@@ -1,0 +1,147 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="no" ?><Message Version="1.0">
+    <unknown_error en_info="unkonwn error" zh_info="未知错误"/>
+  <error_message>
+    <error alias="REQUEST_VIDEO_SEND_TIMEOUT" code="-536862462" en_info="Request Sending Video Overtime" zh_info="请求视频发送超时"/>
+    <error alias="REQUEST_VIDEO_ROUTER_FAIL" code="-536862461" en_info="Fail to Request Video Rooting" zh_info="请求视频路由失败"/>
+    <error alias="REQUEST_VIDEO_ROUTER_ERROR" code="-536862460" en_info="Error in Retrieving Rooting in Server" zh_info="服务器获取路由错误"/>
+    <error alias="NO_AVALIABLE_VIDEO_ROUTER" code="-536862459" en_info="No Available Video Rooting" zh_info="无可用的视频路由"/>
+		<error alias="VIDEO_DATA_INTERRUPTED" code="-536862458" en_info="Video Interrupted" zh_info="视频中断"/>
+		<error alias="RECONNECTING_DISPATCH_SERVER" code="-536862457" en_info="ReConnecting to Server" zh_info="正在重新连接服务器"/>
+		<error alias="MEDIA_SESSION_INTERRUPT" code="-536862456" en_info="Media Session Interrupt" zh_info="媒体会话中断"/>
+		<error alias="UNSUPPORTED_ENCODER_TYPE" code="-536862448" en_info="Unsupported Encoder Type" zh_info="不支持的编码设备类型"/>
+		<error alias="UNSUPPORTED_VIDEO_LINK_MODEL" code="-536862447" en_info="Unsupported Video Transmission Mode" zh_info="不支持的视频传输方式"/>
+		<error alias="PU_NOT_REGISTER" code="-536862446" en_info="Pu not register" zh_info="设备未注册"/>
+		<error alias="ERROR_NOT_FOUND_LONG_CONNECT" code="-536862208" en_info="Connection Not Found" zh_info="连接未找到"/>
+    <error alias="ERROR_CONNECT_FAILURE_BEGIN" code="-536862207" en_info="Error in Starting to Build Connection" zh_info="开始建立连接的时候发生失败"/>
+    <error alias="ERROR_CONNECT_FAILURE_IO_STREAM" code="-536862206" en_info="Fail to Connect Due to Failure to Start Asynchronous Reading and Writing Operations in I/O Streams" zh_info="在I/O流上发起异步读写操作时失败，导致连接失败"/>
+    <error alias="ERROR_NOW_LONG_CONNECT" code="-536862205" en_info="Building Long Connection" zh_info="正在建立长连接"/>
+    <error alias="CONNECT_SERVER_FAIL" code="-536862192" en_info="Fail to Connect to Server" zh_info="连接服务器失败"/>
+    <error alias="REQUEST_TIME_OUT" code="-536862191" en_info="Request Overtime" zh_info="请求超时"/>
+    <error alias="ERROR_SERVER_INTERRUPT" code="-536862190" en_info="Connection to Server Interrupted" zh_info="连接服务器中断"/>
+    <error alias="ERROR_CLIENT_LOGIN" code="-536862189" en_info="Fail to Login after ReConnection" zh_info="客户端重连后登录失败"/>
+    <error alias="ERROR_RELOGIN_TIMEOUT" code="-536862188" en_info="Login Overtime after ReConnection" zh_info="客户端重连后登录超时"/>
+    <error alias="ERROR_SERVER_NOT_CONNECT" code="-536862186" en_info="Server not connect" zh_info="服务器未连接"/>
+    <error alias="ERROR_UNREACHED" code="-536862170" en_info="Destination UnReached" zh_info="目的不可到达"/>
+    <error alias="ERROR_ACCESS_DATABASE" code="-536861951" en_info="Fail to Access Database" zh_info="访问数据库失败"/>
+    <error alias="ERROR_NO_RECORD" code="-536861950" en_info="Find No Record" zh_info="未找到记录"/>
+    <error alias="ERROR_SERVER_LOGINED" code="-536861947" en_info="Server Already Login" zh_info="服务器已登录"/>
+    <error alias="ERROR_USER_SUSPEND" code="-536861936" en_info="The User Has Been Deactivated" zh_info="用户已停用"/>
+    <error alias="ERROR_NO_AUTHORITY" code="-536861935" en_info="No Right to Operate" zh_info="没有执行操作的权限"/>
+    <error alias="ERROR_NO_USER" code="-536861934" en_info="The User Does Not Exist" zh_info="用户不存在"/>
+    <error alias="ERROR_INVALID_PWD" code="-536861933" en_info="Wrong Password" zh_info="密码错误"/>
+    <error alias="ERROR_MAX_LOGINED" code="-536861932" en_info="Reaching Upper Limit of Simultaneous Online" zh_info="同时登录用户数已达到最大"/>
+    <error alias="ERROR_SESSION_EXIST" code="-536861931" en_info="Repeated Session ID" zh_info="会话ID重复"/>
+    <error alias="ERROR_SESSION_NULL" code="-536861930" en_info="Null Session ID" zh_info="空session id错误"/>
+    <error alias="ERROR_USERINFO_NULL" code="-536861929" en_info="No Available User Information" zh_info="无可用的用户信息"/>
+    <error alias="ERROR_USER_LOGINING" code="-536861928" en_info="The User Already Login in Client" zh_info="客户端已经有用户登录"/>
+    <error alias="ERROR_USER_NAME_REPEATED" code="-536861920" en_info="Repeated User Name" zh_info="用户名重复"/>
+    <error alias="ERROR_MAX_USER_COUNT" code="-536861919" en_info="Reach Upper Limit of User Count" zh_info="用户数已达到最大"/>
+    <error alias="ERROR_GROUP_NAME_REPEQTED" code="-536861918" en_info="Repeated User Group Name" zh_info="用户组名称重复"/>
+    <error alias="ERROR_BUFFER_NOT_ENOUGH" code="-536861695" en_info="Buffer Not Enough" zh_info="缓冲区不足"/>
+    <error alias="ERROR_SESSION_NOT_INIT" code="-536861664" en_info="Session Not Initialized" zh_info="会话没有初始化"/>
+    <error alias="ERROR_SERVER_FAULT" code="-536861440" en_info="Error in Server" zh_info="服务器错误"/>
+    <error alias="ERROR_COMMAND_BUFFER_FULL" code="-536861439" en_info="Server Command Buffer is Full" zh_info="服务器命令缓冲区满"/>
+    <error alias="ERROR_OUT_OF_MEMORY" code="-536861438" en_info="Out of Memory" zh_info="内存不足"/>
+    <error alias="ERROR_SERVER_NOT_SUPPORT" code="-536861437" en_info="function not support" zh_info="该平台不支持此功能"/>
+    <error alias="ERROR_ALARM_CONFIRMED" code="-536861436" en_info="Alarm confirmed" zh_info="告警已确认"/>
+    <error alias="ERROR_DEVICE_NOT_FOUND" code="-536861435" en_info="Device not found" zh_info="设备未找到"/>
+    <error alias="ERROR_DEV_STATE_UNKNOWN" code="-536861434" en_info="Device state unknown" zh_info="设置状态未知"/>
+    <error alias="ERROR_SESSION_TIMEOUT" code="-536861424" en_info="Overtime Session  in Server" zh_info="服务器端session超时"/>
+    <error alias="REQUEST_VIDEO_HEADER_TIMEOUT" code="-536862463" en_info="Request Camera Video Overtime" zh_info="请求视频头超时"/>
+    <error alias="ERROR_MAX_GROUP_LOGIN" code="-536861927" en_info="Reach Upper Limit of Administrator's User Count" zh_info="大客户登录用户数达到最大"/>
+    <error alias="ERROR_NULL_POINTER" code="-536862719" en_info="Null Pointer" zh_info="空指针错误"/>
+    <error alias="ERROR_INVALID_ARGUMENT" code="-536862718" en_info="Invalid Parameter" zh_info="非法参数错误"/>
+    <error alias="ERROR_PROTOCOL_PARSE" code="-536862717" en_info="Error in Parsing Protocol" zh_info="协议解析错误"/>
+    <error alias="ERROR_PU_OFFLINE" code="-536861408" en_info="Device Offline" zh_info="设备不在线"/>
+    <error alias="ERROR_PU_NOT_SUPPORT_PROTOCOL" code="-536861183" en_info="Not Supported by PU" zh_info="前端PU不支持"/>
+    <error alias="RET_FAILED" code="-1" en_info="Operate Unsuccessfully" zh_info="访问失败"/>
+    <error alias="ERROR_CLIENT_FAULT" code="-536861915" en_info="Client Not Authorized" zh_info="客户端类型未授权"/>
+    <error alias="ERROR_ENTERPRISE_PREFIX_REPEATED" code="-536861913" en_info="Repeated Administrator Prefix" zh_info="大客户前缀重复"/>
+    <error alias="ERROR_ENTERPRISE_NAME_REPEATED" code="-536861912" en_info="Repeated Administrator Name " zh_info="大客户名称重复"/>
+    <error alias="ERROR_ENTERPRISE_ADMIN_EXIST" code="-536861911" en_info="The Administrator Has A Manager Already" zh_info="大客户已经有管理员"/>
+    <error alias="ERROR_HAVE_CHILD_OFFICE" code="-536861888" en_info="Fail To Delete Office Which Has Child Office" zh_info="局站下面有子局站，不能删除"/>
+    <error alias="ERROR_OFFICE_NAME_REPEATED" code="-536861887" en_info="Repeated Office Name" zh_info="局站重名"/>
+    <error alias="ERROR_KEY_CONFLICT" code="-536861949" en_info="Specified Data or Related Data Exist in Database" zh_info="数据库存在该数据或相关数据"/>
+    <error alias="ERROR_NEED_MAC_BOUND" code="-536861917" en_info="User Account Should Be Bounded with MAC Address" zh_info="用户需要MAC绑定"/>
+    <error alias="ERROR_NEED_USBKEY_BOUND" code="-536861916" en_info="User Account Should Be Bounded with USB Key" zh_info="用户需要USB KEY绑定"/>
+    <error alias="ERROR_MAC_VALIDATE" code="-536861903" en_info="Fail to Pass Authentication" zh_info="服务器验证失败"/>
+    <error alias="ERROR_USBKEY_VALIDATE" code="-536861902" en_info="Fail to Pass Authentication" zh_info="服务器验证失败"/>
+    <error alias="ERROR_MAC_USBKEY_VALIDATE" code="-536861901" en_info="Fail to Pass Authentication" zh_info="服务器验证失败"/>
+    <error alias="ERROR_ENCODER_PORT_REPEATED" code="-536861886" en_info="Repeated Encoder Name or Channels" zh_info="编码器和路数重复"/>
+    <error alias="ERROR_USBKEY_HAVE_BOUND" code="-536861900" en_info="USB Key Provided by Client Has Been Bounded" zh_info="客户端提供的USB Key已经被绑定"/>
+    <error alias="ERROR_ACCESS_UKEY" code="-536861648" en_info="Error in Accessing USB Key" zh_info="访问USB Key发生错误"/>
+    <error alias="ERROR_NO_UKEY" code="-536861647" en_info="USB Key Not Found" zh_info="没有插入USB Key"/>
+    <error alias="ERROR_NO_USERLOCKCOUNT" code="-536861615" en_info="Allowable Times before Being Locked Not Been Initialized in Database" zh_info="数据库没有设置锁定次数初始记录"/>
+    <error alias="ERROR_NO_USERLOCKTIME" code="-536861614" en_info="Locking Time Not Been Initialized in Database" zh_info="数据库没有设置锁定时间初始记录"/>
+    <error alias="ERROR_USERLOCK" code="-536861613" en_info="The User Has Been Locked" zh_info="用户被锁定"/>
+    <error alias="ERROR_MACLOCK" code="-536861610" en_info="The User IP Has Been Locked" zh_info="用户IP被锁定"/>
+    <error alias="ERROR_USER_HAVE_GROUP" code="-536861882" en_info="User Have Group" zh_info="用户存在已创建的组，不能删除"/>
+    <error alias="ERROR_DEVICE_STOPPED" code="-536861885" en_info="The Device Has Been Deactivated" zh_info="设备已停用"/>
+    <error alias="ERROR_SERVER_INUSE" code="-536861884" en_info="server using,can't be delete" zh_info="服务器正在使用不能被删除"/>
+    <error alias="ERROR_REG_SERVER_NOT_MATCH" code="-536861883" en_info="register server not match" zh_info="注册服务器不匹配"/>
+    <error alias="DVR_BUSY" code="-536861182" en_info="PU is Busy, Please Try Later" zh_info="PU忙，请稍后再试"/>
+    <error alias="ERROR_PROVINCE_NAME_EXIST" code="-536861872" en_info="Province Name Already Exist" zh_info="省名称已存在"/>
+    <error alias="ERROR_PROVINCE_FULL" code="-536861871" en_info="Province Count Reach Maximum 100" zh_info="创建省数量达到最大值100"/>
+    <error alias="ERROR_PROVINCE_HAVE_CITY" code="-536861870" en_info="Fail To Delete Province Which Have Cites" zh_info="省下有市不能删除"/>
+    <error alias="ERROR_PROVINCE_HAVE_OFFICE" code="-536861869" en_info="Fail To Delete Province Which Have Offices" zh_info="省下有局站不能删除"/>
+    <error alias="ERROR_CITY_NAME_EXIST" code="-536861868" en_info="City Name Already Exist" zh_info="市名称已存在"/>
+    <error alias="ERROR_CITY_FULL" code="-536861867" en_info="City Count Reach Maximum 100" zh_info="创建市数量达到最大值100"/>
+    <error alias="ERROR_CITY_HAVE_OFFICE" code="-536861866" en_info="Fail To Delete City Which Have Offices" zh_info="市下有局站不能删除"/>
+    <error alias="ERROR_5000PU_IP_EXIST" code="-536861865" en_info="5000 SDK PU IP Exist" zh_info="5000设备的IP地址已存在"/>
+    <error alias="ERROR_DATABASE_IS_EXIST" code="-536861864" en_info="Database has Existed" zh_info="数据库只能添加一个，目前已经存在"/>
+    <error alias="ERROR_BUSINESS_NUMBER_REPEATED" code="-536861863" en_info="Bussiness number repeated" zh_info="业务号重复"/>
+    <error alias="ERROR_SDKPU_CANNOTUSE" code="-536861181" en_info="5000SDK device can't use" zh_info="5000设备不可用"/>
+    <error alias="ERROR_DATABASE_CMS_EXIST" code="-536861862" en_info="CMS has Existed" zh_info="系统中已经存在一个中心服务器"/>
+    <error alias="ERROR_OLDVERSION_CANNOT_USED" code="-536861861" en_info="Client Version is too old" zh_info="客户端版本太旧，请升级新版本"/>
+    <error alias="PU_AUDIO_CHANNEL_USED" code="-536862444" en_info="Pu audio channels have been occupied" zh_info="前端PU语音通道已占用"/>
+    <error alias="ERROR_DECODER_OFFLINE" code="-536861407" en_info="Decoder offline" zh_info="解码器不在线"/>
+    <error alias="ERROR_NO_MANUAL_CRUISE_RECORD" code="-536861860" en_info="not find manual camera cruise task" zh_info="没有添加手动巡航任务"/>
+    <error alias="ERROR_NO_STORE_TYPE" code="-536861859" en_info="camera store is not record" zh_info="摄像头设置为不存储"/>
+    <error alias="ERROR_NO_STORE_TYPE" code="-536861858" en_info="camera no store server" zh_info="摄像头未配置存储服务器"/>
+    <error alias="ERROR_MAX_CAMERA_COUNT" code="-536861881" en_info="create camear max count" zh_info="创建摄像头数达到最大"/>
+    <error alias="ERROR_NAME_REPEATED" code="-536861914" en_info="name repeat" zh_info="名字重复"/>
+    <error alias="ERROR_CHILDOFFICE_OVERTAKE_PARENT" code="-536860400" en_info="child office privilege overtake the parent" zh_info="非法操作，子局站设置的权限大于父局站的权限"/>
+    <error alias="NO_AUTHORITY_TO_ATTEND_MEETING" code="-536860384" en_info="user has no authority to attend meeting" zh_info="用户没有参加会议的权限"/>
+    <error alias="ERROR_STORE_NUM_LIMIT_PRE" code="-536861899" en_info="Store Camera Number Alarm" zh_info="存储路数已达预警值"/>
+    <error alias="ERROR_STORE_NUM_LIMIT" code="-536861898" en_info="Store Is Full, Can't Add Camera" zh_info="存储服务器路数配置已满"/>
+    <error alias="ERROR_STORE_SPACE_LIMIT_PRE" code="-536861897" en_info="Store Space Alarm" zh_info="存储服务器空间已达预警值"/>
+    <error alias="ERROR_STORE_SPACE_LIMIT" code="-536861896" en_info="Store Is No Space,Can't Add Camera" zh_info="存储服务器空间已满，不能添加摄像头"/>
+    <error alias="ERROR_OVER_DOWNLOAD_DURATION" code="-536861895" en_info="Over Download Duration" zh_info="超过上传时间段"/>
+    <error alias="PU_REQUEST_FAULT" code="-536862445" en_info="PU Request Error" zh_info="前端PU请求出错"/>
+    <error alias="ERROR_PUTYPE_MAX_CAMERA_COUNT" code="-536860367" en_info="Putype has max camera number,fail to add camera" zh_info="该PU类型拥有的摄像头数达到最大，创建摄像头失败"/>
+    <error alias="MEETINGROOM_IN_USE" code="-536860383" en_info="Meeting room is in use,can not edit" zh_info="该会议室在使用中，不能编辑"/>
+	  <error alias="ERROR_SERVER_NOT_MATCH" code="-536861405" en_info="server ID not exist or server type not match " zh_info="服务器ID不存在或者服务器类型不匹配"/>
+	  <error alias="ERROR_VIDEO_RESOURCE_LIMITED" code="-536860366" en_info="video resource limited" zh_info="视频资源达到极限"/>
+	  <error alias="ERROR_USER_CANNOT_CHANGE_OFFICE" code="-536860365" en_info="user can't change office" zh_info="用户拥有其他局站设备权限，不允许更改局站"/>
+	  <error alias="ERROR_MAX_FACTORY_DEVICE_LIMITED" code="-536860364" en_info="factory no authoraze or max factory device num" zh_info="厂家未授权或厂家设备数达到最大"/>
+	  <error alias="PU_LOGIN_FAIL" code="-536862443" en_info="PU Login Error" zh_info="登录PU失败"/>
+	  <error alias="ERROR_TRANSCODE_TEMPLET_EXIST" code="-536860363" en_info="TransCode Config Has Existed" zh_info="转码模板配置已经存在"/>
+	  <error alias="ERROR_CSG_LIMIT" code="-536860362" en_info="The Server Is Limited, Please Change Others" zh_info="该接入服务器已超出能力限制，请选择其他接入服务器"/>
+	  <error alias="ERROR_MDU_LIMIT" code="-536860361" en_info="The Server Is Limited, Please Change Others" zh_info="该转发服务器已超出能力限制，请选择其他转发服务器"/>
+	  <error alias="ERROR_STORE_LIMIT" code="-536860360" en_info="The Server Is Limited, Please Change Others" zh_info="该存储服务器已超出能力限制，请选择其他存储服务器"/>
+	  <error alias="ERROR_TVS_LIMIT" code="-536860359" en_info="The Server Is Limited, Please Change Others" zh_info="该电视墙服务器已超出能力限制，请选择其他电视墙服务器"/>
+	  <error alias="ERROR_VAU_LIMIT" code="-536860352" en_info="The Server Is Limited, Please Change Others" zh_info="该移动视频服务器已超出能力限制，请选择其他移动视频服务器"/>
+	  <error alias="ERROR_TRANSCODE_LIMIT" code="-536860351" en_info="The Server Is Limited, Please Change Others" zh_info="该转码服务器已超出能力限制，请选择其他转码服务器"/>
+	  <error alias="ERROR_DISPATCH_OFFLINE" code="-536860350" en_info="The Dispatch Server Is Offline" zh_info="媒体转发服务器不在线，无法申请视频"/>
+	  <error alias="ERROR_STORE_OFFLINE" code="-536860349" en_info="The Store Server Is Offline" zh_info="存储服务器不在线，无法查看录像"/>
+	  <error alias="ERROR_ADC_CUSTOM_NOT_EXIST" code="-536860348" en_info="The Custom Is Not ADC User" zh_info="大客户不是ADC用户，不允许设置"/>
+	  <error alias="PU_PASSWORD_ERROR" code="-536862439" en_info="Invalid UserName or PSWD for PU" zh_info="前端设备用户名密码错误"/>
+	  <error alias="PU_NO_ENOUGH_RIGHT" code="-536862438" en_info="No Enough Right for PU" zh_info="访问前端设备权限不足"/>
+	  <error alias="PU_NOT_INIT" code="-536862437" en_info="PU Not Initialize" zh_info="PU未初始化"/>
+	  <error alias="PU_CHANNEL_ERROR" code="-536862436" en_info="PU Channel Error" zh_info="通道号错误"/>
+	  <error alias="PU_OVER_MAXLINK" code="-536862435" en_info="PU Over Max Link" zh_info="登录PU用户数达到最大"/>
+	  <error alias="PU_VERSION_NOMATCH" code="-536862434" en_info="PU Version Not Match" zh_info="版本不匹配"/>
+	  <error alias="PU_CONNECT_FAIL" code="-536862432" en_info="Connect PU Failed" zh_info="连接编码器设备"/>
+	  <error alias="PU_SEND_ERROR" code="-536862431" en_info="PU Send Error" zh_info="向编码器发送失败"/>
+	  <error alias="PU_RECV_ERROR" code="-536862430" en_info="PU Receive Error" zh_info="从编码器接收失败"/>
+	  <error alias="PU_BUSY" code="-536862429" en_info="PU Is Busy" zh_info="编码器忙"/>
+	  <error alias="PU_OVER_MAX_VIDEOLINK" code="-536862428" en_info="PU Over Max Video Link" zh_info="视频连接个数达到最大"/>
+	  <error alias="PU_NO_DISK" code="768" en_info="PU NO DISK" zh_info="PU无硬盘"/>
+	  <error alias="ERROR_USED_BY_SCENE" code="-536862426" en_info="be used by scene,can not delete" zh_info="被模拟量场景使用，不能删除"/>
+	  <error alias="ERROR_USED_BY_CONFIG" code="-536862427" en_info="be used by ai alarm config ,can not delete" zh_info="被模拟量告警配置使用，不能删除"/>
+		<error alias="FAILED_CHOOSE_DISPATCH_AUTO" code="-536860347" en_info="choose dispatch server automatically failure" zh_info="自动选择转发服务器失败"/>
+	  <error alias="ERROR_ENCODERMODE_HAS_ENCODER" code="-536860346" en_info="Encoder mode has link encoders,can not be deleted" zh_info="编码器模板已关联编码器，不能删除"/>
+	  <error alias="ERROR_MOBILEPU_USERNAME_NOT_REPEAT" code="-536860345" en_info="Mobile phone encoder username can not be repeated" zh_info="手机采集编码器用户名不能重复"/>
+		<error alias="ERROR_DEVICE_BELONG_TO_OTHER_GROUP" code="-536860344" en_info="The device has to belong to another server" zh_info="该设备已从属于别的服务器"/>
+  </error_message>
+</Message>
