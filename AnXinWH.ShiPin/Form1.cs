@@ -52,6 +52,10 @@ namespace AnXinWH.ShiPin
         //initform
         void initfirst()
         {
+            //
+            lbl2Name.Text = "";
+            lbl0Msg.Text = "";
+            //attr
             _list_tcamera = new List<ZXVNMS_TCamera>();
             _userid = "";
             _cmsIP = "";
@@ -148,6 +152,7 @@ namespace AnXinWH.ShiPin
             }
             catch (Exception ex)
             {
+                return false;
                 throw ex;
             }
 
@@ -156,19 +161,22 @@ namespace AnXinWH.ShiPin
         private void button1_Click(object sender, EventArgs e)
         {
             button1.Enabled = false;
-            lbl0Msg.Text = "正在打开中。。。";
+            string msg = "正在打开中。。。";
+            SetMsg(lbl0Msg, msg);
             Cursor.Current = Cursors.WaitCursor;
             try
             {
                 if (!string.IsNullOrEmpty(comboBox1.Text))
                 {
-                    if (OnPlayVideo(_list_tcamera[0].device_id, pictureBox1.Handle))
+                    if (OnPlayVideo(comboBox1.Text.Trim(), pictureBox1.Handle))
                     {
-                        lbl0Msg.Text = "打开成功。。。";
+                        msg = "打开成功。。。";
+                        SetMsg(lbl0Msg, msg);
                     }
                     else
                     {
-                        lbl0Msg.Text = "打开失败。。。";
+                        msg = "打开失败。。。";
+                        SetMsg(lbl0Msg, msg);
                     }
 
                 }
@@ -190,6 +198,43 @@ namespace AnXinWH.ShiPin
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             ZxvnmsSDKApi.ZXVNMS_Free();
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboBox1.SelectedItem != null)
+            {
+
+                setName(comboBox1, lbl2Name);
+            }
+        }
+        void SetMsg(Label lbl, string msg)
+        {
+            this.Invoke(new Action(delegate()
+            {
+                lbl.Text = msg;
+            }));
+        }
+        void setName(ComboBox cb, Label lbl)
+        {
+            SetMsg(lbl, "");
+            if (!string.IsNullOrEmpty(cb.Text))
+            {
+                foreach (var item in _list_tcamera)
+                {
+                    if (item.device_id.Equals(cb.Text))
+                    {
+                        SetMsg(lbl, item.device_name);
+                        return;
+                    }
+                }
+                SetMsg(lbl, "");
+            }
+
+        }
+        private void comboBox1_TextChanged(object sender, EventArgs e)
+        {
+            setName(comboBox1, lbl2Name);
         }
     }
 }
