@@ -282,7 +282,8 @@ namespace AnXinWH.ShiPin
             string cameraID,
             string startTime,
             string endTime,
-            int isForword
+            int isForword,
+            int locate
             );
 
         /// <summary>
@@ -342,7 +343,10 @@ namespace AnXinWH.ShiPin
         /// <param name="pVal">实时视频、文件回放码率（kbps）指针</param>
         /// <returns></returns>
         [DllImport("ZxvnmsSDK.dll")]
-        public static extern int ZXVNMS_GetVideoDataRate(int handle, ref int pVal);
+        public static extern int ZXVNMS_GetVideoDataRate(int handle, IntPtr pVal);
+
+        [DllImport("ZxvnmsSDK.dll")]
+        public static extern int ZXVNMS_GetDownloadRemainTime(int handle, IntPtr pVal);
 
         //**************2.5.	请求视频码流数据
 
@@ -523,8 +527,9 @@ namespace AnXinWH.ShiPin
         public static extern int ZXVNMS_PlayFile(
                     string cameraID,
                     string filename,
+                    int filesize,
                     int locate,
-                    int hWnd);
+                    IntPtr hWnd);
 
         /// <summary>
         /// 2.7.2.	停止文件回放
@@ -583,6 +588,7 @@ namespace AnXinWH.ShiPin
         public static extern int ZXVNMS_DownloadFile(
              string cameraID,
              string filename,
+             int size,
              int locate,
              string savefilepath);
 
@@ -603,7 +609,7 @@ namespace AnXinWH.ShiPin
         /// <param name="pVal">文件回放、下载百分比指针</param>
         /// <returns>0 成功 错误时返回错误号</returns>
         [DllImport("ZxvnmsSDK.dll")]
-        public static extern int ZXVNMS_GetFilePercent(int handle, ref int pVal);
+        public static extern int ZXVNMS_GetFilePercent(int handle, IntPtr pVal);
 
 
         /// <summary>
@@ -702,7 +708,7 @@ namespace AnXinWH.ShiPin
         /// <param name="bufSize">错误信息缓冲区字节数（输出参数）</param>
         /// <returns>0 成功，失败时返回错误号</returns>
         [DllImport("ZxvnmsSDK.dll")]
-        public static extern int ZXVNMS_GetErrorInfo(int errcode, ref string pBuf, ref int bufSize);
+        public static extern int ZXVNMS_GetErrorInfo(int errcode, IntPtr pBuf, IntPtr bufSize);
 
 
         /// <summary>
@@ -857,7 +863,7 @@ namespace AnXinWH.ShiPin
         public static string privilege_flag = "privilege_flag";
         public static string ptz_protocol = "ptz_protocol";
     }
-    public class ZXVNMS_TCamera
+    public class ZXVNMS_Camera2
     {
         public string address { get; set; }
         public string category_id { get; set; }
@@ -946,6 +952,23 @@ namespace AnXinWH.ShiPin
         public static string type = "type";
         public static string filename = "filename";
         public static string size = "size";
+    }
+    public class ZXVNMS_RecordFile2
+    {
+
+        public int id { get; set; }
+        public string locale { get; set; }
+
+
+        public string encoder_id { get; set; }
+        public string service_addr { get; set; }
+        public string service_port { get; set; }
+        public string outport { get; set; }
+        public string starttime { get; set; }
+        public string endtime { get; set; }
+        public string type { get; set; }
+        public string filename { get; set; }
+        public string size { get; set; }
     }
 
     // 摄像头状态
