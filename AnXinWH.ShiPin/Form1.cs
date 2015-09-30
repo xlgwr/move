@@ -170,7 +170,7 @@ namespace AnXinWH.ShiPin
                 return;
             }
             button1.Enabled = false;
-            string msg = "正在打开中。。。";
+            string msg = "正在打开实时视频中。。。";
             SetMsg(lbl0Msg, msg);
             Cursor.Current = Cursors.WaitCursor;
             try
@@ -179,12 +179,12 @@ namespace AnXinWH.ShiPin
                 {
                     if (OnPlayVideo(comb0CameraID.Text.Trim(), pictureBox1.Handle))
                     {
-                        msg = "打开成功。。。";
+                        msg = "打开实时视频成功。。。";
                         SetMsg(lbl0Msg, msg);
                     }
                     else
                     {
-                        msg = "打开失败。。。";
+                        msg = "打开实时视频失败。。。";
                         SetMsg(lbl0Msg, msg);
                     }
 
@@ -206,6 +206,7 @@ namespace AnXinWH.ShiPin
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
+            checkStop(true);
             ZxvnmsSDKApi.ZXVNMS_Free();
         }
 
@@ -522,7 +523,7 @@ namespace AnXinWH.ShiPin
                 var size = Convert.ToInt32(Convert.ToDouble(tmpM[3]) * 1024 * 1024);
 
                 var comMsg = tmpM[0] + ",开始时间：" + tmpM[1] + ",结束时间：" + tmpM[2] + ",大小：" + tmpM[3] + "M";
-                tmpmsg = "打开中：" + comMsg;
+                tmpmsg = "打开回放视频中：" + comMsg;
 
 
                 SetMsg(lbl0Msg, tmpmsg);
@@ -539,11 +540,11 @@ namespace AnXinWH.ShiPin
 
                 if (_m_playfileHandle >= 0)
                 {
-                    tmpmsg = "打开成功：" + comMsg;
+                    tmpmsg = "打开回放视频成功：" + comMsg;
                 }
                 else
                 {
-                    tmpmsg = "打开失败：" + comMsg;
+                    tmpmsg = "打开回放视频失败：" + comMsg;
                 }
 
                 SetMsg(lbl0Msg, tmpmsg);
