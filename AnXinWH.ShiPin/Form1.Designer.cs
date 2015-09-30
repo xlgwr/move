@@ -37,6 +37,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.lbl0Msg = new System.Windows.Forms.Label();
             this.gbtop1 = new System.Windows.Forms.GroupBox();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.comb2Moves = new System.Windows.Forms.ComboBox();
@@ -44,6 +45,7 @@
             this.lbl2Name = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.btn5Down = new System.Windows.Forms.Button();
             this.btn3PlayFile = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
@@ -53,8 +55,6 @@
             this.button8 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
             this.gb00Bottom = new System.Windows.Forms.GroupBox();
-            this.btn5Down = new System.Windows.Forms.Button();
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.gbtop2.SuspendLayout();
@@ -77,7 +77,7 @@
             this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pictureBox1.Location = new System.Drawing.Point(3, 17);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(847, 374);
+            this.pictureBox1.Size = new System.Drawing.Size(847, 405);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
@@ -85,9 +85,9 @@
             // gbtop2
             // 
             this.gbtop2.Controls.Add(this.pictureBox1);
-            this.gbtop2.Location = new System.Drawing.Point(4, 219);
+            this.gbtop2.Location = new System.Drawing.Point(4, 199);
             this.gbtop2.Name = "gbtop2";
-            this.gbtop2.Size = new System.Drawing.Size(853, 394);
+            this.gbtop2.Size = new System.Drawing.Size(853, 425);
             this.gbtop2.TabIndex = 2;
             this.gbtop2.TabStop = false;
             // 
@@ -96,7 +96,7 @@
             this.comb0CameraID.FormattingEnabled = true;
             this.comb0CameraID.Location = new System.Drawing.Point(410, 23);
             this.comb0CameraID.Name = "comb0CameraID";
-            this.comb0CameraID.Size = new System.Drawing.Size(138, 20);
+            this.comb0CameraID.Size = new System.Drawing.Size(158, 20);
             this.comb0CameraID.TabIndex = 3;
             this.comb0CameraID.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             this.comb0CameraID.TextChanged += new System.EventHandler(this.comboBox1_TextChanged);
@@ -114,7 +114,7 @@
             // 
             this.lbl0Msg.AutoSize = true;
             this.lbl0Msg.ForeColor = System.Drawing.Color.Red;
-            this.lbl0Msg.Location = new System.Drawing.Point(25, 180);
+            this.lbl0Msg.Location = new System.Drawing.Point(25, 160);
             this.lbl0Msg.Name = "lbl0Msg";
             this.lbl0Msg.Size = new System.Drawing.Size(23, 12);
             this.lbl0Msg.TabIndex = 5;
@@ -139,30 +139,37 @@
             this.gbtop1.Controls.Add(this.label1);
             this.gbtop1.Location = new System.Drawing.Point(4, 2);
             this.gbtop1.Name = "gbtop1";
-            this.gbtop1.Size = new System.Drawing.Size(847, 211);
+            this.gbtop1.Size = new System.Drawing.Size(847, 191);
             this.gbtop1.TabIndex = 6;
             this.gbtop1.TabStop = false;
             // 
+            // progressBar1
+            // 
+            this.progressBar1.Location = new System.Drawing.Point(25, 132);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(580, 23);
+            this.progressBar1.TabIndex = 9;
+            // 
             // dateTimePicker2
             // 
-            this.dateTimePicker2.Location = new System.Drawing.Point(410, 73);
+            this.dateTimePicker2.Location = new System.Drawing.Point(410, 61);
             this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(138, 21);
+            this.dateTimePicker2.Size = new System.Drawing.Size(158, 21);
             this.dateTimePicker2.TabIndex = 8;
             // 
             // dateTimePicker1
             // 
             this.dateTimePicker1.CustomFormat = "yyyy-MM-dd HH:mm:ss";
             this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker1.Location = new System.Drawing.Point(186, 73);
+            this.dateTimePicker1.Location = new System.Drawing.Point(186, 61);
             this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(138, 21);
+            this.dateTimePicker1.Size = new System.Drawing.Size(158, 21);
             this.dateTimePicker1.TabIndex = 8;
             // 
             // comb2Moves
             // 
             this.comb2Moves.FormattingEnabled = true;
-            this.comb2Moves.Location = new System.Drawing.Point(410, 120);
+            this.comb2Moves.Location = new System.Drawing.Point(410, 100);
             this.comb2Moves.Name = "comb2Moves";
             this.comb2Moves.Size = new System.Drawing.Size(195, 20);
             this.comb2Moves.TabIndex = 7;
@@ -171,7 +178,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(351, 77);
+            this.label4.Location = new System.Drawing.Point(351, 65);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(65, 12);
             this.label4.TabIndex = 4;
@@ -180,7 +187,7 @@
             // lbl2Name
             // 
             this.lbl2Name.AutoSize = true;
-            this.lbl2Name.Location = new System.Drawing.Point(554, 27);
+            this.lbl2Name.Location = new System.Drawing.Point(574, 27);
             this.lbl2Name.Name = "lbl2Name";
             this.lbl2Name.Size = new System.Drawing.Size(41, 12);
             this.lbl2Name.TabIndex = 6;
@@ -189,7 +196,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(127, 77);
+            this.label3.Location = new System.Drawing.Point(115, 65);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(65, 12);
             this.label3.TabIndex = 4;
@@ -198,15 +205,25 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(351, 123);
+            this.label2.Location = new System.Drawing.Point(351, 104);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(65, 12);
             this.label2.TabIndex = 4;
             this.label2.Text = "选择视频：";
             // 
+            // btn5Down
+            // 
+            this.btn5Down.Location = new System.Drawing.Point(611, 126);
+            this.btn5Down.Name = "btn5Down";
+            this.btn5Down.Size = new System.Drawing.Size(108, 34);
+            this.btn5Down.TabIndex = 0;
+            this.btn5Down.Text = "下载视频";
+            this.btn5Down.UseVisualStyleBackColor = true;
+            this.btn5Down.Click += new System.EventHandler(this.btn5Down_Click);
+            // 
             // btn3PlayFile
             // 
-            this.btn3PlayFile.Location = new System.Drawing.Point(611, 112);
+            this.btn3PlayFile.Location = new System.Drawing.Point(611, 93);
             this.btn3PlayFile.Name = "btn3PlayFile";
             this.btn3PlayFile.Size = new System.Drawing.Size(108, 34);
             this.btn3PlayFile.TabIndex = 0;
@@ -216,7 +233,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(186, 112);
+            this.button2.Location = new System.Drawing.Point(186, 93);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(122, 34);
             this.button2.TabIndex = 0;
@@ -226,54 +243,54 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(100, 20);
+            this.button4.Location = new System.Drawing.Point(157, 18);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 46);
+            this.button4.Size = new System.Drawing.Size(75, 37);
             this.button4.TabIndex = 2;
             this.button4.Text = "button4";
             this.button4.UseVisualStyleBackColor = true;
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(181, 20);
+            this.button5.Location = new System.Drawing.Point(238, 18);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(75, 46);
+            this.button5.Size = new System.Drawing.Size(75, 37);
             this.button5.TabIndex = 3;
             this.button5.Text = "button5";
             this.button5.UseVisualStyleBackColor = true;
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(267, 20);
+            this.button6.Location = new System.Drawing.Point(324, 18);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(75, 46);
+            this.button6.Size = new System.Drawing.Size(75, 37);
             this.button6.TabIndex = 2;
             this.button6.Text = "button4";
             this.button6.UseVisualStyleBackColor = true;
             // 
             // button7
             // 
-            this.button7.Location = new System.Drawing.Point(348, 20);
+            this.button7.Location = new System.Drawing.Point(405, 18);
             this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(75, 46);
+            this.button7.Size = new System.Drawing.Size(75, 37);
             this.button7.TabIndex = 3;
             this.button7.Text = "button5";
             this.button7.UseVisualStyleBackColor = true;
             // 
             // button8
             // 
-            this.button8.Location = new System.Drawing.Point(427, 20);
+            this.button8.Location = new System.Drawing.Point(484, 18);
             this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(75, 46);
+            this.button8.Size = new System.Drawing.Size(75, 37);
             this.button8.TabIndex = 2;
             this.button8.Text = "button4";
             this.button8.UseVisualStyleBackColor = true;
             // 
             // button9
             // 
-            this.button9.Location = new System.Drawing.Point(508, 20);
+            this.button9.Location = new System.Drawing.Point(565, 18);
             this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(75, 46);
+            this.button9.Size = new System.Drawing.Size(75, 37);
             this.button9.TabIndex = 3;
             this.button9.Text = "button5";
             this.button9.UseVisualStyleBackColor = true;
@@ -287,29 +304,12 @@
             this.gb00Bottom.Controls.Add(this.button6);
             this.gb00Bottom.Controls.Add(this.button7);
             this.gb00Bottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.gb00Bottom.Location = new System.Drawing.Point(0, 619);
+            this.gb00Bottom.Location = new System.Drawing.Point(0, 630);
             this.gb00Bottom.Name = "gb00Bottom";
-            this.gb00Bottom.Size = new System.Drawing.Size(857, 78);
+            this.gb00Bottom.Size = new System.Drawing.Size(857, 67);
             this.gb00Bottom.TabIndex = 4;
             this.gb00Bottom.TabStop = false;
             this.gb00Bottom.Text = "视频操作";
-            // 
-            // btn5Down
-            // 
-            this.btn5Down.Location = new System.Drawing.Point(611, 146);
-            this.btn5Down.Name = "btn5Down";
-            this.btn5Down.Size = new System.Drawing.Size(108, 34);
-            this.btn5Down.TabIndex = 0;
-            this.btn5Down.Text = "下载视频";
-            this.btn5Down.UseVisualStyleBackColor = true;
-            this.btn5Down.Click += new System.EventHandler(this.btn5Down_Click);
-            // 
-            // progressBar1
-            // 
-            this.progressBar1.Location = new System.Drawing.Point(25, 152);
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(580, 23);
-            this.progressBar1.TabIndex = 9;
             // 
             // timer1
             // 

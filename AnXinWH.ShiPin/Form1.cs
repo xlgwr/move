@@ -259,14 +259,21 @@ namespace AnXinWH.ShiPin
                     SetMsg(lbl0Msg, tmpmsg);
                     return;
                 }
-                if (dateTimePicker1.Value>dateTimePicker2.Value)
+                if (dateTimePicker2.Value > DateTime.Now)
                 {
                     dateTimePicker2.Focus();
+                    tmpmsg = "Error:结束时间大于当前时间。" + DateTime.Now;
+                    SetMsg(lbl0Msg, tmpmsg);
+                    return;
+                }
+                if (dateTimePicker1.Value > dateTimePicker2.Value)
+                {
+                    dateTimePicker1.Focus();
                     tmpmsg = "Error:开始时间大于结束时间。";
                     SetMsg(lbl0Msg, tmpmsg);
                     return;
                 }
-
+               
                 var tmpList = new List<ZXVNMS_RecordFile2>();
 
 
