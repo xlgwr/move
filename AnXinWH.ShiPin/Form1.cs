@@ -140,11 +140,9 @@ namespace AnXinWH.ShiPin
         {
             try
             {
-                if (_m_curPlayHandle >= 0)
-                {
-                    ZxvnmsSDKApi.ZXVNMS_StopVideo(_m_curPlayHandle);
-                    _m_curPlayHandle = -1;
-                }
+
+                checkStop(false);
+
                 int vh = ZxvnmsSDKApi.ZXVNMS_PlayVideo(cameraID, handle);
                 if (vh >= 0)
                 {
@@ -401,11 +399,8 @@ namespace AnXinWH.ShiPin
                     comb0CameraID.Focus();
                     return;
                 }
-                if (_m_downloadHandle >= 0)
-                {
-                    ZxvnmsSDKApi.ZXVNMS_StopFileDownload(_m_downloadHandle);
-                    _m_downloadHandle = -1;
-                }
+                checkStop(true);
+
                 var tmpM = comb2Moves.Text.Split(',');
                 var filename = tmpM[4];
                 var size = Convert.ToInt32(Convert.ToDouble(tmpM[3]) * 1024 * 1024);
@@ -477,6 +472,30 @@ namespace AnXinWH.ShiPin
             }
 
         }
+        void checkStop(bool isDown)
+        {
+
+            if (_m_curPlayHandle >= 0)
+            {
+                ZxvnmsSDKApi.ZXVNMS_StopVideo(_m_curPlayHandle);
+                _m_curPlayHandle = -1;
+            }
+
+            if (_m_playfileHandle >= 0)
+            {
+                ZxvnmsSDKApi.ZXVNMS_StopFilePlay(_m_playfileHandle);
+                _m_playfileHandle = -1;
+            }
+            if (isDown)
+            {
+                if (_m_downloadHandle >= 0)
+                {
+                    ZxvnmsSDKApi.ZXVNMS_StopFileDownload(_m_downloadHandle);
+                    _m_downloadHandle = -1;
+                }
+            }
+
+        }
         private void button3_Click(object sender, EventArgs e)
         {
             try
@@ -494,6 +513,10 @@ namespace AnXinWH.ShiPin
                 }
                 btn3PlayFile.Enabled = false;
 
+                progressBar1.Visible = false;
+                progressBar1.Value = 0;
+                progressBar1.Maximum = 100;
+
                 var tmpM = comb2Moves.Text.Split(',');
                 var filename = tmpM[4];
                 var size = Convert.ToInt32(Convert.ToDouble(tmpM[3]) * 1024 * 1024);
@@ -504,18 +527,7 @@ namespace AnXinWH.ShiPin
 
                 SetMsg(lbl0Msg, tmpmsg);
 
-                if (_m_curPlayHandle >= 0)
-                {
-                    ZxvnmsSDKApi.ZXVNMS_StopVideo(_m_curPlayHandle);
-                    _m_curPlayHandle = -1;
-                }
-
-                if (_m_playfileHandle >= 0)
-                {
-                    ZxvnmsSDKApi.ZXVNMS_StopFilePlay(_m_playfileHandle);
-                    _m_playfileHandle = -1;
-                }
-
+                checkStop(false);
 
                 _m_playfileHandle = ZxvnmsSDKApi.ZXVNMS_PlayFile(
                     comb0CameraID.Text,

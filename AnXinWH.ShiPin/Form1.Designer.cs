@@ -77,7 +77,7 @@
             this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pictureBox1.Location = new System.Drawing.Point(3, 17);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(847, 289);
+            this.pictureBox1.Size = new System.Drawing.Size(847, 374);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
@@ -87,7 +87,7 @@
             this.gbtop2.Controls.Add(this.pictureBox1);
             this.gbtop2.Location = new System.Drawing.Point(4, 219);
             this.gbtop2.Name = "gbtop2";
-            this.gbtop2.Size = new System.Drawing.Size(853, 309);
+            this.gbtop2.Size = new System.Drawing.Size(853, 394);
             this.gbtop2.TabIndex = 2;
             this.gbtop2.TabStop = false;
             // 
@@ -114,7 +114,7 @@
             // 
             this.lbl0Msg.AutoSize = true;
             this.lbl0Msg.ForeColor = System.Drawing.Color.Red;
-            this.lbl0Msg.Location = new System.Drawing.Point(132, 183);
+            this.lbl0Msg.Location = new System.Drawing.Point(25, 180);
             this.lbl0Msg.Name = "lbl0Msg";
             this.lbl0Msg.Size = new System.Drawing.Size(23, 12);
             this.lbl0Msg.TabIndex = 5;
@@ -287,7 +287,7 @@
             this.gb00Bottom.Controls.Add(this.button6);
             this.gb00Bottom.Controls.Add(this.button7);
             this.gb00Bottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.gb00Bottom.Location = new System.Drawing.Point(0, 534);
+            this.gb00Bottom.Location = new System.Drawing.Point(0, 619);
             this.gb00Bottom.Name = "gb00Bottom";
             this.gb00Bottom.Size = new System.Drawing.Size(857, 78);
             this.gb00Bottom.TabIndex = 4;
@@ -306,9 +306,9 @@
             // 
             // progressBar1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(129, 152);
+            this.progressBar1.Location = new System.Drawing.Point(25, 152);
             this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(476, 23);
+            this.progressBar1.Size = new System.Drawing.Size(580, 23);
             this.progressBar1.TabIndex = 9;
             // 
             // timer1
@@ -319,7 +319,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(857, 612);
+            this.ClientSize = new System.Drawing.Size(857, 697);
             this.Controls.Add(this.gb00Bottom);
             this.Controls.Add(this.gbtop2);
             this.Controls.Add(this.gbtop1);
