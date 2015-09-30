@@ -250,14 +250,23 @@ namespace AnXinWH.ShiPin
 
         private void button2_Click(object sender, EventArgs e)
         {
-            var tmpmsg = "";
             try
             {
                 if (string.IsNullOrEmpty(comb0CameraID.Text))
                 {
                     comb0CameraID.Focus();
+                    tmpmsg = "Error:请选择摄像头。";
+                    SetMsg(lbl0Msg, tmpmsg);
                     return;
                 }
+                if (dateTimePicker1.Value>dateTimePicker2.Value)
+                {
+                    dateTimePicker2.Focus();
+                    tmpmsg = "Error:开始时间大于结束时间。";
+                    SetMsg(lbl0Msg, tmpmsg);
+                    return;
+                }
+
                 var tmpList = new List<ZXVNMS_RecordFile2>();
 
 
