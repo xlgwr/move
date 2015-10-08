@@ -318,6 +318,7 @@ namespace AnXinWH.ShiPin
                 }
                 if (i > 0)
                 {
+                    comb2Moves.Items.Clear();
                     foreach (var item in tmpList)
                     {
                         var tmpitem = item.id + "," + item.starttime + "," + item.endtime + "," + item.size + "," + item.filename;
