@@ -1,0 +1,104 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html style="width:100%; height:100%;">
+<head>
+    <meta http-equiv="Content-Type" content="text/html">
+    <title>网络视频浏览器</title>
+    <link href="tdvideo.css" rel="stylesheet" />
+    <script src="ipaddr.js"></script>
+    <script src="tdvideo.js"></script>
+</head>
+
+<body style="margin:0px 0px 0px 0px; background:#CCC" onload="LoadHtml(),ResizeScreen(0)" onresize="setTimeout('ResizeScreen(1)',0)">
+    <div id="lyMain">
+        <div id="main_title" style="display:none;background:url(main-head_2.gif)">
+            <table id="index_top" style="width:100%;" cellspacing="0px">
+                <tr>
+                    <td style="width:202px; background:url(main-head_logo_bg.gif) no-repeat; height:61px;">
+                        <div style="margin-left: 35px;"> <img src="main-head_logo.gif"></div>
+                    </td>
+                    <td style="background:url(main-head_2.gif);height:61px;width:(myWidth - 607px)"></td>
+                    <td style="width:405px;background:url(main-head_3.gif) no-repeat;height:61px;" align="right"></td>
+                </tr>
+            </table>
+            <!--<div id="main-head_1"></div>
+            <div id="main-head_2"></div>
+            <div id="main-head_3"></div>-->
+        </div>
+        <div id="lyLanguage" style="display:none;">
+            <select name="selLanguage" size="1" style="width: 100" onchange="SelLanguage()" tabindex="-1">
+                <option value="0">
+                    <script>OutPrint(JS_cShow5);</script>
+                </option>
+                <option value="1">English</option>
+            </select>
+        </div>
+        <div id="Lybiaoti" style="display:none;">
+            <div id="lyVideo" onclick="ShowPreviewWindow()"></div>
+            <div id="lyPlayback" onclick="ShowPlaybackWindow()"></div>
+            <div id="lyConfig" onclick="ShowConfigWindow()"></div>
+            <div id="lyLog" onclick="ShowLogWindow()"></div>
+
+            <!--div id="lyShowTime"></div-->
+
+
+            <div id="lyCtl01">
+                <a onmouseover="MM_swapImage('imgVideo','','mouseDown.gif',1)" onmouseout="MM_swapImgRestore()">
+                    <img id="imgVideo" src="mouseDown.gif" style="width:132px; height:30px;" />
+                </a>
+            </div>
+
+            <div id="lyCtl02">
+                <a onmouseover="MM_swapImage('imgPlayback','','mouseDown.gif',1)" onmouseout="MM_swapImgRestore()">
+                    <img id="imgPlayback" src="mouseDown.gif" style="width:132px; height:30px;" />
+                </a>
+            </div>
+            <div id="lyCtl03">
+                <a onmouseover="MM_swapImage('imgConfig','','mouseDown.gif',1)" onmouseout="MM_swapImgRestore()">
+                    <img id="imgConfig" src="mouseDown.gif" style="width:132px; height:30px;" />
+                </a>
+            </div>
+            <div id="lyCtl04">
+                <a onmouseover="MM_swapImage('imgLog','','mouseDown.gif',1)" onmouseout="MM_swapImgRestore()">
+                    <img id="imgLog" src="mouseDown.gif" style="width:132px; height:30px;" />
+                </a>
+            </div>
+        </div>
+        <div id="div_obj" style="width:100%;height:100%;">
+            <div id="div_obj_1">
+                <script language="JavaScript" type="text/JavaScript">
+                    var la = "";
+                    if (Sys.ie) {
+                        la = navigator.browserLanguage.toLowerCase();
+                        OutPrint("<object classid=\"clsid:79EB8534-D9A1-4abf-AE73-936DA3BADD9B\" name=\"TiandyVideo\" id=\"NvsVideo\"></object>");
+                    } else {
+                        la = navigator.language.toLowerCase();
+                        OutPrint("<object name=\"TiandyVideo\" id=\"NvsVideo\" type=\"application/plugin-NetVideo\" style='border:1px solid black; width:100%; height:100%'></object>");
+                    }
+                    if (la == "en-us") {
+                        document.title = "Net Video Browser";
+                    } else if (la == "zh-cn") {
+                        document.title = "网络视频浏览器";
+                    } else {
+                        document.title = "Net Video Browser";
+                    }
+                </script>
+                <script language="javascript" event="OnOCXInit(_lInitStatus)" for="NvsVideo">
+                    IE_Event_OCXInit(_lInitStatus);
+                </script>
+                <!--<script language="javascript" event="OnLogon(_lLogonStatus, _lLogonID)" for="NvsVideo">
+                    IE_Event_Logon(_lLogonStatus, _lLogonID);
+                </script>-->
+                <script language="javascript" event="OnChangeLanguage(_lLanguage)" for="NvsVideo">
+                    Event_ChangeLanguage(_lLanguage);
+                </script>
+                <!--<script language="javascript" event="OnCheckUser(_lParam)" for="NvsVideo">
+                    Event_CheckUser(_lParam);
+                </script>-->
+            </div>
+
+            <div id="div_obj_font" style="font-size:12px; height:10px; color:#A0A0A0; display:none"><span style="font-family: arial; font-size:10px;">&copy;</span>TIANDY Co.,Ltd All Rights Reserved</div>
+        </div>
+    </div>
+
+</body>
+</html>

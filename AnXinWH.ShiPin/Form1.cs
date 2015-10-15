@@ -17,10 +17,12 @@ namespace AnXinWH.ShiPin
         static string _cmsIP;
         static int _m_curPlayHandle;
 
-        IntPtr _data;
-        IntPtr _pUser;
+         public static IntPtr _data = Marshal.AllocHGlobal(1024);
+         public static IntPtr _pUser = Marshal.AllocHGlobal(1024);
 
-
+        public static IntPtr percent = Marshal.AllocHGlobal(8);
+        public static IntPtr datarate = Marshal.AllocHGlobal(8);
+        public static IntPtr remaintime = Marshal.AllocHGlobal(8);
 
         IntPtr _pUser0 = new IntPtr(0);
         public Form1()
@@ -66,8 +68,6 @@ namespace AnXinWH.ShiPin
             _userid = "";
             _cmsIP = "";
             _m_curPlayHandle = -1;
-            _data = new IntPtr();
-            _pUser = new IntPtr();
             //initdevice
             initDevice(comm.getConfigHost());
             //initcomp
@@ -86,7 +86,7 @@ namespace AnXinWH.ShiPin
 
         }
 
-        void StreamCallback(int handle, int dataType, ref IntPtr data, int size, ref IntPtr pUser)
+        void StreamCallback(int handle, int dataType, IntPtr data, int size, IntPtr pUser)
         {
 
         }
@@ -103,7 +103,7 @@ namespace AnXinWH.ShiPin
             try
             {
                 var tmpinit = ZxvnmsSDKApi.ZXVNMS_Init();
-                var tmpCallback = ZxvnmsSDKApi.ZXVNMS_SetVideoStreamCallback(StreamCallback, _pUser0);
+                //var tmpCallback = ZxvnmsSDKApi.ZXVNMS_SetVideoStreamCallback(StreamCallback, _pUser0);
                 var tmpLogin = ZxvnmsSDKApi.ZXVNMS_InitSession(tconfig.cmsip,
                     tconfig.cmsPort,
                     tconfig.userName,
@@ -356,9 +356,7 @@ namespace AnXinWH.ShiPin
         }
 
 
-        public static IntPtr percent = Marshal.AllocHGlobal(8);
-        public static IntPtr datarate = Marshal.AllocHGlobal(8);
-        public static IntPtr remaintime = Marshal.AllocHGlobal(8);
+      
         private void timer1_Tick(object sender, EventArgs e)
         {
             try
@@ -602,5 +600,69 @@ namespace AnXinWH.ShiPin
         public string _commSelectMove { get; set; }
 
         public string _fullfilename { get; set; }
+
+        private void btn0FileStream_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(comb2Moves.Text))
+            {
+                comb2Moves.Focus();
+                return;
+            }
+
+            if (string.IsNullOrEmpty(comb0CameraID.Text))
+            {
+                comb0CameraID.Focus();
+                return;
+            }            
+            
+            var tmpM = comb2Moves.Text.Split(',');
+            var filename = tmpM[4];
+            var size = Convert.ToInt32(Convert.ToDouble(tmpM[3]) * 1024 * 1024);
+
+            var comMsg = tmpM[0] + ",开始时间：" + tmpM[1] + ",结束时间：" + tmpM[2] + ",大小：" + tmpM[3] + "M";
+            tmpmsg = "打开回放视频[流]中：" + comMsg;
+            SetMsg(lbl0Msg, tmpmsg);
+
+            try
+            {
+                btn0FileStream.Enabled = false;
+
+                if (_fileStreamHandle>0)
+                {
+                    ZxvnmsSDKApi.ZXVNMS_StopVideoFileStream(_fileStreamHandle);
+                }
+
+                _fileStreamHandle = ZxvnmsSDKApi.ZXVNMS_StartVideoFileStream(
+                    comb0CameraID.Text,
+                    filename, 
+                    size,
+                    0
+                    );
+
+                if (_fileStreamHandle >= 0)
+                {
+                   //var tmpCallback = ZxvnmsSDKApi.ZXVNMS_SetVideoStreamCallback(StreamCallback, _pUser0);
+                    tmpmsg = "打开视频流成功：" + comMsg;
+                    comb3StreamId.Items.Add(_fileStreamHandle);
+                    _fileStreamHandle = -1;
+                }
+                else
+                {
+                    tmpmsg = "打视频流失败：" + comMsg;
+                }
+
+                SetMsg(lbl0Msg, tmpmsg);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                btn0FileStream.Enabled = true;
+            }
+        }
+
+        public int _fileStreamHandle { get; set; }
     }
 }

@@ -56,6 +56,8 @@
             this.button9 = new System.Windows.Forms.Button();
             this.gb00Bottom = new System.Windows.Forms.GroupBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.btn0FileStream = new System.Windows.Forms.Button();
+            this.comb3StreamId = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.gbtop2.SuspendLayout();
             this.gbtop1.SuspendLayout();
@@ -79,7 +81,7 @@
             this.pictureBox1.Image = global::AnXinWH.ShiPin.Properties.Resources.Video;
             this.pictureBox1.Location = new System.Drawing.Point(3, 17);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(847, 405);
+            this.pictureBox1.Size = new System.Drawing.Size(920, 405);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
@@ -89,7 +91,7 @@
             this.gbtop2.Controls.Add(this.pictureBox1);
             this.gbtop2.Location = new System.Drawing.Point(4, 199);
             this.gbtop2.Name = "gbtop2";
-            this.gbtop2.Size = new System.Drawing.Size(853, 425);
+            this.gbtop2.Size = new System.Drawing.Size(926, 425);
             this.gbtop2.TabIndex = 2;
             this.gbtop2.TabStop = false;
             // 
@@ -124,6 +126,8 @@
             // 
             // gbtop1
             // 
+            this.gbtop1.Controls.Add(this.comb3StreamId);
+            this.gbtop1.Controls.Add(this.btn0FileStream);
             this.gbtop1.Controls.Add(this.progressBar1);
             this.gbtop1.Controls.Add(this.dateTimePicker2);
             this.gbtop1.Controls.Add(this.dateTimePicker1);
@@ -141,7 +145,7 @@
             this.gbtop1.Controls.Add(this.label1);
             this.gbtop1.Location = new System.Drawing.Point(4, 2);
             this.gbtop1.Name = "gbtop1";
-            this.gbtop1.Size = new System.Drawing.Size(847, 191);
+            this.gbtop1.Size = new System.Drawing.Size(920, 191);
             this.gbtop1.TabIndex = 6;
             this.gbtop1.TabStop = false;
             // 
@@ -308,7 +312,7 @@
             this.gb00Bottom.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.gb00Bottom.Location = new System.Drawing.Point(0, 630);
             this.gb00Bottom.Name = "gb00Bottom";
-            this.gb00Bottom.Size = new System.Drawing.Size(857, 67);
+            this.gb00Bottom.Size = new System.Drawing.Size(942, 67);
             this.gb00Bottom.TabIndex = 4;
             this.gb00Bottom.TabStop = false;
             this.gb00Bottom.Text = "视频操作";
@@ -317,11 +321,29 @@
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // btn0FileStream
+            // 
+            this.btn0FileStream.Location = new System.Drawing.Point(738, 92);
+            this.btn0FileStream.Name = "btn0FileStream";
+            this.btn0FileStream.Size = new System.Drawing.Size(108, 34);
+            this.btn0FileStream.TabIndex = 10;
+            this.btn0FileStream.Text = "获取视频流";
+            this.btn0FileStream.UseVisualStyleBackColor = true;
+            this.btn0FileStream.Click += new System.EventHandler(this.btn0FileStream_Click);
+            // 
+            // comb3StreamId
+            // 
+            this.comb3StreamId.FormattingEnabled = true;
+            this.comb3StreamId.Location = new System.Drawing.Point(738, 135);
+            this.comb3StreamId.Name = "comb3StreamId";
+            this.comb3StreamId.Size = new System.Drawing.Size(127, 20);
+            this.comb3StreamId.TabIndex = 11;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(857, 697);
+            this.ClientSize = new System.Drawing.Size(942, 697);
             this.Controls.Add(this.gb00Bottom);
             this.Controls.Add(this.gbtop2);
             this.Controls.Add(this.gbtop1);
@@ -367,6 +389,8 @@
         private System.Windows.Forms.Button btn5Down;
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Button btn0FileStream;
+        private System.Windows.Forms.ComboBox comb3StreamId;
     }
 }
 

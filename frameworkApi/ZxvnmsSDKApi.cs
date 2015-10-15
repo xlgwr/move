@@ -357,7 +357,7 @@ namespace AnXinWH.ShiPin
         /// <param name="data">接收视频码流数据缓冲区指针</param>
         /// <param name="size">接收视频码流数据字节数</param>
         /// <param name="pUser">用户数据</param>
-        public delegate void fStreamCallback(int handle, int dataType, ref IntPtr data, int size, ref IntPtr pUser);
+        public delegate void fStreamCallback(int handle, int dataType, IntPtr data, int size, IntPtr pUser);
 
         /// <summary>
         /// 2.5.6.	设置YUV数据回调函数
