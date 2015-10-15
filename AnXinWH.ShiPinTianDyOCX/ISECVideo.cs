@@ -457,7 +457,7 @@ namespace AnXinWH.ShiPinTianDyOCX
         }
 
         #endregion
-        public object LogonAndPlay(object obj)
+        public bool LogonAndPlay(object obj)
         {
             try
             {
@@ -467,7 +467,7 @@ namespace AnXinWH.ShiPinTianDyOCX
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-                return ex.Message;
+                return false;
             }
 
         }
@@ -547,7 +547,7 @@ namespace AnXinWH.ShiPinTianDyOCX
             this.Text = obj.ToString();
         }
 
-        private string Logon()
+        private bool Logon()
         {
             string strUser = "admin";
             string strPwd = "admin";
@@ -564,13 +564,14 @@ namespace AnXinWH.ShiPinTianDyOCX
             {
                 m_cltInfo.m_iServerID = -1;
                 MessageBox.Show("Logon failed !");
-                return "error";
+                return false;
             }
             else
             {
                 m_cltInfo.m_iServerID = iRet;
+                return true;
             }
-            return "error";
+            return false;
         }
         private bool Connect()
         {
