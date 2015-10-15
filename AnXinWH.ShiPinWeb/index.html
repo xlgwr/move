@@ -49,51 +49,56 @@
                     //window.close();
                 }
             }
+            function isecLogon() {
+
+                var x = document.getElementById("x");
+                if (x) {
+                    var cameraIp = GetArgsFromHref(document.location.href, "cameraIp");
+                    //alert(cameraIp);
+                    $("#cameraIp").text("打开" + cameraIp + "中。");
+                    if (!cameraIp) {
+                        cameraIp = "192.168.1.110";
+                    }
+                    var dd = x.LogonAndPlay(cameraIp);
+                    if (dd === true) {
+                        $("#play").val("Stop");
+                        $("#cameraIp").text("打开" + cameraIp + "成功。");
+
+                    } else {
+                        $("#play").val("Play");
+                        $("#cameraIp").text("停止" + cameraIp + "播放。");
+
+                    }
+
+                } else {
+                    alert("控件不存在，请下载控件并把当前页面加入受信用网站中。谢谢。");
+                }
+            }
+            function isecPlay() {
+                var x = document.getElementById("x");
+                if (x) {
+                    var cameraIp = GetArgsFromHref(document.location.href, "cameraIp");
+                    //alert(cameraIp);
+                    $("#cameraIp").text("播放" + cameraIp + "中。");
+                    if (!cameraIp) {
+                        cameraIp = "192.168.1.110";
+                    }
+                    var dd = x.Play(cameraIp);
+                    if (dd === true) {
+                        $("#play").val("Stop");
+                        $("#cameraIp").text("播放" + cameraIp + "成功。");
+
+                    } else {
+                        $("#play").val("Play");
+                        $("#cameraIp").text("停止" + cameraIp + "播放。");
+
+                    }
+
+                } else {
+                    alert("控件不存在，请下载控件并把当前页面加入受信用网站中。谢谢。");
+                }
+            }
         });
-        function isecLogon() {
-            var x = document.getElementById("x");
-            if (x) {
-                var cameraIp = GetArgsFromHref(document.location.href, "cameraIp");
-                //alert(cameraIp);
-                $("#cameraIp").text("打开" + cameraIp + "中。");
-                if (!cameraIp) {
-                    cameraIp = "192.168.1.110";
-                }
-                var dd = x.LogonAndPlay(cameraIp);
-                if (dd === true) {
-                    $("#play").val("Stop");
-                    $("#cameraIp").text("打开" + cameraIp + "成功。");
-                } else {
-                    $("#play").val("Play");
-                    $("#cameraIp").text("停止" + cameraIp + "播放。");
-                }
-
-            } else {
-                alert("控件不存在，请下载控件并把当前页面加入受信用网站中。谢谢。");
-            }
-        }
-        function isecPlay() {
-            var x = document.getElementById("x");
-            if (x) {
-                var cameraIp = GetArgsFromHref(document.location.href, "cameraIp");
-                //alert(cameraIp);
-                $("#cameraIp").text("播放" + cameraIp + "中。");
-                if (!cameraIp) {
-                    cameraIp = "192.168.1.110";
-                }
-                var dd = x.Play(cameraIp);
-                if (dd === true) {
-                    $("#play").val("Stop");
-                    $("#cameraIp").text("播放" + cameraIp + "成功。");
-                } else {
-                    $("#play").val("Play");
-                    $("#cameraIp").text("停止" + cameraIp + "播放。");
-                }
-
-            } else {
-                alert("控件不存在，请下载控件并把当前页面加入受信用网站中。谢谢。");
-            }
-        }
 
     </script>
 </body>

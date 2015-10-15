@@ -28,11 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ISECVideo));
             this.m_video = new System.Windows.Forms.Panel();
             this.SuspendLayout();
             // 
             // m_video
             // 
+            this.m_video.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.m_video.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("m_video.BackgroundImage")));
+            this.m_video.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.m_video.Dock = System.Windows.Forms.DockStyle.Fill;
             this.m_video.Location = new System.Drawing.Point(0, 0);
             this.m_video.Name = "m_video";

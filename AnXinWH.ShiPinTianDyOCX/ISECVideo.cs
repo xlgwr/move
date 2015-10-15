@@ -272,7 +272,7 @@ namespace AnXinWH.ShiPinTianDyOCX
                 //OnMainMessage(m.WParam, m.LParam);
                 OnMessagePro(m.WParam, m.LParam);
                 //this.Notify(m.WParam, m.LParam);
-                var dd = "";
+                //MessageBox.Show("Test消息处理函数");
             }
 
             //默认消息处理函数
@@ -509,22 +509,10 @@ namespace AnXinWH.ShiPinTianDyOCX
                     }
                     else
                     {
-                        Ip = objIp.ToString();
-                        int iLogonID = m_conState[m_iCurrentFrame].m_iLogonID;
-                        if (iLogonID > 0)//如果当前窗口没有登陆，不进行操作
-                        {
-                            //注销当前窗口对应的用户登录
-                            var dd = NVSSDK.NetClient_Logoff(iLogonID);
 
-                            if (dd == 0)
-                            {
-                                Logon();
-                            }
-                        }
-                        else
-                        {
-                            Logon();
-                        }
+                        Ip = objIp.ToString();
+                        //MessageBox.Show(Ip);
+                        Logon();
                     }
                 }
                 return IsPlay;
