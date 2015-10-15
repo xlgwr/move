@@ -88,10 +88,10 @@ namespace AnXinWH.ShiPinTianDyOCX
             //throw new NotImplementedException();
             int iRet;
             //停止接受视频数据
-            iRet = NVSSDK.NetClient_StopCaptureData(m_conState[m_iCurrentFrame].m_uiConID);
+            iRet = NVSSDK.NetClient_StopCaptureData(m_conState[0].m_uiConID);
 
             //停止播放某路视频
-            iRet = NVSSDK.NetClient_StopPlay(m_conState[m_iCurrentFrame].m_uiConID);
+            iRet = NVSSDK.NetClient_StopPlay(m_conState[0].m_uiConID);
             m_video.Invalidate(true);
         }
         private void initFirst()
@@ -160,7 +160,7 @@ namespace AnXinWH.ShiPinTianDyOCX
             RECT rect = new RECT();
 
             //视频到达后开始播放   
-            NVSSDK.NetClient_StartPlay(m_conState[m_iCurrentFrame].m_uiConID, m_video.Handle, rect, 0);
+            NVSSDK.NetClient_StartPlay(m_conState[0].m_uiConID, m_video.Handle, rect, 0);
 
             //修改视频状态信息
             GetWindowStates();
@@ -170,14 +170,14 @@ namespace AnXinWH.ShiPinTianDyOCX
         private void GetWindowStates()
         {
 
-            UInt32 uiConID = m_conState[m_iCurrentFrame].m_uiConID;
+            UInt32 uiConID = m_conState[0].m_uiConID;
 
             //正在录像
             if (NVSSDK.NetClient_GetCaptureStatus(uiConID) == 1)
             {
                 //btnRecord.Text = "Stop";
             }
-            Int32 iLogonID = m_conState[m_iCurrentFrame].m_iLogonID;
+            Int32 iLogonID = m_conState[0].m_iLogonID;
             Int32 iComPortCounts = 2;
             Int32 iComPortEnabledStatus = 0;
 
@@ -190,7 +190,7 @@ namespace AnXinWH.ShiPinTianDyOCX
         private void SetWindowStates()
         {
             //正在播放时，设置窗口对应的状态信息；否则，清空窗口对应的状态信息
-            if (NVSSDK.NetClient_GetPlayingStatus(m_conState[m_iCurrentFrame].m_uiConID) == SDKConstMsg.PLAYER_PLAYING)
+            if (NVSSDK.NetClient_GetPlayingStatus(m_conState[0].m_uiConID) == SDKConstMsg.PLAYER_PLAYING)
             {
                 GetWindowStates();
             }
@@ -210,8 +210,8 @@ namespace AnXinWH.ShiPinTianDyOCX
             {
                 //停止一路视频接收
                 NVSSDK.NetClient_StopRecv(_uiConID);
-                m_conState[m_iCurrentFrame].m_iChannelNO = -1;
-                m_conState[m_iCurrentFrame].m_uiConID = UInt32.MaxValue;
+                m_conState[0].m_iChannelNO = -1;
+                m_conState[0].m_uiConID = UInt32.MaxValue;
                 m_video.Invalidate(true);
 
             }
@@ -361,6 +361,7 @@ namespace AnXinWH.ShiPinTianDyOCX
                 case SDKConstMsg.LOGON_SUCCESS://登陆成功显示设备ID号
                     {
                         m_cltInfo.m_cRemoteIP = _cIP;
+                        ConnStrId = _strID;
                         _isPlay = Connect();
                         break;
                     }
@@ -371,6 +372,7 @@ namespace AnXinWH.ShiPinTianDyOCX
                 case SDKConstMsg.LOGON_TIMEOUT://登陆失败
                     {
                         m_cltInfo.m_iServerID = -1;
+                        ConnStrId = "";
                         MessageBox.Show("Logon failed!");
                         break;
                     }
@@ -479,34 +481,50 @@ namespace AnXinWH.ShiPinTianDyOCX
                 if (IsPlay)
                 {
                     //停止接受视频数据
-                    iRet = NVSSDK.NetClient_StopCaptureData(m_conState[m_iCurrentFrame].m_uiConID);
+                    iRet = NVSSDK.NetClient_StopCaptureData(m_conState[0].m_uiConID);
 
                     //停止播放某路视频
-                    iRet = NVSSDK.NetClient_StopPlay(m_conState[m_iCurrentFrame].m_uiConID);
+                    iRet = NVSSDK.NetClient_StopPlay(m_conState[0].m_uiConID);
+                    this.Width = 600;
+                    this.Height = 500;
                     m_video.Invalidate(true);
                     IsPlay = false;
                 }
                 else
                 {
                     RECT rect = new RECT();
-
+                    this.Width = 600;
+                    this.Height = 500;
                     //开始播放视频
                     iRet = NVSSDK.NetClient_StartPlay
                     (
-                        m_conState[m_iCurrentFrame].m_uiConID,
+                        m_conState[0].m_uiConID,
                         m_video.Handle,
                         rect,
                         0
                     );
                     if (iRet == 0)
                     {
-                        IsPlay = true ;
+                        IsPlay = true;
                     }
                     else
                     {
                         Ip = objIp.ToString();
-                        Logon();
-                        //Connect();
+                        int iLogonID = m_conState[m_iCurrentFrame].m_iLogonID;
+                        if (iLogonID > 0)//如果当前窗口没有登陆，不进行操作
+                        {
+                            //注销当前窗口对应的用户登录
+                            var dd = NVSSDK.NetClient_Logoff(iLogonID);
+
+                            if (dd == 0)
+                            {
+                                Logon();
+                            }
+                        }
+                        else
+                        {
+                            Logon();
+                        }
                     }
                 }
                 return IsPlay;
@@ -582,7 +600,7 @@ namespace AnXinWH.ShiPinTianDyOCX
             m_cltInfo.m_cNetFile = new char[255];
             m_cltInfo.m_cRemoteIP = new char[16];
             Array.Copy(Ip.ToCharArray(), m_cltInfo.m_cRemoteIP, Ip.Length);
-            UInt32 uiConID = m_conState[m_iCurrentFrame].m_uiConID;
+            UInt32 uiConID = m_conState[0].m_uiConID;
 
             //获得当前窗口对应的视频播放状态
             int iRet = NVSSDK.NetClient_GetPlayingStatus(uiConID);
@@ -607,17 +625,17 @@ namespace AnXinWH.ShiPinTianDyOCX
                 //操作失败，清除结构体m_conState的信息
                 if (iRet < 0)
                 {
-                    m_conState[m_iCurrentFrame].m_iLogonID = -1;
-                    m_conState[m_iCurrentFrame].m_uiConID = UInt32.MaxValue;
-                    m_conState[m_iCurrentFrame].m_iChannelNO = -1;
+                    m_conState[0].m_iLogonID = -1;
+                    m_conState[0].m_uiConID = UInt32.MaxValue;
+                    m_conState[0].m_iChannelNO = -1;
                     MessageBox.Show("Connect failed !");
                     return false;
                 }
                 //操作成功，更新结构体m_conState的信息
-                m_conState[m_iCurrentFrame].m_iLogonID = m_cltInfo.m_iServerID;
-                m_conState[m_iCurrentFrame].m_iChannelNO = m_cltInfo.m_iChannelNo;
-                m_conState[m_iCurrentFrame].m_uiConID = uiConID;
-                m_conState[m_iCurrentFrame].m_iStreamNO = m_cltInfo.m_iStreamNO;
+                m_conState[0].m_iLogonID = m_cltInfo.m_iServerID;
+                m_conState[0].m_iChannelNO = m_cltInfo.m_iChannelNo;
+                m_conState[0].m_uiConID = uiConID;
+                m_conState[0].m_iStreamNO = m_cltInfo.m_iStreamNO;
 
                 //开始导出收到的数据
                 NVSSDK.NetClient_StartCaptureData(uiConID);
@@ -646,6 +664,14 @@ namespace AnXinWH.ShiPinTianDyOCX
         {
             get { return _isPlay; }
             private set { _isPlay = value; }
+        }
+
+        private string _connStrId;
+
+        public string ConnStrId
+        {
+            get { return _connStrId; }
+            private set { _connStrId = value; }
         }
     }
 }
