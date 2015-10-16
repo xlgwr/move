@@ -41,12 +41,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseView.cs" />
-    <Compile Include="Client.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Client.Designer.cs">
-      <DependentUpon>Client.cs</DependentUpon>
-    </Compile>
     <Compile Include="IObjectSafety.cs" />
     <Compile Include="ISECVideo.cs">
       <SubType>UserControl</SubType>
@@ -68,9 +62,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Client.resx">
-      <DependentUpon>Client.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="ISECVideo.resx">
       <DependentUpon>ISECVideo.cs</DependentUpon>
     </EmbeddedResource>

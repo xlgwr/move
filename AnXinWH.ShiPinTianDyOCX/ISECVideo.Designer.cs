@@ -34,6 +34,7 @@
             // 
             // m_video
             // 
+            this.m_video.AutoSize = true;
             this.m_video.BackColor = System.Drawing.SystemColors.ControlDark;
             this.m_video.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("m_video.BackgroundImage")));
             this.m_video.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
@@ -51,12 +52,14 @@
             this.Name = "ISECVideo";
             this.Size = new System.Drawing.Size(604, 497);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Panel m_video;
+        public System.Windows.Forms.Panel m_video;
+
 
     }
 }
