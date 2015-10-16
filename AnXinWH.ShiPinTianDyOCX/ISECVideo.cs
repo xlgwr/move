@@ -23,6 +23,7 @@ namespace AnXinWH.ShiPinTianDyOCX
         CONNECT_STATE[] m_conState;
         //当前视频窗口标记，从0开始
         int m_iCurrentFrame = 0;
+        bool _initSetup = false;
         #region att
         private string _ip;
 
@@ -74,13 +75,18 @@ namespace AnXinWH.ShiPinTianDyOCX
 
             //
             //this.Resize += Form1_Resize;
-            //this.Disposed += ISECVideo_Disposed;
+            this.Disposed += ISECVideo_Disposed;
             //initfrist
             initFirst();
             //initwith
             //initwith(m_video);
-            m_cltInfo.m_iServerID = -1;
-            StartUp();
+            if (!_initSetup)
+            {
+                m_cltInfo.m_iServerID = -1;
+                StartUp();
+                _initSetup = false;
+            }
+
         }
 
         void ISECVideo_Disposed(object sender, EventArgs e)
@@ -93,6 +99,8 @@ namespace AnXinWH.ShiPinTianDyOCX
             //停止播放某路视频
             iRet = NVSSDK.NetClient_StopPlay(m_conState[0].m_uiConID);
             m_video.Invalidate(true);
+            NVSSDK.NSLook_Cleanup();
+            NVSSDK.NetClient_Cleanup();
         }
         private void initFirst()
         {
@@ -510,9 +518,12 @@ namespace AnXinWH.ShiPinTianDyOCX
                     else
                     {
 
-                        Ip = objIp.ToString();
+                        //Ip = objIp.ToString();
                         //MessageBox.Show(Ip);
-                        Logon();
+                        NVSSDK.NSLook_Cleanup();
+                        NVSSDK.NetClient_Cleanup();
+                        LogonAndPlay(objIp);
+                        
                     }
                 }
                 return IsPlay;

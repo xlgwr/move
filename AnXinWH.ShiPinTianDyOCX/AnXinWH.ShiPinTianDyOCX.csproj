@@ -40,6 +40,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseView.cs" />
+    <Compile Include="Client.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Client.Designer.cs">
+      <DependentUpon>Client.cs</DependentUpon>
+    </Compile>
     <Compile Include="IObjectSafety.cs" />
     <Compile Include="ISECVideo.cs">
       <SubType>UserControl</SubType>
@@ -53,8 +60,17 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="VideoWindow.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="VideoWindow.Designer.cs">
+      <DependentUpon>VideoWindow.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Client.resx">
+      <DependentUpon>Client.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ISECVideo.resx">
       <DependentUpon>ISECVideo.cs</DependentUpon>
     </EmbeddedResource>
@@ -62,12 +78,18 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="VideoWindow.resx">
+      <DependentUpon>VideoWindow.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\frameworkApiTianDy\frameworkApiTianDy.csproj">
       <Project>{ed6a49ba-af32-4eb2-b959-c9b45f0f5ba5}</Project>
       <Name>frameworkApiTianDy</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Video2.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

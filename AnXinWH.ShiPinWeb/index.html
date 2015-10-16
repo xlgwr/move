@@ -40,15 +40,15 @@
                 isecPlay();
             });
 
-            window.onbeforeunload = function () {
-                var n = window.event.screenX - window.screenLeft;
-                var b = n > document.documentElement.scrollWidth - 20;
-                if (!(b && window.event.clientY < 0 || window.event.altKey)) {
-                    //alert("开始刷新页面了....");
-                    window.event.returnValue = "真的要刷新页面么？刷新后控件将不可用。";     //这里可以放置你想做的操作代码
-                    //window.close();
-                }
-            }
+            //window.onbeforeunload = function () {
+            //    var n = window.event.screenX - window.screenLeft;
+            //    var b = n > document.documentElement.scrollWidth - 20;
+            //    if (!(b && window.event.clientY < 0 || window.event.altKey)) {
+            //        //alert("开始刷新页面了....");
+            //        window.event.returnValue = "真的要刷新页面么？刷新后控件将不可用。";     //这里可以放置你想做的操作代码
+            //        //window.close();
+            //    }
+            //}
             function isecLogon() {
 
                 var x = document.getElementById("x");
@@ -62,11 +62,11 @@
                     var dd = x.LogonAndPlay(cameraIp);
                     if (dd === true) {
                         $("#play").val("Stop");
-                        $("#cameraIp").text("打开" + cameraIp + "成功。");
+                        $("#cameraIp").text("打开cameraIp:" + cameraIp + "成功。");
 
                     } else {
                         $("#play").val("Play");
-                        $("#cameraIp").text("停止" + cameraIp + "播放。");
+                        $("#cameraIp").text("停止cameraIp:" + cameraIp + "播放。");
 
                     }
 
@@ -86,11 +86,11 @@
                     var dd = x.Play(cameraIp);
                     if (dd === true) {
                         $("#play").val("Stop");
-                        $("#cameraIp").text("播放" + cameraIp + "成功。");
+                        $("#cameraIp").text("播放cameraIp:" + cameraIp + "成功。");
 
                     } else {
                         $("#play").val("Play");
-                        $("#cameraIp").text("停止" + cameraIp + "播放。");
+                        $("#cameraIp").text("停止cameraIp:" + cameraIp + "播放。");
 
                     }
 
