@@ -1210,7 +1210,7 @@
             {
             "AssemblyRegister" = "3:2"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:AnXinWH.ShiPinZXVOCX, Version=1.0.0.0, Culture=neutral, PublicKeyToken=6981f6010bdffec1, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:AnXinWH.ShiPinZXVOCX, Version=1.0.0.2, Culture=neutral, PublicKeyToken=6981f6010bdffec1, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_0BFE5CE1DC084F53BF18C0FA1CBD97A5"
@@ -4464,15 +4464,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:ISECVideoZXVAll"
-        "ProductCode" = "8:{3EC88160-DE47-4624-BECF-F9A93DCCA22D}"
-        "PackageCode" = "8:{52AFE3B4-DFA2-47D4-97AB-6FC7F0DF3550}"
+        "ProductCode" = "8:{2D3D44A8-DD74-4F5B-AB39-D514D6E81B09}"
+        "PackageCode" = "8:{6CDFD6B8-1FD1-48D6-B6F2-90D64EF81FA6}"
         "UpgradeCode" = "8:{20C3DB0E-92B8-4DEB-9C64-04BEC378B579}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:1.0.1"
+        "ProductVersion" = "8:1.0.2"
         "Manufacturer" = "8:ISEC"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
@@ -4588,7 +4588,7 @@
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_C43D598BB9574ABCBB8E4C2C7302E75A"
             {
             "Name" = "8:Uninstall ISECVideoZXV Base"
-            "Arguments" = "8:/x {3EC88160-DE47-4624-BECF-F9A93DCCA22D}"
+            "Arguments" = "8:/x {2D3D44A8-DD74-4F5B-AB39-D514D6E81B09}"
             "Description" = "8:"
             "ShowCmd" = "3:1"
             "IconIndex" = "3:0"
