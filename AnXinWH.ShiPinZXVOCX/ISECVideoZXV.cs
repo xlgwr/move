@@ -1,61 +1,61 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Runtime.InteropServices;
+using System.Data;
 using System.Text;
 using System.Windows.Forms;
+using System.Runtime.InteropServices;
+using System.Threading;
+using AnXinWH.ShiPin;
 
-namespace AnXinWH.ShiPin
+namespace AnXinWH.ShiPinZXVOCX
 {
-    public partial class Form1 : Form
+    [Guid("63C42A64-B9A6-4583-B6D0-10DC639D5408")]
+    public partial class ISECVideoZXV : UserControl, IObjectSafety, IDisposable
     {
+        #region attr
         static List<ZXVNMS_Camera2> _list_tcamera;
         static string _userid;
         static string _cmsIP;
-        static int _m_curPlayHandle;
+        public int _m_curPlayHandle { get; private set; }
+        public int _m_downloadHandle { get; private set; }
+        public string _commSelectMove { get; private set; }
+        public int _m_playfileHandle { get; private set; }
+        public int _fileStreamHandle { get; set; }
+        public string _device_id { get; set; }
+        public string _fullfilename { get; private set; }
 
-        public int _m_downloadHandle { get; set; }
-
-        public string _commSelectMove { get; set; }
-
-        public string _fullfilename { get; set; }
-
-         public static IntPtr _data = Marshal.AllocHGlobal(1024);
-         public static IntPtr _pUser = Marshal.AllocHGlobal(1024);
+        public static IntPtr _data = Marshal.AllocHGlobal(1024);
+        public static IntPtr _pUser = Marshal.AllocHGlobal(1024);
 
         public static IntPtr percent = Marshal.AllocHGlobal(8);
         public static IntPtr datarate = Marshal.AllocHGlobal(8);
         public static IntPtr remaintime = Marshal.AllocHGlobal(8);
 
         IntPtr _pUser0 = new IntPtr(0);
-        public Form1()
+        #endregion
+        public ISECVideoZXV()
         {
             InitializeComponent();
             try
             {
-                //
-                this.StartPosition = FormStartPosition.CenterScreen;
-                this.Resize += Form1_Resize;
-                //initwith
-                initwith();
+                this.Disposed += ISECVideoZXV_Disposed;
+
                 //init
+
                 initfirst();
+
+                //init set
+                comb0CameraID.SelectedIndex = 0;
+                progressBar1.Visible = false;
+                progressBar1.Value = 0;
+                progressBar1.Maximum = 100;
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
-
-
-        }
-
-        void Form1_Resize(object sender, EventArgs e)
-        {
-            initwith();
-            //throw new NotImplementedException();
         }
         //initform
         void initfirst()
@@ -80,29 +80,6 @@ namespace AnXinWH.ShiPin
             initcomp(comb0CameraID);
 
             this.Text = _userid + "," + _cmsIP;
-        }
-        void initwith()
-        {
-            gbtop1.Width = this.Width - gbtop1.Left - 20;
-
-            gbtop2.Top = gbtop1.Top + gbtop1.Height;
-            gbtop2.Left = gbtop1.Left;
-            gbtop2.Width = gbtop1.Width;
-            gbtop2.Height = this.Height - gb00Bottom.Height - gbtop2.Top - 35;
-
-        }
-
-        void StreamCallback(int handle, int dataType, IntPtr data, int size, IntPtr pUser)
-        {
-
-        }
-        void initcomp(ComboBox cb)
-        {
-            cb.Items.Clear();
-            foreach (var item in _list_tcamera)
-            {
-                cb.Items.Add(item.device_id);
-            }
         }
         void initDevice(configHost tconfig)
         {
@@ -168,6 +145,17 @@ namespace AnXinWH.ShiPin
 
             return false;
         }
+
+        void initcomp(ComboBox cb)
+        {
+            cb.Items.Clear();
+            foreach (var item in _list_tcamera)
+            {
+                cb.Items.Add(item.device_id);
+            }
+        }
+
+
         private void button1_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(comb0CameraID.Text))
@@ -210,11 +198,6 @@ namespace AnXinWH.ShiPin
 
         }
 
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            checkStop(true);
-            ZxvnmsSDKApi.ZXVNMS_Free();
-        }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -226,10 +209,7 @@ namespace AnXinWH.ShiPin
         }
         void SetMsg(Label lbl, string msg)
         {
-            this.Invoke(new Action(delegate()
-            {
-                lbl.Text = msg;
-            }));
+            lbl.Text = msg;
         }
         void setName(ComboBox cb, Label lbl)
         {
@@ -279,7 +259,7 @@ namespace AnXinWH.ShiPin
                     SetMsg(lbl0Msg, tmpmsg);
                     return;
                 }
-               
+
                 var tmpList = new List<ZXVNMS_RecordFile2>();
 
 
@@ -292,11 +272,13 @@ namespace AnXinWH.ShiPin
                     );
                 if (tmpret != 0)
                 {
-                    IntPtr tmpErrmsg = new IntPtr();
-                    IntPtr size = new IntPtr(100);
+                    IntPtr tmpErrmsg = Marshal.AllocHGlobal(1024);
+                    IntPtr size = Marshal.AllocHGlobal(1024);
                     ZxvnmsSDKApi.ZXVNMS_GetErrorInfo(tmpret, tmpErrmsg, size);
 
-                    tmpmsg = "Error:" + size + "," + tmpErrmsg;
+                    var tmptmpErrmsg = Marshal.PtrToStringAnsi(tmpErrmsg);
+                    var tmpsize = Marshal.ReadInt32(size);
+                    tmpmsg = "Error:" + tmpsize + "," + tmptmpErrmsg;
                     SetMsg(lbl0Msg, tmpmsg);
                     MessageBox.Show(tmpmsg);
                     return;
@@ -339,14 +321,12 @@ namespace AnXinWH.ShiPin
             catch (Exception ex)
             {
                 tmpmsg = ex.Message;
-                SetMsg(lbl0Msg, tmpmsg);
                 MessageBox.Show(tmpmsg);
+                SetMsg(lbl0Msg, tmpmsg);
             }
 
 
         }
-
-        public string _device_id { get; set; }
 
         private void comb2Moves_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -360,9 +340,71 @@ namespace AnXinWH.ShiPin
             }
 
         }
+        private void button3_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(comb2Moves.Text))
+                {
+                    comb2Moves.Focus();
+                    return;
+                }
+
+                if (string.IsNullOrEmpty(comb0CameraID.Text))
+                {
+                    comb0CameraID.Focus();
+                    return;
+                }
+                btn3PlayFile.Enabled = false;
+
+                progressBar1.Visible = false;
+                progressBar1.Value = 0;
+                progressBar1.Maximum = 100;
+
+                var tmpM = comb2Moves.Text.Split(',');
+                var filename = tmpM[4];
+                var size = Convert.ToInt32(Convert.ToDouble(tmpM[3]) * 1024 * 1024);
+
+                var comMsg = tmpM[0] + ",开始时间：" + tmpM[1] + ",结束时间：" + tmpM[2] + ",大小：" + tmpM[3] + "M";
+                tmpmsg = "打开回放视频中：" + comMsg;
 
 
-      
+                SetMsg(lbl0Msg, tmpmsg);
+
+                checkStop(false);
+
+                _m_playfileHandle = ZxvnmsSDKApi.ZXVNMS_PlayFile(
+                    comb0CameraID.Text,
+                    filename,
+                    size,
+                    0,
+                    pictureBox1.Handle
+                    );
+
+                if (_m_playfileHandle >= 0)
+                {
+                    tmpmsg = "打开回放视频成功：" + comMsg;
+                }
+                else
+                {
+                    tmpmsg = "打开回放视频失败：" + comMsg;
+                }
+
+                SetMsg(lbl0Msg, tmpmsg);
+            }
+            catch (Exception ex)
+            {
+                tmpmsg = ex.Message;
+                SetMsg(lbl0Msg, tmpmsg);
+                MessageBox.Show(tmpmsg);
+            }
+            finally
+            {
+                btn3PlayFile.Enabled = true;
+            }
+        }
+
+
         private void timer1_Tick(object sender, EventArgs e)
         {
             try
@@ -388,7 +430,7 @@ namespace AnXinWH.ShiPin
                         ZxvnmsSDKApi.ZXVNMS_StopFileDownload(_m_downloadHandle);
                         _m_downloadHandle = -1;
                     }
-                    timer1.Enabled = false;
+                    //timer1.Enabled = false;
                     btn5Down.Enabled = true;
                     tmpmsg = "下载完成。" + _fullfilename;
                     SetMsg(lbl0Msg, tmpmsg);
@@ -398,7 +440,7 @@ namespace AnXinWH.ShiPin
             }
             catch (Exception ex)
             {
-                timer1.Enabled = false;
+                // timer1.Enabled = false;
                 btn5Down.Enabled = true;
                 tmpmsg = ex.Message;
                 SetMsg(lbl0Msg, tmpmsg);
@@ -472,7 +514,7 @@ namespace AnXinWH.ShiPin
                     }
                     else
                     {
-                        timer1.Enabled = true;
+                        //timer1.Enabled = true;
                     }
                 }
 
@@ -480,7 +522,7 @@ namespace AnXinWH.ShiPin
             }
             catch (Exception ex)
             {
-                timer1.Enabled = false;
+                //timer1.Enabled = false;
                 btn5Down.Enabled = true;
 
 
@@ -494,6 +536,7 @@ namespace AnXinWH.ShiPin
             }
 
         }
+
         void checkStop(bool isDown)
         {
 
@@ -518,150 +561,91 @@ namespace AnXinWH.ShiPin
             }
 
         }
-        private void button3_Click(object sender, EventArgs e)
+        void ISECVideoZXV_Disposed(object sender, EventArgs e)
         {
-            try
-            {
-                if (string.IsNullOrEmpty(comb2Moves.Text))
-                {
-                    comb2Moves.Focus();
-                    return;
-                }
-
-                if (string.IsNullOrEmpty(comb0CameraID.Text))
-                {
-                    comb0CameraID.Focus();
-                    return;
-                }
-                btn3PlayFile.Enabled = false;
-
-                progressBar1.Visible = false;
-                progressBar1.Value = 0;
-                progressBar1.Maximum = 100;
-
-                var tmpM = comb2Moves.Text.Split(',');
-                var filename = tmpM[4];
-                var size = Convert.ToInt32(Convert.ToDouble(tmpM[3]) * 1024 * 1024);
-
-                var comMsg = tmpM[0] + ",开始时间：" + tmpM[1] + ",结束时间：" + tmpM[2] + ",大小：" + tmpM[3] + "M";
-                tmpmsg = "打开回放视频中：" + comMsg;
-
-
-                SetMsg(lbl0Msg, tmpmsg);
-
-                checkStop(false);
-
-                _m_playfileHandle = ZxvnmsSDKApi.ZXVNMS_PlayFile(
-                    comb0CameraID.Text,
-                    filename,
-                    size,
-                    0,
-                    pictureBox1.Handle
-                    );
-
-                if (_m_playfileHandle >= 0)
-                {
-                    tmpmsg = "打开回放视频成功：" + comMsg;
-                }
-                else
-                {
-                    tmpmsg = "打开回放视频失败：" + comMsg;
-                }
-
-                SetMsg(lbl0Msg, tmpmsg);
-            }
-            catch (Exception ex)
-            {
-                tmpmsg = ex.Message;
-                SetMsg(lbl0Msg, tmpmsg);
-                MessageBox.Show(tmpmsg);
-            }
-            finally
-            {
-                btn3PlayFile.Enabled = true;
-            }
+            //throw new NotImplementedException();
+            ZxvnmsSDKApi.ZXVNMS_Free();
         }
+        #region IObjectSafety 成员
+
+        private const string _IID_IDispatch = "{00020400-0000-0000-C000-000000000046}";
+        private const string _IID_IDispatchEx = "{a6ef9860-c720-11d0-9337-00a0c90dcaa9}";
+        private const string _IID_IPersistStorage = "{0000010A-0000-0000-C000-000000000046}";
+        private const string _IID_IPersistStream = "{00000109-0000-0000-C000-000000000046}";
+        private const string _IID_IPersistPropertyBag = "{37D84F60-42CB-11CE-8135-00AA004BB851}";
+
+        private const int INTERFACESAFE_FOR_UNTRUSTED_CALLER = 0x00000001;
+        private const int INTERFACESAFE_FOR_UNTRUSTED_DATA = 0x00000002;
+        private const int S_OK = 0;
+        private const int E_FAIL = unchecked((int)0x80004005);
+        private const int E_NOINTERFACE = unchecked((int)0x80004002);
+
+        private bool _fSafeForScripting = true;
+        private bool _fSafeForInitializing = true;
+
+
+        public int GetInterfaceSafetyOptions(ref Guid riid, ref int pdwSupportedOptions, ref int pdwEnabledOptions)
+        {
+            int Rslt = E_FAIL;
+
+            string strGUID = riid.ToString("B");
+            pdwSupportedOptions = INTERFACESAFE_FOR_UNTRUSTED_CALLER | INTERFACESAFE_FOR_UNTRUSTED_DATA;
+            switch (strGUID)
+            {
+                case _IID_IDispatch:
+                case _IID_IDispatchEx:
+                    Rslt = S_OK;
+                    pdwEnabledOptions = 0;
+                    if (_fSafeForScripting == true)
+                        pdwEnabledOptions = INTERFACESAFE_FOR_UNTRUSTED_CALLER;
+                    break;
+                case _IID_IPersistStorage:
+                case _IID_IPersistStream:
+                case _IID_IPersistPropertyBag:
+                    Rslt = S_OK;
+                    pdwEnabledOptions = 0;
+                    if (_fSafeForInitializing == true)
+                        pdwEnabledOptions = INTERFACESAFE_FOR_UNTRUSTED_DATA;
+                    break;
+                default:
+                    Rslt = E_NOINTERFACE;
+                    break;
+            }
+
+            return Rslt;
+        }
+
+        public int SetInterfaceSafetyOptions(ref Guid riid, int dwOptionSetMask, int dwEnabledOptions)
+        {
+            int Rslt = E_FAIL;
+
+            string strGUID = riid.ToString("B");
+            switch (strGUID)
+            {
+                case _IID_IDispatch:
+                case _IID_IDispatchEx:
+                    if (((dwEnabledOptions & dwOptionSetMask) == INTERFACESAFE_FOR_UNTRUSTED_CALLER) &&
+                            (_fSafeForScripting == true))
+                        Rslt = S_OK;
+                    break;
+                case _IID_IPersistStorage:
+                case _IID_IPersistStream:
+                case _IID_IPersistPropertyBag:
+                    if (((dwEnabledOptions & dwOptionSetMask) == INTERFACESAFE_FOR_UNTRUSTED_DATA) &&
+                            (_fSafeForInitializing == true))
+                        Rslt = S_OK;
+                    break;
+                default:
+                    Rslt = E_NOINTERFACE;
+                    break;
+            }
+
+            return Rslt;
+        }
+
+        #endregion
+
 
         public string tmpmsg { get; set; }
-
-        public int _m_playfileHandle { get; set; }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            gb00Bottom.Visible = false;
-
-            comb0CameraID.SelectedIndex = 0;
-
-            progressBar1.Visible = false;
-            progressBar1.Value = 0;
-            progressBar1.Maximum = 100;
-        }
-
-
-
-
-        private void btn0FileStream_Click(object sender, EventArgs e)
-        {
-            if (string.IsNullOrEmpty(comb2Moves.Text))
-            {
-                comb2Moves.Focus();
-                return;
-            }
-
-            if (string.IsNullOrEmpty(comb0CameraID.Text))
-            {
-                comb0CameraID.Focus();
-                return;
-            }            
-            
-            var tmpM = comb2Moves.Text.Split(',');
-            var filename = tmpM[4];
-            var size = Convert.ToInt32(Convert.ToDouble(tmpM[3]) * 1024 * 1024);
-
-            var comMsg = tmpM[0] + ",开始时间：" + tmpM[1] + ",结束时间：" + tmpM[2] + ",大小：" + tmpM[3] + "M";
-            tmpmsg = "打开回放视频[流]中：" + comMsg;
-            SetMsg(lbl0Msg, tmpmsg);
-
-            try
-            {
-                btn0FileStream.Enabled = false;
-
-                if (_fileStreamHandle>0)
-                {
-                    ZxvnmsSDKApi.ZXVNMS_StopVideoFileStream(_fileStreamHandle);
-                }
-
-                _fileStreamHandle = ZxvnmsSDKApi.ZXVNMS_StartVideoFileStream(
-                    comb0CameraID.Text,
-                    filename, 
-                    size,
-                    0
-                    );
-
-                if (_fileStreamHandle >= 0)
-                {
-                   //var tmpCallback = ZxvnmsSDKApi.ZXVNMS_SetVideoStreamCallback(StreamCallback, _pUser0);
-                    tmpmsg = "打开视频流成功：" + comMsg;
-                    comb3StreamId.Items.Add(_fileStreamHandle);
-                    _fileStreamHandle = -1;
-                }
-                else
-                {
-                    tmpmsg = "打视频流失败：" + comMsg;
-                }
-
-                SetMsg(lbl0Msg, tmpmsg);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            finally
-            {
-                btn0FileStream.Enabled = true;
-            }
-        }
-
-        public int _fileStreamHandle { get; set; }
     }
 }

@@ -41,7 +41,7 @@
             this.m_video.Dock = System.Windows.Forms.DockStyle.Fill;
             this.m_video.Location = new System.Drawing.Point(0, 0);
             this.m_video.Name = "m_video";
-            this.m_video.Size = new System.Drawing.Size(604, 497);
+            this.m_video.Size = new System.Drawing.Size(600, 500);
             this.m_video.TabIndex = 21;
             // 
             // ISECVideo
@@ -50,7 +50,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.m_video);
             this.Name = "ISECVideo";
-            this.Size = new System.Drawing.Size(604, 497);
+            this.Size = new System.Drawing.Size(600, 500);
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnXinWH.ShiPinWeb", "AnXinW
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnXinWH.ShiPinTianDyOCX", "AnXinWH.ShiPinTianDyOCX\AnXinWH.ShiPinTianDyOCX.csproj", "{E6D6A260-7F97-4929-8863-47D9E70A75E9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnXinWH.ShiPinZXVOCX", "AnXinWH.ShiPinZXVOCX\AnXinWH.ShiPinZXVOCX.csproj", "{B97BD0EC-33B5-48C6-88B0-5EACCE8373D7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{E6D6A260-7F97-4929-8863-47D9E70A75E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E6D6A260-7F97-4929-8863-47D9E70A75E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E6D6A260-7F97-4929-8863-47D9E70A75E9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B97BD0EC-33B5-48C6-88B0-5EACCE8373D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B97BD0EC-33B5-48C6-88B0-5EACCE8373D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B97BD0EC-33B5-48C6-88B0-5EACCE8373D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B97BD0EC-33B5-48C6-88B0-5EACCE8373D7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

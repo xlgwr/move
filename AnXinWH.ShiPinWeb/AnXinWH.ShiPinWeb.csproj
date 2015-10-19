@@ -57,6 +57,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="index2.html" />
     <Content Include="packages.config" />
     <Content Include="ISECVideo.msi" />
     <None Include="Properties\PublishProfiles\dd.pubxml" />
