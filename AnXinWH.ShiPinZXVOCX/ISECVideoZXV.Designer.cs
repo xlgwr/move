@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.gbtop2 = new System.Windows.Forms.GroupBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.gbtop1 = new System.Windows.Forms.GroupBox();
@@ -46,6 +47,7 @@
             this.button1 = new System.Windows.Forms.Button();
             this.comb0CameraID = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.gbtop2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.gbtop1.SuspendLayout();
@@ -230,6 +232,10 @@
             this.label1.TabIndex = 4;
             this.label1.Text = "摄像头：";
             // 
+            // timer1
+            // 
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
             // ISECVideoZXV
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -266,6 +272,7 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ComboBox comb0CameraID;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Timer timer1;
 
     }
 }

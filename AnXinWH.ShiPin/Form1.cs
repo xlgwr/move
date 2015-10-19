@@ -292,11 +292,13 @@ namespace AnXinWH.ShiPin
                     );
                 if (tmpret != 0)
                 {
-                    IntPtr tmpErrmsg = new IntPtr();
-                    IntPtr size = new IntPtr(100);
+                    IntPtr tmpErrmsg = Marshal.AllocHGlobal(1024);
+                    IntPtr size = Marshal.AllocHGlobal(1024);
                     ZxvnmsSDKApi.ZXVNMS_GetErrorInfo(tmpret, tmpErrmsg, size);
 
-                    tmpmsg = "Error:" + size + "," + tmpErrmsg;
+                    var tmptmpErrmsg = Marshal.PtrToStringAnsi(tmpErrmsg);
+                    var tmpsize = Marshal.ReadInt32(size);
+                    tmpmsg = "Error:" + tmpsize + "," + tmptmpErrmsg;
                     SetMsg(lbl0Msg, tmpmsg);
                     MessageBox.Show(tmpmsg);
                     return;
@@ -460,11 +462,14 @@ namespace AnXinWH.ShiPin
 
                     if (_m_downloadHandle < 0)
                     {
-                        IntPtr tmpErrmsg = new IntPtr();
-                        IntPtr buflen = new IntPtr(0);
-                        ZxvnmsSDKApi.ZXVNMS_GetErrorInfo(_m_downloadHandle, tmpErrmsg, buflen);
 
-                        tmpmsg = "Error:下载失败，" + _m_downloadHandle + "," + tmpErrmsg;
+                        IntPtr tmpErrmsg = Marshal.AllocHGlobal(1024);
+                        IntPtr size2 = Marshal.AllocHGlobal(1024);
+                        ZxvnmsSDKApi.ZXVNMS_GetErrorInfo(_m_downloadHandle, tmpErrmsg, size2);
+
+                        var tmptmpErrmsg = Marshal.PtrToStringAnsi(tmpErrmsg);
+                        var tmpsize = Marshal.ReadInt32(size2);
+                        tmpmsg = "Error:" + tmpsize + "," + tmptmpErrmsg;
                         SetMsg(lbl0Msg, tmpmsg);
                         MessageBox.Show(tmpmsg);
                         btn5Down.Enabled = true;

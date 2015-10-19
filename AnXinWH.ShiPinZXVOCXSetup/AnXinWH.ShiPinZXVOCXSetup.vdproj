@@ -15,115 +15,61 @@
     {
         "Entry"
         {
-        "MsmKey" = "8:_0A1C69B24A4149B380400E96BDDF24A7"
+        "MsmKey" = "8:_023E30888129440CA2346B00580899BB"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_1205876B9BBB480AA6D277B04DE5283C"
+        "MsmKey" = "8:_045869976D9A404986600D12D5E2548B"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_1A761BDECB014A5B81BE2B73F13BD926"
+        "MsmKey" = "8:_04FD1B0D3D0144E78AC499738F84380F"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_1F513A9790C24C07B4D1768332AF8E82"
+        "MsmKey" = "8:_2D1DB142C85349C098F7672E1FDDCE51"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_2DDED17FDE0A4F1B9DE88A9063029EE3"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_344CB8511FE148ED9AA62990C848366A"
+        "MsmKey" = "8:_3AF778F48D7A4853BB5B11911AC5629C"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_3D4E02EDFCB01C63C11F6A8DEEAE9F05"
-        "OwnerKey" = "8:_1205876B9BBB480AA6D277B04DE5283C"
+        "OwnerKey" = "8:_91ED7FFEF2C74856B7593F53A690CD22"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_3EF123DA44B7480194DE493BF5D6BD84"
+        "MsmKey" = "8:_50BC6A7BB95F4D5A9E2244FF11995AFF"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_43E4E160E57B4195A904D010DA243F54"
+        "MsmKey" = "8:_5DA9B813C5064F829B63A1EFF8A85F35"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_531C5CA54F9844588FC2F31BED97B8FE"
+        "MsmKey" = "8:_6289EDE7964246E590C8F803BB86DDAE"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_5827ED057D944C81A3D4A93F8831AFF8"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_61EB7C980CCF401CB01896DF9A70B0D1"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_65B4F3B0FC024B998D46D4AE37B6BC42"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_69A48F2630E64F58A72585AF37C3A443"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_6BF0AE3418AB472D9E6F700F393B71A6"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_6F5225B39C80403AA70995AD702C09DB"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_6F83E41CA7EB4535A05144C3BE5726CD"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_7542529CD8834D04B3E439E2BBC81F95"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_780412169A034780939E79A584FB19C1"
+        "MsmKey" = "8:_761E4CD45C3F4F79B6DCBC8135E3A226"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -135,134 +81,158 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_88B65A55F8354F2B981ABED035F317B4"
+        "MsmKey" = "8:_8849013226914B48BC69074621F6F656"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_956EB0A0813442DD8DB889FA62231D81"
+        "MsmKey" = "8:_8A767F8430DD4F02AB2E1D5602BECF23"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_9BAE409A7AAB444D95B9C0EEB726DD41"
+        "MsmKey" = "8:_914CF8C07C704D5C9ED81144BBEAF04D"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_A0CC125DD3C245B29333DD6D42A54645"
+        "MsmKey" = "8:_91ED7FFEF2C74856B7593F53A690CD22"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_B17166D302B349AAB4AEA0ABD601BBA5"
+        "MsmKey" = "8:_9326113F749F41718BC0CECA969B1AFA"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_B33F3AAABBAE44BA9B8D26343B8F15D6"
+        "MsmKey" = "8:_96CABB0DF1FD4A3F96C16DB49D9420F0"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_BB110C362D7249469DF255A5757CD8A7"
+        "MsmKey" = "8:_99714C85C88A4A6F9F52BACE89A3CF66"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_A4238D7CA4124099AA44B29738A7AB14"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_A76FEE87F59346D28FE7E8EF37E325D2"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_A77574E077CA4120BAA3623716C5A44B"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_A91F5D1CD3F548A18721FBC63AAAF953"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_B1F13F9510444B5AB7C07A9F35968A08"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_B6710E95A43C407DB8CDE1EB57F66D26"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_BE0F46DC57ED0BECC2EF0CE224B985D8"
-        "OwnerKey" = "8:_1205876B9BBB480AA6D277B04DE5283C"
+        "OwnerKey" = "8:_91ED7FFEF2C74856B7593F53A690CD22"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_CEE6FDE7F2894BB68665EABA20E604B4"
+        "MsmKey" = "8:_C0E9823EA68F4A44BCD71E620E9F04BE"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_E2BD9211FD2340CF9872AF877658830A"
+        "MsmKey" = "8:_C1C0C3207AA3477FB19028BE898B9AC3"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_E46CC5CEEB854786B4EA8C594FD8F574"
+        "MsmKey" = "8:_D6FB4C2E906643AAB93A2436169B7E85"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_EC95BD83C18440A6BD46067500EA6876"
+        "MsmKey" = "8:_DFBAA6046E774ADDBCC6E8BCBF72D6DF"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_ED41B3E41E3D4EB6AAB945F28A2E81A1"
+        "MsmKey" = "8:_E935BCD6E1FD49DF9C75A3CF362F2BAE"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_F0FB26CECE9D4FC89B84DE020B29C50C"
+        "MsmKey" = "8:_ED1DC41B348E417088CED9E644D71AD6"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_F35D53842CE64DACA57B74B55190DD5D"
+        "MsmKey" = "8:_F1AFB861FEDD4E0C8D2930A7AB4EB03D"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_F682C6EDA8344A50AA6D21015C92C522"
+        "MsmKey" = "8:_F400DE530B284B2B8570CE54225C8DF9"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_F6FFD19831E9466AB2FCCA5878D33FD5"
+        "MsmKey" = "8:_F43615B7BA92416CB18DDB2A6F6DC521"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_F9E6E69BFD2A40009FEDCB0635D44F45"
+        "MsmKey" = "8:_FD190500CFDF4B539667968958D8BA4E"
         "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_FF8C8AD8F27A4286B0394334B31C20F2"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_1205876B9BBB480AA6D277B04DE5283C"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_344CB8511FE148ED9AA62990C848366A"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_BE0F46DC57ED0BECC2EF0CE224B985D8"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_91ED7FFEF2C74856B7593F53A690CD22"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -283,6 +253,27 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.0,Profile=Client"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4 Client Profile (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.0,Profile=Client"
+                    }
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:Microsoft.Windows.Installer.3.1"
+                    {
+                    "Name" = "8:Windows Installer 3.1"
+                    "ProductCode" = "8:Microsoft.Windows.Installer.3.1"
+                    }
+                }
+            }
         }
         "Release"
         {
@@ -299,6 +290,14 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+            }
         }
     }
     "Deployable"
@@ -328,10 +327,10 @@
         }
         "File"
         {
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_0A1C69B24A4149B380400E96BDDF24A7"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_023E30888129440CA2346B00580899BB"
             {
-            "SourcePath" = "8:..\\AnXinWH.ShiPinZXVOCX\\bin\\Debug\\frameworkApi.pdb"
-            "TargetName" = "8:frameworkApi.pdb"
+            "SourcePath" = "8:..\\AnXinWH.ShiPinZXVOCX\\bin\\Debug\\ZxvnmsSDK.dll"
+            "TargetName" = "8:ZxvnmsSDK.dll"
             "Tag" = "8:"
             "Folder" = "8:_410F7F7FC6EF40DF9B72ECC5BACDE9A4"
             "Condition" = "8:"
@@ -348,21 +347,10 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_1205876B9BBB480AA6D277B04DE5283C"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_045869976D9A404986600D12D5E2548B"
             {
-            "AssemblyRegister" = "3:2"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:AnXinWH.ShiPinZXVOCX, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86"
-                "ScatterAssemblies"
-                {
-                    "_1205876B9BBB480AA6D277B04DE5283C"
-                    {
-                    "Name" = "8:AnXinWH.ShiPinZXVOCX.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:..\\AnXinWH.ShiPinZXVOCX\\bin\\Debug\\AnXinWH.ShiPinZXVOCX.dll"
-            "TargetName" = "8:"
+            "SourcePath" = "8:..\\AnXinWH.ShiPinZXVOCX\\bin\\Debug\\xerces-c_2_7.dll"
+            "TargetName" = "8:xerces-c_2_7.dll"
             "Tag" = "8:"
             "Folder" = "8:_410F7F7FC6EF40DF9B72ECC5BACDE9A4"
             "Condition" = "8:"
@@ -379,10 +367,10 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_1A761BDECB014A5B81BE2B73F13BD926"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_04FD1B0D3D0144E78AC499738F84380F"
             {
-            "SourcePath" = "8:..\\AnXinWH.ShiPinZXVOCX\\bin\\Debug\\log4cxx_znv.dll"
-            "TargetName" = "8:log4cxx_znv.dll"
+            "SourcePath" = "8:..\\AnXinWH.ShiPinZXVOCX\\bin\\Debug\\PlayCtrl.dll"
+            "TargetName" = "8:PlayCtrl.dll"
             "Tag" = "8:"
             "Folder" = "8:_410F7F7FC6EF40DF9B72ECC5BACDE9A4"
             "Condition" = "8:"
@@ -399,10 +387,10 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_1F513A9790C24C07B4D1768332AF8E82"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_2D1DB142C85349C098F7672E1FDDCE51"
             {
-            "SourcePath" = "8:..\\AnXinWH.ShiPinZXVOCX\\bin\\Debug\\ZxAlarm.dll"
-            "TargetName" = "8:ZxAlarm.dll"
+            "SourcePath" = "8:..\\AnXinWH.ShiPinZXVOCX\\bin\\Debug\\rtp.dll"
+            "TargetName" = "8:rtp.dll"
             "Tag" = "8:"
             "Folder" = "8:_410F7F7FC6EF40DF9B72ECC5BACDE9A4"
             "Condition" = "8:"
@@ -419,41 +407,10 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_2DDED17FDE0A4F1B9DE88A9063029EE3"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_3AF778F48D7A4853BB5B11911AC5629C"
             {
-            "SourcePath" = "8:..\\AnXinWH.ShiPinZXVOCX\\bin\\Debug\\ExtendModule.dll"
-            "TargetName" = "8:ExtendModule.dll"
-            "Tag" = "8:"
-            "Folder" = "8:_410F7F7FC6EF40DF9B72ECC5BACDE9A4"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_344CB8511FE148ED9AA62990C848366A"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:frameworkApi, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_344CB8511FE148ED9AA62990C848366A"
-                    {
-                    "Name" = "8:frameworkApi.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:..\\AnXinWH.ShiPinZXVOCX\\bin\\Debug\\frameworkApi.dll"
-            "TargetName" = "8:"
+            "SourcePath" = "8:..\\AnXinWH.ShiPinZXVOCX\\bin\\Debug\\ZxVideo.dll"
+            "TargetName" = "8:ZxVideo.dll"
             "Tag" = "8:"
             "Folder" = "8:_410F7F7FC6EF40DF9B72ECC5BACDE9A4"
             "Condition" = "8:"
@@ -490,107 +447,7 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_3EF123DA44B7480194DE493BF5D6BD84"
-            {
-            "SourcePath" = "8:..\\AnXinWH.ShiPinZXVOCX\\bin\\Debug\\hpr.dll"
-            "TargetName" = "8:hpr.dll"
-            "Tag" = "8:"
-            "Folder" = "8:_410F7F7FC6EF40DF9B72ECC5BACDE9A4"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_43E4E160E57B4195A904D010DA243F54"
-            {
-            "SourcePath" = "8:..\\AnXinWH.ShiPinZXVOCX\\bin\\Debug\\AnalyzeData.dll"
-            "TargetName" = "8:AnalyzeData.dll"
-            "Tag" = "8:"
-            "Folder" = "8:_410F7F7FC6EF40DF9B72ECC5BACDE9A4"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_531C5CA54F9844588FC2F31BED97B8FE"
-            {
-            "SourcePath" = "8:..\\AnXinWH.ShiPinZXVOCX\\bin\\Debug\\rtp.dll"
-            "TargetName" = "8:rtp.dll"
-            "Tag" = "8:"
-            "Folder" = "8:_410F7F7FC6EF40DF9B72ECC5BACDE9A4"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_5827ED057D944C81A3D4A93F8831AFF8"
-            {
-            "SourcePath" = "8:..\\AnXinWH.ShiPinZXVOCX\\bin\\Debug\\T15crtD.dll"
-            "TargetName" = "8:T15crtD.dll"
-            "Tag" = "8:"
-            "Folder" = "8:_410F7F7FC6EF40DF9B72ECC5BACDE9A4"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_61EB7C980CCF401CB01896DF9A70B0D1"
-            {
-            "SourcePath" = "8:..\\AnXinWH.ShiPinZXVOCX\\bin\\Debug\\TCPModule.dll"
-            "TargetName" = "8:TCPModule.dll"
-            "Tag" = "8:"
-            "Folder" = "8:_410F7F7FC6EF40DF9B72ECC5BACDE9A4"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_65B4F3B0FC024B998D46D4AE37B6BC42"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_50BC6A7BB95F4D5A9E2244FF11995AFF"
             {
             "SourcePath" = "8:..\\AnXinWH.ShiPinZXVOCX\\bin\\Debug\\ClerkEncoder.dll"
             "TargetName" = "8:ClerkEncoder.dll"
@@ -610,10 +467,10 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_69A48F2630E64F58A72585AF37C3A443"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_5DA9B813C5064F829B63A1EFF8A85F35"
             {
-            "SourcePath" = "8:..\\AnXinWH.ShiPinZXVOCX\\bin\\Debug\\AnXinWH.ShiPinZXVOCX.pdb"
-            "TargetName" = "8:AnXinWH.ShiPinZXVOCX.pdb"
+            "SourcePath" = "8:..\\AnXinWH.ShiPinZXVOCX\\bin\\Debug\\3GPConvert.dll"
+            "TargetName" = "8:3GPConvert.dll"
             "Tag" = "8:"
             "Folder" = "8:_410F7F7FC6EF40DF9B72ECC5BACDE9A4"
             "Condition" = "8:"
@@ -630,10 +487,10 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_6BF0AE3418AB472D9E6F700F393B71A6"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_6289EDE7964246E590C8F803BB86DDAE"
             {
-            "SourcePath" = "8:..\\AnXinWH.ShiPinZXVOCX\\bin\\Debug\\system_message.xml"
-            "TargetName" = "8:system_message.xml"
+            "SourcePath" = "8:..\\AnXinWH.ShiPinZXVOCX\\bin\\Debug\\TCPModule.dll"
+            "TargetName" = "8:TCPModule.dll"
             "Tag" = "8:"
             "Folder" = "8:_410F7F7FC6EF40DF9B72ECC5BACDE9A4"
             "Condition" = "8:"
@@ -650,70 +507,10 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_6F5225B39C80403AA70995AD702C09DB"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_761E4CD45C3F4F79B6DCBC8135E3A226"
             {
-            "SourcePath" = "8:..\\AnXinWH.ShiPinZXVOCX\\bin\\Debug\\PUProxyModule.dll"
-            "TargetName" = "8:PUProxyModule.dll"
-            "Tag" = "8:"
-            "Folder" = "8:_410F7F7FC6EF40DF9B72ECC5BACDE9A4"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_6F83E41CA7EB4535A05144C3BE5726CD"
-            {
-            "SourcePath" = "8:..\\AnXinWH.ShiPinZXVOCX\\bin\\Debug\\ACE_znv.dll"
-            "TargetName" = "8:ACE_znv.dll"
-            "Tag" = "8:"
-            "Folder" = "8:_410F7F7FC6EF40DF9B72ECC5BACDE9A4"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_7542529CD8834D04B3E439E2BBC81F95"
-            {
-            "SourcePath" = "8:..\\AnXinWH.ShiPinZXVOCX\\bin\\Debug\\PlayCtrl.dll"
-            "TargetName" = "8:PlayCtrl.dll"
-            "Tag" = "8:"
-            "Folder" = "8:_410F7F7FC6EF40DF9B72ECC5BACDE9A4"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_780412169A034780939E79A584FB19C1"
-            {
-            "SourcePath" = "8:..\\AnXinWH.ShiPinZXVOCX\\bin\\Debug\\sdklog.properties"
-            "TargetName" = "8:sdklog.properties"
+            "SourcePath" = "8:..\\AnXinWH.ShiPinZXVOCX\\bin\\Debug\\RTSPModule.dll"
+            "TargetName" = "8:RTSPModule.dll"
             "Tag" = "8:"
             "Folder" = "8:_410F7F7FC6EF40DF9B72ECC5BACDE9A4"
             "Condition" = "8:"
@@ -750,30 +547,10 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_88B65A55F8354F2B981ABED035F317B4"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_8849013226914B48BC69074621F6F656"
             {
-            "SourcePath" = "8:..\\AnXinWH.ShiPinZXVOCX\\bin\\Debug\\AnXinWH.ShiPinZXVOCX.tlb"
-            "TargetName" = "8:AnXinWH.ShiPinZXVOCX.tlb"
-            "Tag" = "8:"
-            "Folder" = "8:_410F7F7FC6EF40DF9B72ECC5BACDE9A4"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:2"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_956EB0A0813442DD8DB889FA62231D81"
-            {
-            "SourcePath" = "8:..\\AnXinWH.ShiPinZXVOCX\\bin\\Debug\\StreamInfoLib.dll"
-            "TargetName" = "8:StreamInfoLib.dll"
+            "SourcePath" = "8:..\\AnXinWH.ShiPinZXVOCX\\bin\\Debug\\sdklog.properties"
+            "TargetName" = "8:sdklog.properties"
             "Tag" = "8:"
             "Folder" = "8:_410F7F7FC6EF40DF9B72ECC5BACDE9A4"
             "Condition" = "8:"
@@ -790,10 +567,10 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_9BAE409A7AAB444D95B9C0EEB726DD41"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_8A767F8430DD4F02AB2E1D5602BECF23"
             {
-            "SourcePath" = "8:..\\AnXinWH.ShiPinZXVOCX\\bin\\Debug\\HWEnc.dll"
-            "TargetName" = "8:HWEnc.dll"
+            "SourcePath" = "8:..\\AnXinWH.ShiPinZXVOCX\\bin\\Debug\\HCNetSDK.dll"
+            "TargetName" = "8:HCNetSDK.dll"
             "Tag" = "8:"
             "Folder" = "8:_410F7F7FC6EF40DF9B72ECC5BACDE9A4"
             "Condition" = "8:"
@@ -810,10 +587,10 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A0CC125DD3C245B29333DD6D42A54645"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_914CF8C07C704D5C9ED81144BBEAF04D"
             {
-            "SourcePath" = "8:..\\AnXinWH.ShiPinZXVOCX\\bin\\Debug\\xerces-c_2_7.dll"
-            "TargetName" = "8:xerces-c_2_7.dll"
+            "SourcePath" = "8:..\\AnXinWH.ShiPinZXVOCX\\bin\\Debug\\ZxLog.dll"
+            "TargetName" = "8:ZxLog.dll"
             "Tag" = "8:"
             "Folder" = "8:_410F7F7FC6EF40DF9B72ECC5BACDE9A4"
             "Condition" = "8:"
@@ -830,10 +607,21 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_B17166D302B349AAB4AEA0ABD601BBA5"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_91ED7FFEF2C74856B7593F53A690CD22"
             {
-            "SourcePath" = "8:..\\AnXinWH.ShiPinZXVOCX\\bin\\Debug\\ZxVideo.dll"
-            "TargetName" = "8:ZxVideo.dll"
+            "AssemblyRegister" = "3:2"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:AnXinWH.ShiPinZXVOCX, Version=1.0.0.0, Culture=neutral, PublicKeyToken=6981f6010bdffec1, processorArchitecture=x86"
+                "ScatterAssemblies"
+                {
+                    "_91ED7FFEF2C74856B7593F53A690CD22"
+                    {
+                    "Name" = "8:AnXinWH.ShiPinZXVOCX.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:..\\AnXinWH.ShiPinZXVOCX\\bin\\Debug\\AnXinWH.ShiPinZXVOCX.dll"
+            "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_410F7F7FC6EF40DF9B72ECC5BACDE9A4"
             "Condition" = "8:"
@@ -850,7 +638,127 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_B33F3AAABBAE44BA9B8D26343B8F15D6"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_9326113F749F41718BC0CECA969B1AFA"
+            {
+            "SourcePath" = "8:..\\AnXinWH.ShiPinZXVOCX\\bin\\Debug\\log4cxx_znv.dll"
+            "TargetName" = "8:log4cxx_znv.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_410F7F7FC6EF40DF9B72ECC5BACDE9A4"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_96CABB0DF1FD4A3F96C16DB49D9420F0"
+            {
+            "SourcePath" = "8:..\\AnXinWH.ShiPinZXVOCX\\bin\\Debug\\NetViewPlayerAdv.dll"
+            "TargetName" = "8:NetViewPlayerAdv.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_410F7F7FC6EF40DF9B72ECC5BACDE9A4"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:4"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_99714C85C88A4A6F9F52BACE89A3CF66"
+            {
+            "SourcePath" = "8:..\\AnXinWH.ShiPinZXVOCX\\bin\\Debug\\ZxAlarm.dll"
+            "TargetName" = "8:ZxAlarm.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_410F7F7FC6EF40DF9B72ECC5BACDE9A4"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A4238D7CA4124099AA44B29738A7AB14"
+            {
+            "SourcePath" = "8:..\\AnXinWH.ShiPinZXVOCX\\bin\\Debug\\CommonModule.dll"
+            "TargetName" = "8:CommonModule.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_410F7F7FC6EF40DF9B72ECC5BACDE9A4"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A76FEE87F59346D28FE7E8EF37E325D2"
+            {
+            "SourcePath" = "8:..\\AnXinWH.ShiPinZXVOCX\\bin\\Debug\\AnalyzeData.dll"
+            "TargetName" = "8:AnalyzeData.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_410F7F7FC6EF40DF9B72ECC5BACDE9A4"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A77574E077CA4120BAA3623716C5A44B"
+            {
+            "SourcePath" = "8:..\\AnXinWH.ShiPinZXVOCX\\bin\\Debug\\workfactry.dll"
+            "TargetName" = "8:workfactry.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_410F7F7FC6EF40DF9B72ECC5BACDE9A4"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A91F5D1CD3F548A18721FBC63AAAF953"
             {
             "SourcePath" = "8:..\\AnXinWH.ShiPinZXVOCX\\bin\\Debug\\StreamTransClient.dll"
             "TargetName" = "8:StreamTransClient.dll"
@@ -870,10 +778,30 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_BB110C362D7249469DF255A5757CD8A7"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_B1F13F9510444B5AB7C07A9F35968A08"
             {
-            "SourcePath" = "8:..\\AnXinWH.ShiPinZXVOCX\\bin\\Debug\\3GPConvert.dll"
-            "TargetName" = "8:3GPConvert.dll"
+            "SourcePath" = "8:..\\AnXinWH.ShiPinZXVOCX\\bin\\Debug\\HWEnc.dll"
+            "TargetName" = "8:HWEnc.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_410F7F7FC6EF40DF9B72ECC5BACDE9A4"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_B6710E95A43C407DB8CDE1EB57F66D26"
+            {
+            "SourcePath" = "8:..\\AnXinWH.ShiPinZXVOCX\\bin\\Debug\\T15tmman32D.dll"
+            "TargetName" = "8:T15tmman32D.dll"
             "Tag" = "8:"
             "Folder" = "8:_410F7F7FC6EF40DF9B72ECC5BACDE9A4"
             "Condition" = "8:"
@@ -894,7 +822,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:frameworkApi, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:frameworkApi, Version=1.0.0.0, Culture=neutral, PublicKeyToken=07ee2efa89890651, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
                     "_BE0F46DC57ED0BECC2EF0CE224B985D8"
@@ -921,7 +849,7 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_CEE6FDE7F2894BB68665EABA20E604B4"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_C0E9823EA68F4A44BCD71E620E9F04BE"
             {
             "SourcePath" = "8:..\\AnXinWH.ShiPinZXVOCX\\bin\\Debug\\ZxvideoLocal.dll"
             "TargetName" = "8:ZxvideoLocal.dll"
@@ -941,7 +869,87 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_E2BD9211FD2340CF9872AF877658830A"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_C1C0C3207AA3477FB19028BE898B9AC3"
+            {
+            "SourcePath" = "8:..\\AnXinWH.ShiPinZXVOCX\\bin\\Debug\\ACE_znv.dll"
+            "TargetName" = "8:ACE_znv.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_410F7F7FC6EF40DF9B72ECC5BACDE9A4"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_D6FB4C2E906643AAB93A2436169B7E85"
+            {
+            "SourcePath" = "8:..\\AnXinWH.ShiPinZXVOCX\\bin\\Debug\\hpr.dll"
+            "TargetName" = "8:hpr.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_410F7F7FC6EF40DF9B72ECC5BACDE9A4"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_DFBAA6046E774ADDBCC6E8BCBF72D6DF"
+            {
+            "SourcePath" = "8:..\\AnXinWH.ShiPinZXVOCX\\bin\\Debug\\ExtendModule.dll"
+            "TargetName" = "8:ExtendModule.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_410F7F7FC6EF40DF9B72ECC5BACDE9A4"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_E935BCD6E1FD49DF9C75A3CF362F2BAE"
+            {
+            "SourcePath" = "8:..\\AnXinWH.ShiPinZXVOCX\\bin\\Debug\\system_message.xml"
+            "TargetName" = "8:system_message.xml"
+            "Tag" = "8:"
+            "Folder" = "8:_410F7F7FC6EF40DF9B72ECC5BACDE9A4"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_ED1DC41B348E417088CED9E644D71AD6"
             {
             "SourcePath" = "8:..\\AnXinWH.ShiPinZXVOCX\\bin\\Debug\\DS40xxSDK.dll"
             "TargetName" = "8:DS40xxSDK.dll"
@@ -961,10 +969,10 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_E46CC5CEEB854786B4EA8C594FD8F574"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F1AFB861FEDD4E0C8D2930A7AB4EB03D"
             {
-            "SourcePath" = "8:..\\AnXinWH.ShiPinZXVOCX\\bin\\Debug\\HCNetSDK.dll"
-            "TargetName" = "8:HCNetSDK.dll"
+            "SourcePath" = "8:..\\AnXinWH.ShiPinZXVOCX\\bin\\Debug\\PUProxyModule.dll"
+            "TargetName" = "8:PUProxyModule.dll"
             "Tag" = "8:"
             "Folder" = "8:_410F7F7FC6EF40DF9B72ECC5BACDE9A4"
             "Condition" = "8:"
@@ -981,10 +989,10 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_EC95BD83C18440A6BD46067500EA6876"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F400DE530B284B2B8570CE54225C8DF9"
             {
-            "SourcePath" = "8:..\\AnXinWH.ShiPinZXVOCX\\bin\\Debug\\ZxvnmsSDK.dll"
-            "TargetName" = "8:ZxvnmsSDK.dll"
+            "SourcePath" = "8:..\\AnXinWH.ShiPinZXVOCX\\bin\\Debug\\T15crtD.dll"
+            "TargetName" = "8:T15crtD.dll"
             "Tag" = "8:"
             "Folder" = "8:_410F7F7FC6EF40DF9B72ECC5BACDE9A4"
             "Condition" = "8:"
@@ -1001,130 +1009,30 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_ED41B3E41E3D4EB6AAB945F28A2E81A1"
-            {
-            "SourcePath" = "8:..\\AnXinWH.ShiPinZXVOCX\\bin\\Debug\\T15tmman32D.dll"
-            "TargetName" = "8:T15tmman32D.dll"
-            "Tag" = "8:"
-            "Folder" = "8:_410F7F7FC6EF40DF9B72ECC5BACDE9A4"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F0FB26CECE9D4FC89B84DE020B29C50C"
-            {
-            "SourcePath" = "8:..\\AnXinWH.ShiPinZXVOCX\\bin\\Debug\\CommonModule.dll"
-            "TargetName" = "8:CommonModule.dll"
-            "Tag" = "8:"
-            "Folder" = "8:_410F7F7FC6EF40DF9B72ECC5BACDE9A4"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F35D53842CE64DACA57B74B55190DD5D"
-            {
-            "SourcePath" = "8:..\\AnXinWH.ShiPinZXVOCX\\bin\\Debug\\RTSPModule.dll"
-            "TargetName" = "8:RTSPModule.dll"
-            "Tag" = "8:"
-            "Folder" = "8:_410F7F7FC6EF40DF9B72ECC5BACDE9A4"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F682C6EDA8344A50AA6D21015C92C522"
-            {
-            "SourcePath" = "8:..\\AnXinWH.ShiPinZXVOCX\\bin\\Debug\\NetViewPlayerAdv.dll"
-            "TargetName" = "8:NetViewPlayerAdv.dll"
-            "Tag" = "8:"
-            "Folder" = "8:_410F7F7FC6EF40DF9B72ECC5BACDE9A4"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:4"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F6FFD19831E9466AB2FCCA5878D33FD5"
-            {
-            "SourcePath" = "8:..\\AnXinWH.ShiPinZXVOCX\\bin\\Debug\\workfactry.dll"
-            "TargetName" = "8:workfactry.dll"
-            "Tag" = "8:"
-            "Folder" = "8:_410F7F7FC6EF40DF9B72ECC5BACDE9A4"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F9E6E69BFD2A40009FEDCB0635D44F45"
-            {
-            "SourcePath" = "8:..\\AnXinWH.ShiPinZXVOCX\\bin\\Debug\\ZxLog.dll"
-            "TargetName" = "8:ZxLog.dll"
-            "Tag" = "8:"
-            "Folder" = "8:_410F7F7FC6EF40DF9B72ECC5BACDE9A4"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_FF8C8AD8F27A4286B0394334B31C20F2"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F43615B7BA92416CB18DDB2A6F6DC521"
             {
             "SourcePath" = "8:..\\AnXinWH.ShiPinZXVOCX\\bin\\Debug\\PlatformAdapter.dll"
             "TargetName" = "8:PlatformAdapter.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_410F7F7FC6EF40DF9B72ECC5BACDE9A4"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_FD190500CFDF4B539667968958D8BA4E"
+            {
+            "SourcePath" = "8:..\\AnXinWH.ShiPinZXVOCX\\bin\\Debug\\StreamInfoLib.dll"
+            "TargetName" = "8:StreamInfoLib.dll"
             "Tag" = "8:"
             "Folder" = "8:_410F7F7FC6EF40DF9B72ECC5BACDE9A4"
             "Condition" = "8:"
@@ -1208,15 +1116,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:ISECVideoZXV"
-        "ProductCode" = "8:{F12F9E3C-CC95-42FD-95BC-D18E4FACE750}"
-        "PackageCode" = "8:{D3BA892C-2E6F-40CE-8C8A-F6C795302C2B}"
+        "ProductCode" = "8:{878F789B-A215-4E84-9526-82EB5BE004F2}"
+        "PackageCode" = "8:{CE37B355-09D1-4319-B90B-C2606CE82C7F}"
         "UpgradeCode" = "8:{CCF7AEA6-CAA9-4E9A-A2E3-5A89AA448C5E}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:1.0.0"
+        "ProductVersion" = "8:1.0.1"
         "Manufacturer" = "8:ISEC"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
@@ -1332,7 +1240,7 @@
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_C12A1A5A0F9146D5B78A968889F5748C"
             {
             "Name" = "8:UnInstall ISECVideo.ZXV"
-            "Arguments" = "8:/u {F12F9E3C-CC95-42FD-95BC-D18E4FACE750}"
+            "Arguments" = "8:/x {878F789B-A215-4E84-9526-82EB5BE004F2}"
             "Description" = "8:"
             "ShowCmd" = "3:1"
             "IconIndex" = "3:0"

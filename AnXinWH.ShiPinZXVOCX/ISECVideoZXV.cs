@@ -430,7 +430,7 @@ namespace AnXinWH.ShiPinZXVOCX
                         ZxvnmsSDKApi.ZXVNMS_StopFileDownload(_m_downloadHandle);
                         _m_downloadHandle = -1;
                     }
-                    //timer1.Enabled = false;
+                    timer1.Enabled = false;
                     btn5Down.Enabled = true;
                     tmpmsg = "下载完成。" + _fullfilename;
                     SetMsg(lbl0Msg, tmpmsg);
@@ -440,7 +440,7 @@ namespace AnXinWH.ShiPinZXVOCX
             }
             catch (Exception ex)
             {
-                // timer1.Enabled = false;
+                timer1.Enabled = false;
                 btn5Down.Enabled = true;
                 tmpmsg = ex.Message;
                 SetMsg(lbl0Msg, tmpmsg);
@@ -502,19 +502,21 @@ namespace AnXinWH.ShiPinZXVOCX
 
                     if (_m_downloadHandle < 0)
                     {
-                        IntPtr tmpErrmsg = new IntPtr();
-                        IntPtr buflen = new IntPtr(0);
-                        ZxvnmsSDKApi.ZXVNMS_GetErrorInfo(_m_downloadHandle, tmpErrmsg, buflen);
+                        IntPtr tmpErrmsg = Marshal.AllocHGlobal(1024);
+                        IntPtr size2 = Marshal.AllocHGlobal(1024);
+                        ZxvnmsSDKApi.ZXVNMS_GetErrorInfo(_m_downloadHandle, tmpErrmsg, size2);
 
-                        tmpmsg = "Error:下载失败，" + _m_downloadHandle + "," + tmpErrmsg;
+                        var tmptmpErrmsg = Marshal.PtrToStringAnsi(tmpErrmsg);
+                        var tmpsize = Marshal.ReadInt32(size2);
+                        tmpmsg = "Error:" + tmpsize + "," + tmptmpErrmsg;
                         SetMsg(lbl0Msg, tmpmsg);
                         MessageBox.Show(tmpmsg);
                         btn5Down.Enabled = true;
-                        return;
+                        return; 
                     }
                     else
                     {
-                        //timer1.Enabled = true;
+                        timer1.Enabled = true;
                     }
                 }
 
@@ -522,7 +524,7 @@ namespace AnXinWH.ShiPinZXVOCX
             }
             catch (Exception ex)
             {
-                //timer1.Enabled = false;
+                timer1.Enabled = false;
                 btn5Down.Enabled = true;
 
 
@@ -564,6 +566,7 @@ namespace AnXinWH.ShiPinZXVOCX
         void ISECVideoZXV_Disposed(object sender, EventArgs e)
         {
             //throw new NotImplementedException();
+            checkStop(true);
             ZxvnmsSDKApi.ZXVNMS_Free();
         }
         #region IObjectSafety 成员

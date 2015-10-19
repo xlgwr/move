@@ -37,6 +37,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.lbl0Msg = new System.Windows.Forms.Label();
             this.gbtop1 = new System.Windows.Forms.GroupBox();
+            this.comb3StreamId = new System.Windows.Forms.ComboBox();
+            this.btn0FileStream = new System.Windows.Forms.Button();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
@@ -56,8 +58,6 @@
             this.button9 = new System.Windows.Forms.Button();
             this.gb00Bottom = new System.Windows.Forms.GroupBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.btn0FileStream = new System.Windows.Forms.Button();
-            this.comb3StreamId = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.gbtop2.SuspendLayout();
             this.gbtop1.SuspendLayout();
@@ -78,7 +78,6 @@
             // 
             this.pictureBox1.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox1.Image = global::AnXinWH.ShiPin.Properties.Resources.Video;
             this.pictureBox1.Location = new System.Drawing.Point(3, 17);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(920, 405);
@@ -148,6 +147,24 @@
             this.gbtop1.Size = new System.Drawing.Size(920, 191);
             this.gbtop1.TabIndex = 6;
             this.gbtop1.TabStop = false;
+            // 
+            // comb3StreamId
+            // 
+            this.comb3StreamId.FormattingEnabled = true;
+            this.comb3StreamId.Location = new System.Drawing.Point(738, 135);
+            this.comb3StreamId.Name = "comb3StreamId";
+            this.comb3StreamId.Size = new System.Drawing.Size(127, 20);
+            this.comb3StreamId.TabIndex = 11;
+            // 
+            // btn0FileStream
+            // 
+            this.btn0FileStream.Location = new System.Drawing.Point(738, 92);
+            this.btn0FileStream.Name = "btn0FileStream";
+            this.btn0FileStream.Size = new System.Drawing.Size(108, 34);
+            this.btn0FileStream.TabIndex = 10;
+            this.btn0FileStream.Text = "获取视频流";
+            this.btn0FileStream.UseVisualStyleBackColor = true;
+            this.btn0FileStream.Click += new System.EventHandler(this.btn0FileStream_Click);
             // 
             // progressBar1
             // 
@@ -320,24 +337,6 @@
             // timer1
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // btn0FileStream
-            // 
-            this.btn0FileStream.Location = new System.Drawing.Point(738, 92);
-            this.btn0FileStream.Name = "btn0FileStream";
-            this.btn0FileStream.Size = new System.Drawing.Size(108, 34);
-            this.btn0FileStream.TabIndex = 10;
-            this.btn0FileStream.Text = "获取视频流";
-            this.btn0FileStream.UseVisualStyleBackColor = true;
-            this.btn0FileStream.Click += new System.EventHandler(this.btn0FileStream_Click);
-            // 
-            // comb3StreamId
-            // 
-            this.comb3StreamId.FormattingEnabled = true;
-            this.comb3StreamId.Location = new System.Drawing.Point(738, 135);
-            this.comb3StreamId.Name = "comb3StreamId";
-            this.comb3StreamId.Size = new System.Drawing.Size(127, 20);
-            this.comb3StreamId.TabIndex = 11;
             // 
             // Form1
             // 

@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "AnXinWH.ShiPinZXVOCXSetup", "AnXinWH.ShiPinZXVOCXSetup.vdproj", "{EE331D2C-9B83-44F0-AAB1-3C200C3CB0EF}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "AnXinWH.ShiPinZXVOCXSetupBase", "..\AnXinWH.ShiPinZXVOCXSetupBase\AnXinWH.ShiPinZXVOCXSetupBase.vdproj", "{66B96EF0-4E90-47DC-BA83-E14165AF3E53}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Default = Debug|Default
@@ -13,6 +15,10 @@ Global
 		{EE331D2C-9B83-44F0-AAB1-3C200C3CB0EF}.Debug|Default.Build.0 = Debug
 		{EE331D2C-9B83-44F0-AAB1-3C200C3CB0EF}.Release|Default.ActiveCfg = Release
 		{EE331D2C-9B83-44F0-AAB1-3C200C3CB0EF}.Release|Default.Build.0 = Release
+		{66B96EF0-4E90-47DC-BA83-E14165AF3E53}.Debug|Default.ActiveCfg = Debug
+		{66B96EF0-4E90-47DC-BA83-E14165AF3E53}.Debug|Default.Build.0 = Debug
+		{66B96EF0-4E90-47DC-BA83-E14165AF3E53}.Release|Default.ActiveCfg = Release
+		{66B96EF0-4E90-47DC-BA83-E14165AF3E53}.Release|Default.Build.0 = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
