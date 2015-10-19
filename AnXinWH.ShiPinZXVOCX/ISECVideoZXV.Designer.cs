@@ -48,17 +48,21 @@
             this.comb0CameraID = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.trackBar1 = new System.Windows.Forms.TrackBar();
+            this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.gbtop2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.gbtop1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.SuspendLayout();
             // 
             // gbtop2
             // 
+            this.gbtop2.Controls.Add(this.trackBar1);
             this.gbtop2.Controls.Add(this.pictureBox1);
             this.gbtop2.Location = new System.Drawing.Point(4, 197);
             this.gbtop2.Name = "gbtop2";
-            this.gbtop2.Size = new System.Drawing.Size(857, 425);
+            this.gbtop2.Size = new System.Drawing.Size(857, 443);
             this.gbtop2.TabIndex = 7;
             this.gbtop2.TabStop = false;
             // 
@@ -68,7 +72,7 @@
             this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pictureBox1.Location = new System.Drawing.Point(3, 17);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(851, 405);
+            this.pictureBox1.Size = new System.Drawing.Size(851, 423);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
@@ -149,7 +153,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(88, 59);
+            this.label3.Location = new System.Drawing.Point(73, 59);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(65, 12);
             this.label3.TabIndex = 4;
@@ -236,6 +240,19 @@
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // trackBar1
+            // 
+            this.trackBar1.Location = new System.Drawing.Point(194, 408);
+            this.trackBar1.Maximum = 100;
+            this.trackBar1.Name = "trackBar1";
+            this.trackBar1.Size = new System.Drawing.Size(452, 45);
+            this.trackBar1.TabIndex = 2;
+            this.trackBar1.Scroll += new System.EventHandler(this.trackBar1_Scroll);
+            // 
+            // timer2
+            // 
+            this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
+            // 
             // ISECVideoZXV
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -243,11 +260,13 @@
             this.Controls.Add(this.gbtop2);
             this.Controls.Add(this.gbtop1);
             this.Name = "ISECVideoZXV";
-            this.Size = new System.Drawing.Size(861, 630);
+            this.Size = new System.Drawing.Size(861, 646);
             this.gbtop2.ResumeLayout(false);
+            this.gbtop2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.gbtop1.ResumeLayout(false);
             this.gbtop1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -273,6 +292,8 @@
         private System.Windows.Forms.ComboBox comb0CameraID;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.TrackBar trackBar1;
+        private System.Windows.Forms.Timer timer2;
 
     }
 }

@@ -69,11 +69,14 @@ namespace AnXinWH.ShiPinZXVOCX
 
             dateTimePicker2.Format = DateTimePickerFormat.Custom;
             dateTimePicker2.CustomFormat = "yyyy-MM-dd HH:mm:ss";
+            trackBar1.Visible = false;
             //attr
             _list_tcamera = new List<ZXVNMS_Camera2>();
             _userid = "";
             _cmsIP = "";
             _m_curPlayHandle = -1;
+            _m_playfileHandle = -1;
+            _m_downloadHandle = -1;
             //initdevice
             initDevice(comm.getConfigHost());
             //initcomp
@@ -334,7 +337,7 @@ namespace AnXinWH.ShiPinZXVOCX
             {
                 var tmpM = comb2Moves.Text.Split(',');
 
-                var tmpmsg = "当前选择：" + tmpM[0] + ",开始时间：" + tmpM[1] + ",结束时间：" + tmpM[2] + ",大小：" + tmpM[3] + "M";
+                var tmpmsg = "当前选择：" + tmpM[0] + ",时间：" + tmpM[1] + "-->" + tmpM[2] + ",视频大小：" + tmpM[3] + "M";
                 _commSelectMove = tmpmsg;
                 SetMsg(lbl0Msg, tmpmsg);
             }
@@ -365,8 +368,8 @@ namespace AnXinWH.ShiPinZXVOCX
                 var filename = tmpM[4];
                 var size = Convert.ToInt32(Convert.ToDouble(tmpM[3]) * 1024 * 1024);
 
-                var comMsg = tmpM[0] + ",开始时间：" + tmpM[1] + ",结束时间：" + tmpM[2] + ",大小：" + tmpM[3] + "M";
-                tmpmsg = "打开回放视频中：" + comMsg;
+                _comMsg = tmpM[0] + ",时间：" + tmpM[1] + "-->" + tmpM[2] + ",视频大小：" + tmpM[3] + "M";
+                tmpmsg = "打开回放视频中：" + _comMsg;
 
 
                 SetMsg(lbl0Msg, tmpmsg);
@@ -381,13 +384,19 @@ namespace AnXinWH.ShiPinZXVOCX
                     pictureBox1.Handle
                     );
 
+                trackBar1.Value = 0;
                 if (_m_playfileHandle >= 0)
                 {
-                    tmpmsg = "打开回放视频成功：" + comMsg;
+                    tmpmsg = "打开回放视频成功：" + _comMsg;
+                    trackBar1.Visible = true;
+                    timer2.Enabled = true;
+
                 }
                 else
                 {
-                    tmpmsg = "打开回放视频失败：" + comMsg;
+                    tmpmsg = "打开回放视频失败：" + _comMsg;
+                    trackBar1.Visible = false;
+                    timer2.Enabled = false;
                 }
 
                 SetMsg(lbl0Msg, tmpmsg);
@@ -395,6 +404,9 @@ namespace AnXinWH.ShiPinZXVOCX
             catch (Exception ex)
             {
                 tmpmsg = ex.Message;
+                trackBar1.Value = 0;
+                timer2.Enabled = false;
+
                 SetMsg(lbl0Msg, tmpmsg);
                 MessageBox.Show(tmpmsg);
             }
@@ -407,32 +419,81 @@ namespace AnXinWH.ShiPinZXVOCX
 
         private void timer1_Tick(object sender, EventArgs e)
         {
+
+            getPercent(_m_downloadHandle, "下载完成。", true);
+        }
+        private void timer2_Tick(object sender, EventArgs e)
+        {
+            getPercent(_m_playfileHandle, "播放完成。", false);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="_handid"></param>
+        /// <param name="msg"></param>
+        /// <param name="isdown"></param>
+        void getPercent(int _handid, string msg, bool isdown)
+        {
             try
             {
-                ZxvnmsSDKApi.ZXVNMS_GetFilePercent(_m_downloadHandle, percent);
-                ZxvnmsSDKApi.ZXVNMS_GetVideoDataRate(_m_downloadHandle, datarate);
-                ZxvnmsSDKApi.ZXVNMS_GetDownloadRemainTime(_m_downloadHandle, remaintime);
-
+                ZxvnmsSDKApi.ZXVNMS_GetFilePercent(_handid, percent);
+                ZxvnmsSDKApi.ZXVNMS_GetVideoDataRate(_handid, datarate);
 
                 var tmppercent = Marshal.ReadInt32(percent);
-                var tmpdatarate = Marshal.ReadInt32(datarate);
-                var tmpremaintime = Marshal.ReadInt32(remaintime);
+                var tmpdatarate = Marshal.ReadInt32(datarate) / 128;
 
-                tmpmsg = "speed:" + tmpdatarate + " B/S,percent:" + tmppercent + "%,remaintime:" + tmpremaintime + "s" + "," + _commSelectMove;
-                SetMsg(lbl0Msg, tmpmsg);
                 var tmpValue = Convert.ToDouble(tmppercent);
-                progressBar1.Value = Convert.ToInt32(Math.Ceiling(tmpValue));
+                var setTmpValue = Convert.ToInt32(Math.Ceiling(tmpValue));
 
                 if (tmpValue >= 100)
                 {
-                    if (_m_downloadHandle >= 0)
+                    if (isdown)
                     {
-                        ZxvnmsSDKApi.ZXVNMS_StopFileDownload(_m_downloadHandle);
-                        _m_downloadHandle = -1;
+                        if (_handid >= 0)
+                        {
+                            ZxvnmsSDKApi.ZXVNMS_StopFileDownload(_handid);
+                            _m_downloadHandle = -1;
+
+                        }
+                        timer1.Enabled = false;
+                        btn5Down.Enabled = true;
+                        progressBar1.Value = 100;
+                        tmpmsg = msg + _fullfilename;
                     }
-                    timer1.Enabled = false;
-                    btn5Down.Enabled = true;
-                    tmpmsg = "下载完成。" + _fullfilename;
+                    else
+                    {
+                        if (_handid >= 0)
+                        {
+                            ZxvnmsSDKApi.ZXVNMS_StopFilePlay(_handid);
+                            _m_playfileHandle = -1;
+                        }
+                        timer2.Enabled = false;
+                        trackBar1.Visible = false;
+                        trackBar1.Value = 0;
+                        tmpmsg = msg + _comMsg;
+                    }
+
+
+                    SetMsg(lbl0Msg, tmpmsg);
+                }
+                else
+                {
+                    if (isdown)
+                    {
+                        ZxvnmsSDKApi.ZXVNMS_GetDownloadRemainTime(_handid, remaintime);
+
+                        var tmpremaintime = Marshal.ReadInt32(remaintime);
+
+                        tmpmsg = "speed:" + tmpdatarate + " KB/S,percent:" + tmppercent + "%,remaintime:" + tmpremaintime + "s" + "," + _commSelectMove;
+                        progressBar1.Value = setTmpValue;
+                    }
+                    else
+                    {
+                        tmpmsg = "已播放:" + tmppercent + "%, speed:" + tmpdatarate + " KB/S，" + _comMsg;
+
+                        trackBar1.Value = setTmpValue;
+                    }
+
                     SetMsg(lbl0Msg, tmpmsg);
                 }
 
@@ -440,13 +501,19 @@ namespace AnXinWH.ShiPinZXVOCX
             }
             catch (Exception ex)
             {
-                timer1.Enabled = false;
-                btn5Down.Enabled = true;
+                if (isdown)
+                {
+                    timer1.Enabled = false;
+                    btn5Down.Enabled = true;
+                }
+                {
+                    timer2.Enabled = false;
+                }
+
                 tmpmsg = ex.Message;
                 SetMsg(lbl0Msg, tmpmsg);
                 MessageBox.Show(tmpmsg);
             }
-
         }
         private void btn5Down_Click(object sender, EventArgs e)
         {
@@ -512,7 +579,7 @@ namespace AnXinWH.ShiPinZXVOCX
                         SetMsg(lbl0Msg, tmpmsg);
                         MessageBox.Show(tmpmsg);
                         btn5Down.Enabled = true;
-                        return; 
+                        return;
                     }
                     else
                     {
@@ -552,6 +619,7 @@ namespace AnXinWH.ShiPinZXVOCX
             {
                 ZxvnmsSDKApi.ZXVNMS_StopFilePlay(_m_playfileHandle);
                 _m_playfileHandle = -1;
+                timer2.Enabled = false;
             }
             if (isDown)
             {
@@ -559,6 +627,7 @@ namespace AnXinWH.ShiPinZXVOCX
                 {
                     ZxvnmsSDKApi.ZXVNMS_StopFileDownload(_m_downloadHandle);
                     _m_downloadHandle = -1;
+                    timer1.Enabled = false;
                 }
             }
 
@@ -650,5 +719,38 @@ namespace AnXinWH.ShiPinZXVOCX
 
 
         public string tmpmsg { get; set; }
+
+        private void trackBar1_Scroll(object sender, EventArgs e)
+        {
+            try
+            {
+                if (_m_playfileHandle > 0)
+                {
+                    if (trackBar1.Value == 100)
+                    {
+                        SetMsg(lbl0Msg, "Notice:已播放完毕." + _comMsg);
+                        return;
+                    }
+                    var tmpLayout = ZxvnmsSDKApi.ZXVNMS_SetFilePlayOffset(_m_playfileHandle, trackBar1.Value);
+                    SetMsg(lbl0Msg, "从" + trackBar1.Value + "%开始播放，" + _comMsg);
+
+                }
+                else
+                {
+                    SetMsg(lbl0Msg, "Error:视频未开始回放。" + DateTime.Now.ToString());
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+
+
+        }
+
+        public string _comMsg { get; set; }
+
+
     }
 }

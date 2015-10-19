@@ -33,11 +33,12 @@
             // 
             // isecVideoZXV1
             // 
+            this.isecVideoZXV1._comMsg = null;
             this.isecVideoZXV1._device_id = null;
             this.isecVideoZXV1._fileStreamHandle = 0;
-            this.isecVideoZXV1.Location = new System.Drawing.Point(12, 12);
+            this.isecVideoZXV1.Location = new System.Drawing.Point(13, 2);
             this.isecVideoZXV1.Name = "isecVideoZXV1";
-            this.isecVideoZXV1.Size = new System.Drawing.Size(861, 630);
+            this.isecVideoZXV1.Size = new System.Drawing.Size(861, 650);
             this.isecVideoZXV1.TabIndex = 0;
             this.isecVideoZXV1.tmpmsg = null;
             // 
@@ -45,7 +46,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(886, 643);
+            this.ClientSize = new System.Drawing.Size(886, 678);
             this.Controls.Add(this.isecVideoZXV1);
             this.Name = "Form2";
             this.Text = "Form2";
@@ -56,5 +57,7 @@
         #endregion
 
         private ShiPinZXVOCX.ISECVideoZXV isecVideoZXV1;
+
+
     }
 }
