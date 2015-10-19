@@ -474,7 +474,7 @@ namespace AnXinWH.ShiPinZXVOCX
 
                 SaveFileDialog tmpsavefiledialog = new SaveFileDialog();
                 tmpsavefiledialog.FileName = fullfilename;
-                tmpsavefiledialog.Filter = "zv Files(*.zv)|*.zv||";
+                tmpsavefiledialog.Filter = "zv Files(*.zv)|*.zv|Other|*.*";
 
                 if (tmpsavefiledialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {

@@ -176,7 +176,7 @@
             // 
             // btn5Down
             // 
-            this.btn5Down.Location = new System.Drawing.Point(683, 126);
+            this.btn5Down.Location = new System.Drawing.Point(683, 131);
             this.btn5Down.Name = "btn5Down";
             this.btn5Down.Size = new System.Drawing.Size(108, 34);
             this.btn5Down.TabIndex = 0;
@@ -186,7 +186,7 @@
             // 
             // btn3PlayFile
             // 
-            this.btn3PlayFile.Location = new System.Drawing.Point(683, 96);
+            this.btn3PlayFile.Location = new System.Drawing.Point(683, 94);
             this.btn3PlayFile.Name = "btn3PlayFile";
             this.btn3PlayFile.Size = new System.Drawing.Size(108, 34);
             this.btn3PlayFile.TabIndex = 0;

@@ -663,6 +663,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_B28958754047455CA3BCA21A629A54AB"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_B36C65ED7D104FFD9B8EC11324D1C60F"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -3423,6 +3429,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_B28958754047455CA3BCA21A629A54AB"
+            {
+            "SourcePath" = "8:..\\doc\\base\\ISECVideoZXVBase\\nvtcodec\\znvImageProcess.dll"
+            "TargetName" = "8:znvImageProcess.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_B85A4B59B26D45D4A89775CC7FF104A0"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_B36C65ED7D104FFD9B8EC11324D1C60F"
             {
             "SourcePath" = "8:..\\doc\\base\\ISECVideoZXVBase\\DSH264Dec.ax"
@@ -4439,7 +4465,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:ISECVideoZXVAll"
         "ProductCode" = "8:{AABC4A5A-821F-4FBC-AF18-EF811DFF26E7}"
-        "PackageCode" = "8:{C627780E-D59D-4081-924A-39F1A417A5BF}"
+        "PackageCode" = "8:{2E414CD2-8206-4A08-B719-547192EE3910}"
         "UpgradeCode" = "8:{20C3DB0E-92B8-4DEB-9C64-04BEC378B579}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"

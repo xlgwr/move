@@ -36,7 +36,7 @@
             this.comb0CameraID = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.lbl0Msg = new System.Windows.Forms.Label();
-            this.gbtop1 = new System.Windows.Forms.GroupBox();
+            this.gb0head = new System.Windows.Forms.GroupBox();
             this.comb3StreamId = new System.Windows.Forms.ComboBox();
             this.btn0FileStream = new System.Windows.Forms.Button();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
@@ -60,7 +60,7 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.gbtop2.SuspendLayout();
-            this.gbtop1.SuspendLayout();
+            this.gb0head.SuspendLayout();
             this.gb00Bottom.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -123,30 +123,30 @@
             this.lbl0Msg.TabIndex = 5;
             this.lbl0Msg.Text = "msg";
             // 
-            // gbtop1
+            // gb0head
             // 
-            this.gbtop1.Controls.Add(this.comb3StreamId);
-            this.gbtop1.Controls.Add(this.btn0FileStream);
-            this.gbtop1.Controls.Add(this.progressBar1);
-            this.gbtop1.Controls.Add(this.dateTimePicker2);
-            this.gbtop1.Controls.Add(this.dateTimePicker1);
-            this.gbtop1.Controls.Add(this.comb2Moves);
-            this.gbtop1.Controls.Add(this.label4);
-            this.gbtop1.Controls.Add(this.lbl2Name);
-            this.gbtop1.Controls.Add(this.label3);
-            this.gbtop1.Controls.Add(this.label2);
-            this.gbtop1.Controls.Add(this.lbl0Msg);
-            this.gbtop1.Controls.Add(this.btn5Down);
-            this.gbtop1.Controls.Add(this.btn3PlayFile);
-            this.gbtop1.Controls.Add(this.button2);
-            this.gbtop1.Controls.Add(this.button1);
-            this.gbtop1.Controls.Add(this.comb0CameraID);
-            this.gbtop1.Controls.Add(this.label1);
-            this.gbtop1.Location = new System.Drawing.Point(4, 2);
-            this.gbtop1.Name = "gbtop1";
-            this.gbtop1.Size = new System.Drawing.Size(920, 191);
-            this.gbtop1.TabIndex = 6;
-            this.gbtop1.TabStop = false;
+            this.gb0head.Controls.Add(this.comb3StreamId);
+            this.gb0head.Controls.Add(this.btn0FileStream);
+            this.gb0head.Controls.Add(this.progressBar1);
+            this.gb0head.Controls.Add(this.dateTimePicker2);
+            this.gb0head.Controls.Add(this.dateTimePicker1);
+            this.gb0head.Controls.Add(this.comb2Moves);
+            this.gb0head.Controls.Add(this.label4);
+            this.gb0head.Controls.Add(this.lbl2Name);
+            this.gb0head.Controls.Add(this.label3);
+            this.gb0head.Controls.Add(this.label2);
+            this.gb0head.Controls.Add(this.lbl0Msg);
+            this.gb0head.Controls.Add(this.btn5Down);
+            this.gb0head.Controls.Add(this.btn3PlayFile);
+            this.gb0head.Controls.Add(this.button2);
+            this.gb0head.Controls.Add(this.button1);
+            this.gb0head.Controls.Add(this.comb0CameraID);
+            this.gb0head.Controls.Add(this.label1);
+            this.gb0head.Location = new System.Drawing.Point(4, 2);
+            this.gb0head.Name = "gb0head";
+            this.gb0head.Size = new System.Drawing.Size(920, 191);
+            this.gb0head.TabIndex = 6;
+            this.gb0head.TabStop = false;
             // 
             // comb3StreamId
             // 
@@ -345,7 +345,7 @@
             this.ClientSize = new System.Drawing.Size(942, 697);
             this.Controls.Add(this.gb00Bottom);
             this.Controls.Add(this.gbtop2);
-            this.Controls.Add(this.gbtop1);
+            this.Controls.Add(this.gb0head);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "Form1";
@@ -353,8 +353,8 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.gbtop2.ResumeLayout(false);
-            this.gbtop1.ResumeLayout(false);
-            this.gbtop1.PerformLayout();
+            this.gb0head.ResumeLayout(false);
+            this.gb0head.PerformLayout();
             this.gb00Bottom.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -368,7 +368,7 @@
         private System.Windows.Forms.ComboBox comb0CameraID;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lbl0Msg;
-        private System.Windows.Forms.GroupBox gbtop1;
+        private System.Windows.Forms.GroupBox gb0head;
         private System.Windows.Forms.Label lbl2Name;
         private System.Windows.Forms.ComboBox comb2Moves;
         private System.Windows.Forms.Label label2;

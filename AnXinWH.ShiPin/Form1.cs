@@ -23,8 +23,8 @@ namespace AnXinWH.ShiPin
 
         public string _fullfilename { get; set; }
 
-         public static IntPtr _data = Marshal.AllocHGlobal(1024);
-         public static IntPtr _pUser = Marshal.AllocHGlobal(1024);
+        public static IntPtr _data = Marshal.AllocHGlobal(1024);
+        public static IntPtr _pUser = Marshal.AllocHGlobal(1024);
 
         public static IntPtr percent = Marshal.AllocHGlobal(8);
         public static IntPtr datarate = Marshal.AllocHGlobal(8);
@@ -83,11 +83,11 @@ namespace AnXinWH.ShiPin
         }
         void initwith()
         {
-            gbtop1.Width = this.Width - gbtop1.Left - 20;
+            gb0head.Width = this.Width - gb0head.Left - 20;
 
-            gbtop2.Top = gbtop1.Top + gbtop1.Height;
-            gbtop2.Left = gbtop1.Left;
-            gbtop2.Width = gbtop1.Width;
+            gbtop2.Top = gb0head.Top + gb0head.Height;
+            gbtop2.Left = gb0head.Left;
+            gbtop2.Width = gb0head.Width;
             gbtop2.Height = this.Height - gb00Bottom.Height - gbtop2.Top - 35;
 
         }
@@ -279,7 +279,7 @@ namespace AnXinWH.ShiPin
                     SetMsg(lbl0Msg, tmpmsg);
                     return;
                 }
-               
+
                 var tmpList = new List<ZXVNMS_RecordFile2>();
 
 
@@ -364,7 +364,7 @@ namespace AnXinWH.ShiPin
         }
 
 
-      
+
         private void timer1_Tick(object sender, EventArgs e)
         {
             try
@@ -617,8 +617,8 @@ namespace AnXinWH.ShiPin
             {
                 comb0CameraID.Focus();
                 return;
-            }            
-            
+            }
+
             var tmpM = comb2Moves.Text.Split(',');
             var filename = tmpM[4];
             var size = Convert.ToInt32(Convert.ToDouble(tmpM[3]) * 1024 * 1024);
@@ -631,21 +631,21 @@ namespace AnXinWH.ShiPin
             {
                 btn0FileStream.Enabled = false;
 
-                if (_fileStreamHandle>0)
+                if (_fileStreamHandle > 0)
                 {
                     ZxvnmsSDKApi.ZXVNMS_StopVideoFileStream(_fileStreamHandle);
                 }
 
                 _fileStreamHandle = ZxvnmsSDKApi.ZXVNMS_StartVideoFileStream(
                     comb0CameraID.Text,
-                    filename, 
+                    filename,
                     size,
                     0
                     );
 
                 if (_fileStreamHandle >= 0)
                 {
-                   //var tmpCallback = ZxvnmsSDKApi.ZXVNMS_SetVideoStreamCallback(StreamCallback, _pUser0);
+                    //var tmpCallback = ZxvnmsSDKApi.ZXVNMS_SetVideoStreamCallback(StreamCallback, _pUser0);
                     tmpmsg = "打开视频流成功：" + comMsg;
                     comb3StreamId.Items.Add(_fileStreamHandle);
                     _fileStreamHandle = -1;
