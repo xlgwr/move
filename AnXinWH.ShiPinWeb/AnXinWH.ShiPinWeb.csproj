@@ -60,6 +60,7 @@
     <Content Include="index2.html" />
     <Content Include="packages.config" />
     <Content Include="ISECVideo.msi" />
+    <Content Include="ISECVideoZXV.msi" />
     <None Include="Properties\PublishProfiles\dd.pubxml" />
     <None Include="Scripts\jquery-1.11.3.intellisense.js" />
     <Content Include="Scripts\jquery-1.11.3.js" />
