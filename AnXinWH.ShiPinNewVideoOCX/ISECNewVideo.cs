@@ -24,6 +24,10 @@ namespace AnXinWH.ShiPinNewVideoOCX
         TMCC.tmVideoInCfg_t videoIn = new TMCC.tmVideoInCfg_t();
 
         public Dictionary<string, TMCC.tmFindFileCfg_t> _sss { get; set; }
+        public string ReceiveNo { get; private set; }
+
+        static DateTime _startTime = DateTime.Now;
+        static DateTime _endTime = DateTime.Now;
 
 
         //collback
@@ -54,13 +58,17 @@ namespace AnXinWH.ShiPinNewVideoOCX
         private void initForm()
         {
             //throw new NotImplementedException();
+            lbl0Msg.Text = "";
 
-            dateTimePicker1.Format = DateTimePickerFormat.Custom;
-            dateTimePicker1.CustomFormat = "yyyy-MM-dd HH:mm:ss";
-            dateTimePicker1.Text = DateTime.Now.AddHours(-7).ToString();
+            _startTime = DateTime.Now.AddHours(-1);
+            _endTime = DateTime.Now;
 
-            dateTimePicker2.Format = DateTimePickerFormat.Custom;
-            dateTimePicker2.CustomFormat = "yyyy-MM-dd HH:mm:ss";
+            //dateTimePicker1.Format = DateTimePickerFormat.Custom;
+            //dateTimePicker1.CustomFormat = "yyyy-MM-dd HH:mm:ss";
+            //dateTimePicker1.Text = DateTime.Now.AddHours(-7).ToString();
+
+            //dateTimePicker2.Format = DateTimePickerFormat.Custom;
+            //dateTimePicker2.CustomFormat = "yyyy-MM-dd HH:mm:ss";
 
         }
 
@@ -226,9 +234,62 @@ namespace AnXinWH.ShiPinNewVideoOCX
 
             return 1;
         }
-       
+
         #endregion
 
+
+        #region for js todo
+        public void SetReceiptNo(object o)
+        {
+            if (o != null)
+            {
+                ReceiveNo = o.ToString();
+                groupBox1.Text = ReceiveNo;
+            }
+        }
+        public string SetTime(object start, object end)
+        {
+            try
+            {
+                if (start != null && end != null)
+                {
+                    DateTime tmpStart = DateTime.Now;
+
+                    DateTime tmpEnd = DateTime.Now;
+                    if (DateTime.TryParse(start.ToString(), out tmpStart))
+                    {
+                        _startTime = tmpStart;
+                        //dateTimePicker1.Value = startTime;
+                    }
+                    else
+                    {
+                        return "开始时间有误：" + start.ToString();
+                    }
+
+                    if (DateTime.TryParse(end.ToString(), out tmpEnd))
+                    {
+                        _endTime = tmpEnd;
+                        //dateTimePicker2.Value = endTime;
+                    }
+                    else
+                    {
+                        return "结束时间有误：" + end.ToString();
+                    }
+                    groupBox1.Text = ReceiveNo + ", " + _startTime.ToString("yyyy-MM-dd HH:mm:ss") + "----> " + _endTime.ToString("yyyy-MM-dd HH:mm:ss"); ;
+
+                    button1_Click(null, null);
+                    return "ok";
+                }
+                return "Error.提供的数据有误。";
+
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+
+        }
+        #endregion
         void ISECNewVideo_Disposed(object sender, EventArgs e)
         {
             //throw new NotImplementedException();
@@ -319,18 +380,18 @@ namespace AnXinWH.ShiPinNewVideoOCX
             try
             {
                 Cursor.Current = Cursors.WaitCursor;
-                this.button1.Enabled = false;
+                //this.button1.Enabled = false;
 
-                if (dateTimePicker2.Value > DateTime.Now)
+                if (_startTime > DateTime.Now)
                 {
-                    dateTimePicker2.Focus();
+                    //dateTimePicker2.Focus();
                     tmpmsg = "Error:结束时间大于当前时间。" + DateTime.Now;
                     SetMsg(lbl0Msg, tmpmsg);
                     return;
                 }
-                if (dateTimePicker1.Value > dateTimePicker2.Value)
+                if (_startTime > _endTime)
                 {
-                    dateTimePicker1.Focus();
+                    //dateTimePicker1.Focus();
                     tmpmsg = "Error:开始时间大于结束时间。";
                     SetMsg(lbl0Msg, tmpmsg);
                     return;
@@ -343,8 +404,8 @@ namespace AnXinWH.ShiPinNewVideoOCX
                 TMCC.tmFindFileCfg_t FileCfg = new TMCC.tmFindFileCfg_t();
 
 
-                var startTime = dateTimePicker1.Value;
-                var endTime = dateTimePicker2.Value;
+                var startTime = _startTime; //dateTimePicker1.Value;
+                var endTime = _endTime; //dateTimePicker2.Value;
 
 
                 ConditionCfg.dwSize = (UInt32)Marshal.SizeOf(ConditionCfg);
@@ -420,7 +481,7 @@ namespace AnXinWH.ShiPinNewVideoOCX
             finally
             {
                 Cursor.Current = Cursors.Default;
-                this.button1.Enabled = true;
+                //this.button1.Enabled = true;
             }
         }
 

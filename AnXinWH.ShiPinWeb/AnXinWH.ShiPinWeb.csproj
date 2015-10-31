@@ -60,11 +60,19 @@
     <Content Include="index.html" />
     <Content Include="index2.html" />
     <Content Include="packages.config" />
-    <Content Include="ISECVideo.msi" />
-    <Content Include="ISECVideoZXV.msi" />
-    <Content Include="ISECVideoZXVAll.msi" />
+    <Content Include="ISECVideo.msi">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ISECVideoZXV.msi">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="ISECVideoZXVAll.msi">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <Content Include="ZVfilePlay.exe" />
-    <Content Include="ISECNewVideo.msi" />
+    <Content Include="ISECNewVideo.msi">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="Properties\PublishProfiles\dd.pubxml" />
     <None Include="Scripts\jquery-1.11.3.intellisense.js" />
     <Content Include="Scripts\jquery-1.11.3.js" />

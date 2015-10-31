@@ -15,12 +15,6 @@
     {
         "Entry"
         {
-        "MsmKey" = "8:_2D243AC453B24DD7B9489987CB93EE3D"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_69ECA41AECFB49E98146CF6D6193BEF5"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -40,12 +34,6 @@
         "Entry"
         {
         "MsmKey" = "8:_8F431392E5464F19BCD89001D266A137"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_9664C78DAB1C4CCD9B86B6D32DF229A6"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -142,6 +130,19 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.0,Profile=Client"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4 Client Profile (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.0,Profile=Client"
+                    }
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:Microsoft.Windows.Installer.3.1"
+                    {
+                    "Name" = "8:Windows Installer 3.1"
+                    "ProductCode" = "8:Microsoft.Windows.Installer.3.1"
+                    }
+                }
             }
         }
     }
@@ -172,26 +173,6 @@
         }
         "File"
         {
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_2D243AC453B24DD7B9489987CB93EE3D"
-            {
-            "SourcePath" = "8:..\\AnXinWH.ShiPinNewVideoOCX\\bin\\Debug\\AnXinWH.ShiPinNewVideoOCX.tlb"
-            "TargetName" = "8:AnXinWH.ShiPinNewVideoOCX.tlb"
-            "Tag" = "8:"
-            "Folder" = "8:_BB49CDB826044B39B2CF5A0834A742ED"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:2"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_69ECA41AECFB49E98146CF6D6193BEF5"
             {
             "SourcePath" = "8:..\\AnXinWH.ShiPinNewVideoOCX\\bin\\Debug\\msvcr90.dll"
@@ -252,26 +233,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_9664C78DAB1C4CCD9B86B6D32DF229A6"
-            {
-            "SourcePath" = "8:..\\AnXinWH.ShiPinNewVideoOCX\\bin\\Debug\\AnXinWH.ShiPinNewVideoOCX.pdb"
-            "TargetName" = "8:AnXinWH.ShiPinNewVideoOCX.pdb"
-            "Tag" = "8:"
-            "Folder" = "8:_BB49CDB826044B39B2CF5A0834A742ED"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_B3BFA54EC375410DA8CD652F406861FE"
             {
             "SourcePath" = "8:..\\AnXinWH.ShiPinNewVideoOCX\\bin\\Debug\\tmControlClient.dll"
@@ -296,7 +257,7 @@
             {
             "AssemblyRegister" = "3:2"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:AnXinWH.ShiPinNewVideoOCX, Version=1.0.0.0, Culture=neutral, PublicKeyToken=c8486a0d113f11e1, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:AnXinWH.ShiPinNewVideoOCX, Version=1.0.0.5, Culture=neutral, PublicKeyToken=c8486a0d113f11e1, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_BF6FD85E95794296BBAAE72BDA1D9999"
@@ -450,22 +411,22 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:ISECNewVideo"
-        "ProductCode" = "8:{C96F18FC-C7C9-4475-9193-9EA6BD75F174}"
-        "PackageCode" = "8:{FB24702D-E7E1-453D-83A3-FBBB773C3B3E}"
-        "UpgradeCode" = "8:{D69F3A75-4D25-4F97-A969-37E4B3FB7082}"
+        "ProductCode" = "8:{BDE43BF0-0D44-4850-9395-B263AA3FE14E}"
+        "PackageCode" = "8:{84A1C636-9627-4BED-9AFA-344E09A05786}"
+        "UpgradeCode" = "8:{EB0299AF-E441-436C-8DBE-8862E4E0D490}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
-        "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.0.0"
+        "InstallAllUsers" = "11:TRUE"
+        "ProductVersion" = "8:1.0.5"
         "Manufacturer" = "8:ISEC"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
         "Title" = "8:ISECNewVideo"
         "Subject" = "8:"
         "ARPCONTACT" = "8:xlgwr"
-        "Keywords" = "8:Video"
+        "Keywords" = "8:ISEC Video"
         "ARPCOMMENTS" = "8:ISECNewVideo"
         "ARPURLINFOABOUT" = "8:"
         "ARPPRODUCTICON" = "8:"
@@ -574,7 +535,7 @@
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_BC1BB662A1334C5597CDB4EAED743F16"
             {
             "Name" = "8:UnInstall ISECNewVideo"
-            "Arguments" = "8:/x {C96F18FC-C7C9-4475-9193-9EA6BD75F174}"
+            "Arguments" = "8:/x {BDE43BF0-0D44-4850-9395-B263AA3FE14E}"
             "Description" = "8:"
             "ShowCmd" = "3:1"
             "IconIndex" = "3:0"

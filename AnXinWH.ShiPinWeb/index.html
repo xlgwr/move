@@ -1,14 +1,47 @@
 ﻿<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <title>ISEC Video</title>
+
+    <script src="Scripts/jquery-1.11.3.min.js"></script>
+    <script src="js/ISECVideo.js"></script>
+    <script src="js/todo.js"></script>
+
 </head>
 <body>
-    <a href="ISECNewVideo.msi">视频控件下载</a>
-    <br />
+    <div>
+        <a href="ISECNewVideo.msi">视频控件下载</a>
+        <br />
+    </div>
+    <hr />
     <div>
         <object id="a" classid="clsid:66F195EB-3753-45FA-93A6-6B58F33DBC85"></object>
     </div>
+    <script type="text/javascript">
+        $(function () {
+            var a = document.getElementById("a");
+            try {
+                var receiptNo = GetArgsFromHref(document.location.href, "receiptNo");
+                if (receiptNo) {
+                    a.SetReceiptNo("仓单号:" + receiptNo.toString());
+                } else {
+                    a.SetReceiptNo("没有仓单号。");
+                }
+                var startTime = GetArgsFromHref(document.location.href, "startTime");
+                var endTime = GetArgsFromHref(document.location.href, "endTime");
+
+                var dd = a.SetTime(startTime, endTime);
+                if (dd.toString() != "ok") {
+
+                    alert(dd);
+                }
+
+            } catch (e) {
+                alert("加载控件失败。Error:" + e.message);
+            }
+        });
+    </script>
 </body>
 </html>
