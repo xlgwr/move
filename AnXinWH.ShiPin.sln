@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnXinWH.ShiPinTianDyOCX", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnXinWH.ShiPinZXVOCX", "AnXinWH.ShiPinZXVOCX\AnXinWH.ShiPinZXVOCX.csproj", "{B97BD0EC-33B5-48C6-88B0-5EACCE8373D7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnXinWH.ShiPinNewVideo", "AnXinWH.ShiPinNewVideo\AnXinWH.ShiPinNewVideo.csproj", "{2B9E7D3A-3570-4E8F-BA70-5E8B8EAE37E6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{B97BD0EC-33B5-48C6-88B0-5EACCE8373D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B97BD0EC-33B5-48C6-88B0-5EACCE8373D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B97BD0EC-33B5-48C6-88B0-5EACCE8373D7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2B9E7D3A-3570-4E8F-BA70-5E8B8EAE37E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B9E7D3A-3570-4E8F-BA70-5E8B8EAE37E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B9E7D3A-3570-4E8F-BA70-5E8B8EAE37E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B9E7D3A-3570-4E8F-BA70-5E8B8EAE37E6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

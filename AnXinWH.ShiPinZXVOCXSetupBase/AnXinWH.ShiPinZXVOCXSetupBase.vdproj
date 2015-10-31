@@ -934,25 +934,43 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_43234C230ECA476D8AFE2DED3E2F75EF"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_0BFE5CE1DC084F53BF18C0FA1CBD97A5"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_76816855AA8627224B41029C404029E4"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_F832B32C720A48C7B312DD29CA814ABC"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_ECF2C7696C0A4700B375203A2D7A7369"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_E584D38153A540B192EB0D47319E2F73"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_DE49BA705A6D4D9E9008477528D41A9B"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_D86DB481D7D94854A630B615D6651E2E"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_AF5EF2F9A10848DF9355ADBA9777F4A4"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_86824D66FC2040B6B893CADA78EB7C8E"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -970,55 +988,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_ECF2C7696C0A4700B375203A2D7A7369"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_7634CD5D041F439EB2DEF28238FC40AD"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_AF5EF2F9A10848DF9355ADBA9777F4A4"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_5CF4A47E2BE2410CAEF1B0B230ADB507"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_165E001FFFCD4DF9B0487B15D6F6690A"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_86824D66FC2040B6B893CADA78EB7C8E"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_44ADABF4FA4D436AAB5FA859E81687BC"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_E584D38153A540B192EB0D47319E2F73"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_D86DB481D7D94854A630B615D6651E2E"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -1030,13 +1000,43 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_5CF4A47E2BE2410CAEF1B0B230ADB507"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_44ADABF4FA4D436AAB5FA859E81687BC"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_43234C230ECA476D8AFE2DED3E2F75EF"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_4319EAEE70A443BDBE585BD244A58DF0"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_DE49BA705A6D4D9E9008477528D41A9B"
+        "OwnerKey" = "8:_165E001FFFCD4DF9B0487B15D6F6690A"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_0BFE5CE1DC084F53BF18C0FA1CBD97A5"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_76816855AA8627224B41029C404029E4"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -1096,6 +1096,19 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.0,Profile=Client"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4 Client Profile (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.0,Profile=Client"
+                    }
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:Microsoft.Windows.Installer.3.1"
+                    {
+                    "Name" = "8:Windows Installer 3.1"
+                    "ProductCode" = "8:Microsoft.Windows.Installer.3.1"
+                    }
+                }
             }
         }
     }
@@ -4464,15 +4477,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:ISECVideoZXVAll"
-        "ProductCode" = "8:{2D3D44A8-DD74-4F5B-AB39-D514D6E81B09}"
-        "PackageCode" = "8:{6CDFD6B8-1FD1-48D6-B6F2-90D64EF81FA6}"
+        "ProductCode" = "8:{9DD0BFC5-2582-4E6E-B40F-49D197EE8AD1}"
+        "PackageCode" = "8:{B12B0DDC-B4B0-432E-9CDD-5351A64CA45C}"
         "UpgradeCode" = "8:{20C3DB0E-92B8-4DEB-9C64-04BEC378B579}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:1.0.2"
+        "ProductVersion" = "8:1.0.3"
         "Manufacturer" = "8:ISEC"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
@@ -4588,7 +4601,7 @@
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_C43D598BB9574ABCBB8E4C2C7302E75A"
             {
             "Name" = "8:Uninstall ISECVideoZXV Base"
-            "Arguments" = "8:/x {2D3D44A8-DD74-4F5B-AB39-D514D6E81B09}"
+            "Arguments" = "8:/x {9DD0BFC5-2582-4E6E-B40F-49D197EE8AD1}"
             "Description" = "8:"
             "ShowCmd" = "3:1"
             "IconIndex" = "3:0"

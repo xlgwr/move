@@ -1,0 +1,557 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Runtime.InteropServices;
+namespace AnXinWH.ShiPinNewVideo
+{
+    public sealed class TMCC
+    {
+        public const int TMCC_ERR_SUCCESS = 0;
+        public const int TMCC_MAJOR_CMD_SERVERCONTROL = 0x111;		/*远程服务器控制*/
+        public const int TMCC_MINOR_CMD_MANUALCAPTURE = 0x10;		    /*远程手动抓图传到本地*/
+        public const int TMCC_MAJOR_CMD_VIDEOINCFG = 0x116;		/*视频输入配置*/
+        public const int TMCC_MINOR_CMD_VIDEOIN = 0x00;		    /*输入配置*/
+
+
+        [DllImport("tmControlClient.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int TMCC_SetTimeOut(IntPtr flag, int dwTime);
+
+
+        [DllImport("tmControlClient.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int TMCC_RegisterConnectCallBack(IntPtr flag, TMCC_CONNECT_CALLBACK CALLBACK, IntPtr contone);
+
+
+        [DllImport("tmControlClient.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern IntPtr TMCC_Init(UInt32 flag);
+
+        [DllImport("tmControlClient.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int TMCC_SetAutoReConnect(IntPtr ptr, bool bShow);
+
+        [DllImport("tmControlClient.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int TMCC_SetDisplayShow(IntPtr ptr, bool bShow);
+
+        [DllImport("tmControlClient.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int TMCC_SetStreamBufferTime(IntPtr ptr, UInt32 dwTime);
+
+        [DllImport("tmControlClient.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int TMCC_Connect(IntPtr ptr, ref tmConnectInfo_t connectInfo, bool bSync);
+
+        [DllImport("tmControlClient.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int TMCC_GetConfig(IntPtr ptr, ref tmCommandInfo_t cmdInfo);
+
+        [DllImport("tmControlClient.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int TMCC_SetConfig(IntPtr ptr, ref tmCommandInfo_t cmdInfo);
+
+        [DllImport("tmControlClient.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int TMCC_SaveConfig(IntPtr ptr);
+
+        [DllImport("tmControlClient.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int TMCC_ConnectStream(IntPtr ptr, ref tmPlayRealStreamCfg_t info, IntPtr playHandler);
+
+        [DllImport("tmControlClient.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int TMCC_CloseStream(IntPtr ptr);
+
+        [DllImport("tmControlClient.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int TMCC_ClearDisplay(IntPtr ptr);
+
+        [DllImport("tmControlClient.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int TMCC_DisConnect(IntPtr flag);
+
+        [DllImport("tmControlClient.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int TMCC_Done(IntPtr flag);
+
+        [DllImport("tmControlClient.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int TMCC_CapturePictureToFile(IntPtr hTmCC, string pFileName, string pFmt);
+
+        [DllImport("tmControlClient.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int TMCC_SetOtherParam(IntPtr hTmCC, uint dwFlags, IntPtr buf, ref int iLen);
+
+        [DllImport("tmControlClient.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int TMCC_RegisterStreamCallBack(IntPtr ptr, StreamCallback back, IntPtr context);
+
+        [DllImport("tmControlClient.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int TMCC_RegisterAVFrameCallBack(IntPtr ptr, AvFrameCallback back, IntPtr context);
+
+        [DllImport("tmControlClient.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int TMCC_SetImageOutFmt(IntPtr ptr, uint iOutFmt);
+
+        [DllImport("tmControlClient.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int TMCC_GetLastError();
+
+        [DllImport("tmControlClient.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern IntPtr TMCC_FindFirstFile(IntPtr ptr, IntPtr ConditionCfg, IntPtr FileCfg);
+
+
+        [DllImport("tmControlClient.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int TMCC_FindNextFile(IntPtr ptr, IntPtr FileCfg);
+
+        //[DllImport("tmControlClient.dll", CallingConvention = CallingConvention.Cdecl)]
+        //public static extern IntPtr TMCC_OpenFile(IntPtr ptr, ref  tmPlayConditionCfg_t pPlayInfo, IntPtr hPlayWnd);
+
+        [DllImport("tmControlClient.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern IntPtr TMCC_OpenFile(IntPtr ptr, IntPtr pPlayInfo, IntPtr hPlayWnd);
+
+        [DllImport("tmControlClient.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int TMCC_ControlFile(IntPtr ptr, IntPtr  hPlayWnd);
+
+
+        [DllImport("tmControlClient.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern IntPtr TMCC_ReadFile(IntPtr ptr, ref byte[] buf, int iReadSize);
+
+
+        [DllImport("tmControlClient.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int TMCC_CloseFile(IntPtr ptr);
+
+        [DllImport("tmControlClient.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int TMCC_FindCloseFile(IntPtr hTmFile);
+
+        //实时流回调
+        public delegate void StreamCallback(IntPtr hTmCC, ref tmRealStreamInfo_t pStreamInfo, IntPtr context);
+        //解码输出回调
+        public delegate void AvFrameCallback(IntPtr hTmCC, ref tmAvImageInfo_t pStreamInfo, IntPtr context);
+
+        //连接消息回调函数，通过它可以得到异步方式和断开连接状态
+        public delegate void TMCC_CONNECT_CALLBACK(IntPtr hTmCC, bool bConnect, uint dwResult, IntPtr context);
+
+
+        //连接消息回调函数，通过它可以得到异步方式和断开连接状态
+        public delegate int fnStreamReadCallBackDelegate(IntPtr hTmCC, IntPtr pStreamInfo, IntPtr context);
+
+        public class tmFileAccessInterface_t
+        {
+            public delegate IntPtr OpenDelegate(string lpFileName, string lpMode, IntPtr context);
+            public OpenDelegate Open;
+            public delegate int CloseDelegate(IntPtr hFile);
+            public CloseDelegate Close;
+            public delegate uint SeekDelegate(IntPtr hFile, int offset, int origin);
+            public SeekDelegate Seek;
+            public delegate int ReadDelegate(IntPtr hFile, IntPtr lpBuffer, int nRead);
+            public ReadDelegate Read;
+            public delegate int WriteDelegate(IntPtr hFile, IntPtr lpBuffer, int nWrite);
+            public WriteDelegate Write;
+            public delegate uint SizeDelegate(IntPtr hFile);
+            public SizeDelegate Size;
+        }
+
+          [StructLayoutAttribute(LayoutKind.Sequential)]
+        public struct tmPlayControlCfg_t
+        {
+            public uint dwSize;				/*本结构大小*/
+            public uint dwCommand;			/*控制命令	*/
+
+        }
+
+
+        //文件索引结构定义
+        public class tmAvIndexEntry_t
+        {
+            public uint ckid;
+            public uint dwFlags;
+            public uint dwChunkOffset;
+            public uint dwChunkLength;
+        }
+
+        [StructLayoutAttribute(LayoutKind.Sequential, CharSet = CharSet.Ansi, Size = 128)]
+        public struct _time
+        {
+            public tmTimeInfo_t struStartTime; //文件的开始时间
+            public tmTimeInfo_t struStopTime; //文件的结束时间
+            public byte byCheckStopTime; //是否检测结束时间
+            public byte byAlarmType; //报警类型
+            public byte byFileFormat; //0-JPEG,1-JPEG2000,2-RGB555,3-RGB565,4-RGB24,
+            public byte byBackupData; //是否是备份文件
+            public byte byDiskName; //所在磁盘
+            public byte byConvertToJpeg; //非JPEG强制转换成JPEG
+
+            [MarshalAs(UnmanagedType.ByValArray, SizeConst = 18)]
+            public char[] byReserves;
+
+            [MarshalAs(UnmanagedType.ByValArray, SizeConst = 32)]
+            public char[] sServerAddress;
+
+
+            public uint dwServerPort; //服务器端口
+            [MarshalAs(UnmanagedType.ByValArray, SizeConst = 32)]
+            public char[] sUserName;
+
+            [MarshalAs(UnmanagedType.ByValArray, SizeConst = 32)]
+            public char[] sUserPass;
+
+            //[MarshalAs(UnmanagedType.ByValTStr, SizeConst = 18)]
+            //public string byReserves;
+            //[MarshalAs(UnmanagedType.ByValTStr, SizeConst = 32)]
+            //public string sServerAddress; //服务器地址
+            //public uint dwServerPort; //服务器端口
+            //[MarshalAs(UnmanagedType.ByValTStr, SizeConst = 32)]
+            //public string sUserName; //用户名
+            //[MarshalAs(UnmanagedType.ByValTStr, SizeConst = 32)]
+            //public string sUserPass; //用户密码
+        }
+
+        [StructLayoutAttribute(LayoutKind.Sequential, Size = 128)]
+        public struct _file
+        {
+            public byte byAutoCreateIndex; //是否自动生成索引
+            public byte byAutoPlay; //打开后是否自动播放
+            [MarshalAs(UnmanagedType.ByValArray, SizeConst = 2)]
+            public byte[] byTemp;
+            [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 128)]
+            public string sFileName; //文件名
+            public tmFileAccessInterface_t pFileCallBack; //文件访问回调函数
+            public IntPtr pFileContext; //文件访问相关句柄
+            public tmAvIndexEntry_t pAvIndex; //索引缓冲
+            public int iAvIndexCount; //缓冲中的索引数
+        }
+
+        [StructLayoutAttribute(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
+
+        //文件播放条件定义
+        public struct tmPlayConditionCfg_t
+        {
+            public uint dwSize;
+            public ushort wFactoryId; //厂商ID
+            public byte byChannel; //通道 
+            public byte byPlayImage; //是否操作图片
+
+
+            public tmTimeInfo_t struStartTime; //文件的开始时间
+            public tmTimeInfo_t struStopTime; //文件的结束时间
+            //public byte byCheckStopTime; //是否检测结束时间
+            //public byte byAlarmType; //报警类型
+            //public byte byFileFormat; //0-JPEG,1-JPEG2000,2-RGB555,3-RGB565,4-RGB24,
+            //public byte byBackupData; //是否是备份文件
+            //public byte byDiskName; //所在磁盘
+            //public byte byConvertToJpeg; //非JPEG强制转换成JPEG
+
+            //[StructLayout(LayoutKind.Explicit, Size=128)]
+            //public struct _infos
+            //{
+            //    [FieldOffset(0)]
+            //    public _time time; 
+            //    [FieldOffset(0)]
+            //    public _file file; 
+            //}
+
+            //public _infos info;
+
+            //public byte byBufferBeforePlay; //开始播放是否需要缓冲数据
+            //public byte byEnableServer; //是否启用网络参数
+            //public byte byPlayType; //播放方式
+            //public byte byDecoderType; //解码方式
+            //public uint dwBufferSizeBeforePlay; //缓冲大小
+
+
+            //public fnStreamReadCallBackDelegate fnStreamReadCallBack;
+            //public IntPtr fnStreamReadContext;
+        }
+
+
+
+
+        [StructLayoutAttribute(LayoutKind.Sequential)]
+        public struct tmConnectInfo_t
+        {
+            public uint dwSize;				//该结构的大小，必须填写
+            [MarshalAs(UnmanagedType.ByValArray, SizeConst = 32)]
+            public char[] pIp;			//连接服务器的IP地址
+            public int iPort;				//服务器连接的端口
+            [MarshalAs(UnmanagedType.ByValArray, SizeConst = 32)]
+            public char[] szUser;			//登录用户名
+            [MarshalAs(UnmanagedType.ByValArray, SizeConst = 32)]
+            public char[] szPass;			//登录用户口令
+            public int iUserLevel;			//登录用户级别，主要用户DVS的一些互斥访问资源
+            [MarshalAs(UnmanagedType.ByValArray, SizeConst = 32)]
+            public byte[] pUserContext;//用户自定义数据
+
+            public void Init()
+            {
+                pUserContext = new byte[32];
+            }
+        }
+
+        [StructLayoutAttribute(LayoutKind.Sequential)]
+        public struct tmPlayRealStreamCfg_t
+        {
+            public UInt32 dwSize;
+            [MarshalAs(UnmanagedType.ByValArray, SizeConst = 32)]
+            public char[] szAddress;	//连接服务器的IP地址
+            [MarshalAs(UnmanagedType.ByValArray, SizeConst = 32)]
+            public char[] szTurnAddress;//转发器地址
+            public int iPort;		//服务器连接的端口
+            [MarshalAs(UnmanagedType.ByValArray, SizeConst = 32)]
+            public char[] szUser;	//登录用户名
+            [MarshalAs(UnmanagedType.ByValArray, SizeConst = 32)]
+            public char[] szPass;	//登录用户口令
+            public byte byChannel;	//通道
+            public byte byStream;	//码流号
+            public byte byTranstType;	//传输类型
+            public byte byReConnectNum;	//从连次数	
+            public int iTranstPackSize;//传输包大小
+            public int iReConnectTime;	//重连的时间间隔
+            public byte byTransProtocol;//传输协议0-内部自定,1-SONY,2-RTSP	
+            [MarshalAs(UnmanagedType.ByValArray, SizeConst = 128)]
+            public char[] ok;	//登录用户口令
+            public void Init()
+            {
+                ok = new char[128];
+            }
+        }
+
+        [StructLayoutAttribute(LayoutKind.Sequential)]
+        public struct tmRealStreamInfo_t
+        {
+            public uint dwSize;		//本结构大小
+            public byte byFrameType;	//帧类型0-视频，1-音频，2-数据流头
+            public byte byNeedReset;	//是否需要复位解码器
+            public byte byKeyFrame;	//是否关键帧
+            public byte byTemp;
+            public uint dwFactoryId;	//厂家ID	
+            public uint dwStreamTag;	//流类型Tag
+            public uint dwStreamId;	//流ID
+            //union
+            //{
+            //int	iWidth;		//视频宽
+            public int iSamplesPerSec;	//音频采样率
+            //int	iHeight;	//视频高
+            public int iBitsPerSample;	//音频采样位数
+            //};
+            //union
+            //{
+            //    int	iFrameRate;	//帧率*1000
+            public int iChannels;	//音频的声道数
+            //};
+            //add by 2009-0429
+            //union
+            //{
+            public uint nDisplayScale;	//显示比例*1000
+            //};
+            public uint dwTimeStamp;	//时间戳(单位毫秒)
+            public uint dwPlayTime;		//此帧播放时间(单位毫秒)
+            public uint dwBitRate;		//此数据流的码流大小	
+            public IntPtr pBuffer;		//数据缓冲
+            public int iBufferSize;		//数据大小
+        }
+
+        [StructLayoutAttribute(LayoutKind.Sequential)]
+        public struct tmFindConditionCfg_t
+        {
+            public uint dwSize; //本结构大小
+            public byte byChannel; //搜索的通道
+            public byte byFileType; //搜索类型 0xFF-全部，'N'-定时，'M'-移动，'A'-报警，'H'-手动，'O'-其它
+            public byte bySearchAllTime; //搜索所有时间文件
+            public byte bySearchImage; //是否搜索图片
+            public tmTimeInfo_t struStartTime; //搜索的开始时间
+            public tmTimeInfo_t struStopTime; //搜索的结束时间
+            public byte byEnableServer; //是否启用网络参数
+            public byte byOldServer; //是否是老设备
+            public byte byBackupData; //是否搜索备份文件
+            public byte byTemp;
+            //public string sServerAddress = new string(new char[32]); //服务器地址
+            [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 32)]
+            public string sServerAddress;	//连接服务器的IP地址
+
+            public uint dwServerPort; //服务器端口
+            [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 32)]
+            public string sUserName;	//连接服务器的IP地址
+            // public string sUserName = new string(new char[32]); //用户名
+            [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 32)]
+            public string sUserPass;	//连接服务器的IP地址
+            //public string sUserPass = new string(new char[32]); //用户密码
+        }
+
+
+        //[StructLayoutAttribute(LayoutKind.Sequential, CharSet=CharSet.Ansi, Pack=1)]
+        [StructLayoutAttribute(LayoutKind.Sequential, CharSet = CharSet.Ansi, Pack = 2)]
+        public struct tmFindFileCfg_t
+        {
+            public uint dwSize;
+            [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 64)]
+            public string sFileName;	//连接服务器的IP地址
+            public byte byChannel; //搜索的通道
+
+            [StructLayout(LayoutKind.Explicit)]
+            struct s
+            {
+                [FieldOffset(0)]
+                public byte byAlarmType; //搜索类型 0xFF-全部，'N'-定时，'M'-移动，'A'-报警，'H'-手动，'O'-其它
+                [FieldOffset(0)]
+                public byte byFileType; //搜索类型 0xFF-全部，'N'-定时，'M'-移动，'A'-报警，'H'-手动，'O'-其它
+            }
+
+
+            public ushort wFactoryId; //厂商ID
+            public tmTimeInfo_t struStartTime; //搜索的开始时间
+            public tmTimeInfo_t struStopTime; //搜索的结束时间
+            public uint dwFileTime; //文件时间，毫秒
+            public uint dwFileSize; //文件的大小(字节表示，所以录像文件不能太大)
+            public byte byImage; //文件是否为图片
+            public byte byFileFormat; //文件格式
+            public byte byBackupData; //是否是备份文件
+            public byte byDiskName; //所在磁盘
+        }
+
+        [StructLayoutAttribute(LayoutKind.Sequential)]
+        public struct tmTimeInfo_t
+        {
+            public ushort wYear;
+            public byte byMonth;
+            public byte byDay;
+            public byte byHour;
+            public byte byMinute;
+            public byte bySecond;
+            public byte byTemp;
+            public uint dwMicroSecond;
+        }
+
+        [StructLayoutAttribute(LayoutKind.Sequential)]
+        public struct tmAvImageInfo_t
+        {
+            public byte video;
+            public byte face;
+            [MarshalAs(UnmanagedType.ByValArray, SizeConst = 2)]
+            public byte[] temp;
+            public IntPtr buffer0;
+            public IntPtr buffer1;
+            public IntPtr buffer2;
+            public IntPtr buffer3;
+            public int bufsize0;
+            public int bufsize1;
+            public int bufsize2;
+            public int bufsize3;
+            _stuVideo videoInfo;
+            public int key_frame;
+            public uint timestamp;
+        }
+
+        [StructLayoutAttribute(LayoutKind.Sequential)]
+        public struct _stuVideo
+        {
+            public short width;
+            public short height;
+            public int framerate;
+            public byte format;
+            [MarshalAs(UnmanagedType.ByValArray, SizeConst = 3)]
+            public byte[] temp;
+        }
+
+        [StructLayoutAttribute(LayoutKind.Sequential)]
+        public struct tmCommandInfo_t
+        {
+            public uint dwSize;		        //该结构的大小，必须填写为sizeof(tmCommandInfo_t)	
+            public uint dwMajorCommand;		//主消息数据命令即数据类型
+            public uint dwMinorCommand;		//次消息数据命令即数据类型	
+            public ushort iChannel;         //通道号，该通道号要根据dwMajorCommand来判断是否有效
+            public ushort iStream;          //子通道号，该通道号要根据dwMajorCommand来判断是否有效
+            public IntPtr pCommandBuffer;   //消息数据缓冲
+            public int iCommandBufferLen;   //消息数据缓冲大小
+            public int iCommandDataLen;     //消息数据实际大小
+            public uint dwResult;           //消息控制返回结果
+        }
+
+        [StructLayoutAttribute(LayoutKind.Sequential)]
+        public struct tmToManagerImageInfo_t
+        {
+            public uint dwSize;
+            public _stuImage image;
+            [MarshalAs(UnmanagedType.ByValArray, SizeConst = 8)]
+            public byte[] byTemp;
+            [MarshalAs(UnmanagedType.ByValArray, SizeConst = 6)]
+            public byte[] byMACAddr;
+            [MarshalAs(UnmanagedType.ByValArray, SizeConst = 2)]
+            public byte[] byTemp2;
+            [MarshalAs(UnmanagedType.ByValArray, SizeConst = 16)]
+            public byte[] szServerIP;
+            public byte byImageFmt;
+
+            public byte byCount;
+            public byte byIndex;
+            public byte byImageMode;
+            public byte byAlarmId;
+            public byte byChannelId;
+            [MarshalAs(UnmanagedType.ByValArray, SizeConst = 2)]
+            public byte[] byOtherInfo;
+            public _stuTime time;
+            public uint dwImageSize;
+        }
+
+        [StructLayoutAttribute(LayoutKind.Sequential)]
+        public struct _stuImage
+        {
+            public short nWidth;
+            public short nHeight;
+            public byte byBitCount;
+            public byte byRevolving;
+            [MarshalAs(UnmanagedType.ByValArray, SizeConst = 2)]
+            public byte[] byTemp;
+        };
+
+        [StructLayoutAttribute(LayoutKind.Sequential)]
+        public struct _stuTime
+        {
+            public short nYear;
+            public byte nMonth;
+            public byte nDay;
+            public byte nDayOfWeek;
+            public byte nHour;
+            public byte nMinute;
+            public byte nSecond;
+        }
+
+        [StructLayoutAttribute(LayoutKind.Sequential)]
+        public struct tmVideoInCfg_t
+        {
+            public uint dwSize;
+            public byte byAntiFlickerMode;
+            public byte byVideoColorStyle;
+            public byte byRotaeAngle180;
+            public byte byColorTransMode; /*彩转黑模式0-自动，1-彩色，2-黑白*/
+            public byte byShutterSpeed;
+            public byte byAgc;
+            public byte byIRShutMode;
+            public byte byExposure;
+            public byte byIRStartHour;
+            public byte byIRStartMin;
+            public byte byIRStopHour;
+            public byte byIRStopMin;
+            public byte byModeSwitch;
+            public byte byWhiteBalance;
+            public byte byWdr;
+            public byte byBlc;
+            public ushort nWhiteBalanceR;
+            public ushort nWhiteBalanceB;
+            public byte byMctfStrength;
+            public byte byIRType;
+            public byte byIRCutTriggerAlarmOut;
+            public byte byIRCutTime;
+            public byte byExposureLevel;
+            public byte byColorTransMin;
+            public byte byColorTransMax;
+            public byte byNoiseFilter;
+            public byte byForceNoiseFilter;
+            public byte byAeMeteringMode;
+            public byte byWdrMode;
+            public byte byIRShutAlarmIn;
+            public byte byAutoContrast;
+            public byte byLightInhibitionEn;
+            public byte byVinFrameRate;
+            [MarshalAs(UnmanagedType.ByValArray, SizeConst = 7)]
+            public byte[] byTemp;
+            public byte byAgcTransMin;
+            public byte byAgcTransMax;
+            public ushort nMaxShutterSpeed;
+            public ushort nMaxAgc;
+            [MarshalAs(UnmanagedType.ByValArray, SizeConst = 96)]
+            public byte[] byAeMeteringData;
+            [MarshalAs(UnmanagedType.ByValArray, SizeConst = 4)]
+            public byte[] byExposureLevelHdr;
+            [MarshalAs(UnmanagedType.ByValArray, SizeConst = 4)]
+            public ushort[] nMinShutterSpeedHdr;
+            [MarshalAs(UnmanagedType.ByValArray, SizeConst = 4)]
+            public ushort[] nMaxShutterSpeedHdr;
+            [MarshalAs(UnmanagedType.ByValArray, SizeConst = 4)]
+            public byte[] byMaxAgcHdr;
+            [MarshalAs(UnmanagedType.ByValArray, SizeConst = 4 * 96)]
+            public byte[] byAeMeteringDataHdr;
+        }
+    }
+}
