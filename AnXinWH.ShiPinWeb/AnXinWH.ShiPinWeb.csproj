@@ -57,6 +57,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="index.html" />
     <Content Include="index2.html" />
     <Content Include="packages.config" />
     <Content Include="ISECVideo.msi" />
@@ -77,7 +78,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="home.html" />
-    <Content Include="index.html" />
+    <Content Include="index3.html" />
     <Content Include="ipaddr.js" />
     <Content Include="js\ISECVideo.js" />
     <Content Include="js\todo.js" />

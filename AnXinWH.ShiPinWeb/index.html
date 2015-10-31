@@ -1,105 +1,14 @@
 ﻿<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title></title>
-    <script src="Scripts/jquery-1.11.3.min.js"></script>
-    <script src="js/ISECVideo.js"></script>
-    <script src="js/todo.js"></script>
-    <style type="text/css">
-        #isecVideo {
-            margin-left: auto;
-            margin-right: auto;
-            min-height: 800px;
-            min-width: 600px;
-        }
-
-        #x {
-            margin-left: auto;
-            margin-right: auto;
-            min-height: 600px;
-            min-width: 600px;
-        }
-    </style>
 </head>
 <body>
+    <a href="ISECNewVideo.msi">视频控件下载</a>
+    <br />
     <div>
-        <!--<input type="button" value="Play" onclick="fnTest()" />-->
-        <a href="ISECVideo.msi">控件下载</a>
-        <input id="play" type="button" value="Play" />
-        <span id="cameraIp"></span>
+        <object id="a" classid="clsid:66F195EB-3753-45FA-93A6-6B58F33DBC85"></object>
     </div>
-    <hr />
-    <div id="isecVideo">
-        <object id="x" classid="clsid:EF5FEA44-AD86-429E-B13E-FA94F5F06193"></object>
-    </div>
-    <script type="text/javascript">
-        $(function () {
-            isecLogon();
-            $("#play").click(function () {
-                isecPlay();
-            });
-
-            //window.onbeforeunload = function () {
-            //    var n = window.event.screenX - window.screenLeft;
-            //    var b = n > document.documentElement.scrollWidth - 20;
-            //    if (!(b && window.event.clientY < 0 || window.event.altKey)) {
-            //        //alert("开始刷新页面了....");
-            //        window.event.returnValue = "真的要刷新页面么？刷新后控件将不可用。";     //这里可以放置你想做的操作代码
-            //        //window.close();
-            //    }
-            //}
-            function isecLogon() {
-
-                var x = document.getElementById("x");
-                try {
-                    var cameraIp = GetArgsFromHref(document.location.href, "cameraIp");
-                    //alert(cameraIp);
-                    $("#cameraIp").text("打开" + cameraIp + "中。");
-                    if (!cameraIp) {
-                        cameraIp = "192.168.1.110";
-                    }
-                    var dd = x.LogonAndPlay(cameraIp);
-                    if (dd === true) {
-                        $("#play").val("Stop");
-                        $("#cameraIp").text("打开cameraIp:" + cameraIp + "成功。");
-
-                    } else {
-                        $("#play").val("Play");
-                        $("#cameraIp").text("停止cameraIp:" + cameraIp + "播放。");
-
-                    }
-                } catch (e) {
-                    alert("加载控件失败。Error:" + e.message);
-                }
-            }
-            function isecPlay() {
-                var x = document.getElementById("x");
-
-                try {
-                    var cameraIp = GetArgsFromHref(document.location.href, "cameraIp");
-                    //alert(cameraIp);
-                    $("#cameraIp").text("播放" + cameraIp + "中。");
-                    if (!cameraIp) {
-                        cameraIp = "192.168.1.110";
-                    }
-                    var dd = x.Play(cameraIp);
-                    if (dd === true) {
-                        $("#play").val("Stop");
-                        $("#cameraIp").text("播放cameraIp:" + cameraIp + "成功。");
-
-                    } else {
-                        $("#play").val("Play");
-                        $("#cameraIp").text("停止cameraIp:" + cameraIp + "播放。");
-
-                    }
-
-                } catch (e) {
-                    alert("加载控件失败。Error:" + e.message);
-                }
-            }
-        });
-
-    </script>
 </body>
 </html>

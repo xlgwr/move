@@ -16,9 +16,6 @@ namespace AnXinWH.ShiPinNewVideo
         IntPtr hLogin = IntPtr.Zero;
         IntPtr _currPlayfile = IntPtr.Zero;
         IntPtr _hfile = IntPtr.Zero;
-
-        IntPtr pCmdBuffer = Marshal.AllocHGlobal(1920 * 1080);
-        String strTitle;
         TMCC.tmVideoInCfg_t videoIn = new TMCC.tmVideoInCfg_t();
 
         public Form1()
@@ -245,7 +242,7 @@ namespace AnXinWH.ShiPinNewVideo
                     }
                     else
                     {
-                        lbl0Msg.Text = "播放视频失败,时间:" + name+"请再次尝试.谢谢.";
+                        lbl0Msg.Text = "播放视频失败,时间:" + name + "请再次尝试.谢谢.";
                     }
 
                 }
@@ -314,7 +311,7 @@ namespace AnXinWH.ShiPinNewVideo
             {
                 iTemp++;
                 String str = "[" + Convert.ToString(pStreamInfo.iSamplesPerSec) + "x" + Convert.ToString(pStreamInfo.iBitsPerSample) + "] ";
-                strTitle = "ClientDemo C# " + str;
+                var strTitle = "ClientDemo C# " + str;
                 for (int i = 0; i < iTemp; i++)
                 {
                     strTitle += ">";
