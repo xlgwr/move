@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using System.Data;
 using System.Runtime.InteropServices;
 using System.Threading;
+using System.Reflection;
 
 namespace AnXinWH.ShiPinNewVideoOCX
 {
@@ -23,11 +24,22 @@ namespace AnXinWH.ShiPinNewVideoOCX
         IntPtr _hfile = IntPtr.Zero;
         TMCC.tmVideoInCfg_t videoIn = new TMCC.tmVideoInCfg_t();
 
-        public Dictionary<string, TMCC.tmFindFileCfg_t> _sss { get; set; }
+        static Dictionary<string, TMCC.tmFindFileCfg_t> _dicIn { get; set; }
+        static Dictionary<string, TMCC.tmFindFileCfg_t> _dicOut { get; set; }
+        static Dictionary<string, TMCC.tmFindFileCfg_t> _dicShelf { get; set; }
+
         public string ReceiveNo { get; private set; }
 
-        static DateTime _startTime = DateTime.Now;
-        static DateTime _endTime = DateTime.Now;
+        static DateTime _InstartTime = DateTime.Now;
+        static DateTime _InendTime = DateTime.Now;
+
+
+        static DateTime _OutstartTime = DateTime.Now;
+        static DateTime _OutendTime = DateTime.Now;
+
+
+        static DateTime _ShelfstartTime = DateTime.Now;
+        static DateTime _ShelfendTime = DateTime.Now;
 
 
         //collback
@@ -45,6 +57,9 @@ namespace AnXinWH.ShiPinNewVideoOCX
             try
             {
                 this.Disposed += ISECNewVideo_Disposed;
+                listBox1.DoubleClick += listBox1_DoubleClick;
+                listBox2.DoubleClick += listBox2_DoubleClick;
+                listBox3.DoubleClick += listBox3_DoubleClick;
 
                 initForm();
                 initVideo();
@@ -54,14 +69,32 @@ namespace AnXinWH.ShiPinNewVideoOCX
                 MessageBox.Show(ex.Message);
             }
         }
+
+        void listBox3_DoubleClick(object sender, EventArgs e)
+        {
+            //throw new NotImplementedException();
+            play_DoubleClick(listBox3, _dicOut, "出库视频");
+        }
+
+        void listBox2_DoubleClick(object sender, EventArgs e)
+        {
+            //throw new NotImplementedException();
+            play_DoubleClick(listBox2, _dicShelf, "上架视频");
+        }
+
+        void listBox1_DoubleClick(object sender, EventArgs e)
+        {
+            //throw new NotImplementedException();
+            play_DoubleClick(listBox1, _dicIn, "入库视频");
+        }
         #region function
         private void initForm()
         {
             //throw new NotImplementedException();
             lbl0Msg.Text = "";
 
-            _startTime = DateTime.Now.AddHours(-1);
-            _endTime = DateTime.Now;
+            _InstartTime = DateTime.Now.AddHours(-1);
+            _InendTime = DateTime.Now;
 
             //dateTimePicker1.Format = DateTimePickerFormat.Custom;
             //dateTimePicker1.CustomFormat = "yyyy-MM-dd HH:mm:ss";
@@ -109,16 +142,16 @@ namespace AnXinWH.ShiPinNewVideoOCX
             }
         }
 
-        void playOldFileListName(string name)
+        void playOldFileListName(string name, Dictionary<string, TMCC.tmFindFileCfg_t> dic, string notice)
         {
             try
             {
-                if (_sss.ContainsKey(name))
+                if (dic.ContainsKey(name))
                 {
 
                     closeAll();
 
-                    var anotherP = _sss[name];
+                    var anotherP = dic[name];
 
                     TMCC.tmPlayConditionCfg_t struCond = new TMCC.tmPlayConditionCfg_t();
 
@@ -144,24 +177,24 @@ namespace AnXinWH.ShiPinNewVideoOCX
 
                     if (iflag == 0)
                     {
-                        lbl0Msg.Text = "播放视频成功,时间:" + name;
+                        lbl0Msg.Text = notice + ",播放视频成功,时间:" + name;
                     }
                     else
                     {
-                        lbl0Msg.Text = "播放视频失败,时间:" + name + "请再次尝试.谢谢.";
+                        lbl0Msg.Text = notice + ",播放视频失败,时间:" + name + "请再次尝试.谢谢.";
                     }
 
                 }
                 else
                 {
-                    MessageBox.Show(name + "不存在.请选择正确的文件名。");
+                    MessageBox.Show(notice + "," + name + "不存在.请选择正确的文件名。");
                     return;
                 }
             }
             catch (Exception ex)
             {
-
-                throw ex;
+                MessageBox.Show(notice + ",Play Error:" + ex.Message);
+                //throw ex;
             }
 
 
@@ -247,7 +280,21 @@ namespace AnXinWH.ShiPinNewVideoOCX
                 groupBox1.Text = ReceiveNo;
             }
         }
-        public string SetTime(object start, object end)
+        public string jsGetVersion()
+        {
+            try
+            {
+                AssemblyName name = Assembly.GetExecutingAssembly().GetName();
+                return name.Version.ToString();
+
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+
+        }
+        public string jsSetTimeIn(object start, object end)
         {
             try
             {
@@ -258,26 +305,33 @@ namespace AnXinWH.ShiPinNewVideoOCX
                     DateTime tmpEnd = DateTime.Now;
                     if (DateTime.TryParse(start.ToString(), out tmpStart))
                     {
-                        _startTime = tmpStart;
+                        _InstartTime = tmpStart;
                         //dateTimePicker1.Value = startTime;
                     }
                     else
                     {
-                        return "开始时间有误：" + start.ToString();
+                        return "入库视频 开始时间有误：" + start.ToString();
                     }
 
                     if (DateTime.TryParse(end.ToString(), out tmpEnd))
                     {
-                        _endTime = tmpEnd;
+                        _InendTime = tmpEnd;
                         //dateTimePicker2.Value = endTime;
                     }
                     else
                     {
-                        return "结束时间有误：" + end.ToString();
+                        return "入库视频 结束时间有误：" + end.ToString();
                     }
-                    groupBox1.Text = ReceiveNo + ", " + _startTime.ToString("yyyy-MM-dd HH:mm:ss") + "----> " + _endTime.ToString("yyyy-MM-dd HH:mm:ss"); ;
+                    var notice = _InstartTime.ToString("yyyy-MM-dd HH:mm:ss") + "----> " + _InendTime.ToString("yyyy-MM-dd HH:mm:ss"); ;
 
-                    button1_Click(null, null);
+                    _dicIn = getListMoveFromStartAnd(_InstartTime, _InendTime, listBox1, "入库视频");
+
+                    if (listBox1.Items.Count > 0 && _dicIn.Count > 0)
+                    {
+                        listBox1.SelectedIndex = 0;
+                        listBox1_DoubleClick(null, null);
+                    }
+
                     return "ok";
                 }
                 return "Error.提供的数据有误。";
@@ -285,7 +339,107 @@ namespace AnXinWH.ShiPinNewVideoOCX
             }
             catch (Exception ex)
             {
-                return ex.Message;
+                return "jsError:" + ex.Message;
+            }
+
+        }
+
+        public string jsSetTimeOut(object start, object end)
+        {
+            try
+            {
+                if (start != null && end != null)
+                {
+                    DateTime tmpStart = DateTime.Now;
+
+                    DateTime tmpEnd = DateTime.Now;
+                    if (DateTime.TryParse(start.ToString(), out tmpStart))
+                    {
+                        _OutstartTime = tmpStart;
+                        //dateTimePicker1.Value = startTime;
+                    }
+                    else
+                    {
+                        return "出库视频 开始时间有误：" + start.ToString();
+                    }
+
+                    if (DateTime.TryParse(end.ToString(), out tmpEnd))
+                    {
+                        _OutendTime = tmpEnd;
+                        //dateTimePicker2.Value = endTime;
+                    }
+                    else
+                    {
+                        return "出库视频 结束时间有误：" + end.ToString();
+                    }
+                    var notice = _OutstartTime.ToString("yyyy-MM-dd HH:mm:ss") + "----> " + _OutendTime.ToString("yyyy-MM-dd HH:mm:ss"); ;
+
+                    _dicOut = getListMoveFromStartAnd(_OutstartTime, _OutendTime, listBox3, "出库视频");
+
+                    if (listBox3.Items.Count > 0)
+                    {
+                        listBox3.SelectedIndex = 0;
+                        //listBox2_DoubleClick(null, null);
+                    }
+
+                    return "ok";
+                }
+                return "Error.提供的数据有误。";
+
+            }
+            catch (Exception ex)
+            {
+                return "jsError:" + ex.Message;
+            }
+
+        }
+
+        public string jsSetTimeShelf(object start, object end)
+        {
+            try
+            {
+                if (start != null && end != null)
+                {
+                    DateTime tmpStart = DateTime.Now;
+
+                    DateTime tmpEnd = DateTime.Now;
+                    if (DateTime.TryParse(start.ToString(), out tmpStart))
+                    {
+                        _ShelfstartTime = tmpStart;
+                        //dateTimePicker1.Value = startTime;
+                    }
+                    else
+                    {
+                        return "上架视频 开始时间有误：" + start.ToString();
+                    }
+
+                    if (DateTime.TryParse(end.ToString(), out tmpEnd))
+                    {
+                        _ShelfendTime = tmpEnd;
+                        //dateTimePicker2.Value = endTime;
+                    }
+                    else
+                    {
+                        return "上架视频 结束时间有误：" + end.ToString();
+                    }
+                    var notice = _ShelfstartTime.ToString("yyyy-MM-dd HH:mm:ss") + "----> " + _ShelfendTime.ToString("yyyy-MM-dd HH:mm:ss"); ;
+
+                    _dicShelf = getListMoveFromStartAnd(_ShelfstartTime, _ShelfendTime, listBox2, "出库视频");
+
+                    if (listBox2.Items.Count > 0)
+                    {
+                        listBox2.SelectedIndex = 0;
+                        //listBox2_DoubleClick(null, null);
+                    }
+
+                    return "ok";
+                }
+                return "Error.提供的数据有误。";
+
+            }
+            catch (Exception ex)
+            {
+                return "jsError:" + ex.Message;
             }
 
         }
@@ -375,37 +529,35 @@ namespace AnXinWH.ShiPinNewVideoOCX
 
         #endregion
 
-        private void button1_Click(object sender, EventArgs e)
+        private Dictionary<string, TMCC.tmFindFileCfg_t> getListMoveFromStartAnd(DateTime startTime, DateTime endTime, ListBox tmplis, string notice)
         {
+            var tmpdic = new Dictionary<string, TMCC.tmFindFileCfg_t>();
             try
             {
                 Cursor.Current = Cursors.WaitCursor;
                 //this.button1.Enabled = false;
 
-                if (_startTime > DateTime.Now)
+
+                if (startTime > DateTime.Now)
                 {
                     //dateTimePicker2.Focus();
-                    tmpmsg = "Error:结束时间大于当前时间。" + DateTime.Now;
+                    tmpmsg = notice + " Error:结束时间大于当前时间。" + DateTime.Now;
                     SetMsg(lbl0Msg, tmpmsg);
-                    return;
+                    return tmpdic;
                 }
-                if (_startTime > _endTime)
+                if (startTime > endTime)
                 {
                     //dateTimePicker1.Focus();
-                    tmpmsg = "Error:开始时间大于结束时间。";
+                    tmpmsg = notice + " Error:开始时间大于结束时间。";
                     SetMsg(lbl0Msg, tmpmsg);
-                    return;
+                    return tmpdic;
                 }
-                _sss = new Dictionary<string, TMCC.tmFindFileCfg_t>();
-                listBox1.Items.Clear();
+
+                tmplis.Items.Clear();
 
 
                 TMCC.tmFindConditionCfg_t ConditionCfg = new TMCC.tmFindConditionCfg_t();
                 TMCC.tmFindFileCfg_t FileCfg = new TMCC.tmFindFileCfg_t();
-
-
-                var startTime = _startTime; //dateTimePicker1.Value;
-                var endTime = _endTime; //dateTimePicker2.Value;
 
 
                 ConditionCfg.dwSize = (UInt32)Marshal.SizeOf(ConditionCfg);
@@ -451,8 +603,8 @@ namespace AnXinWH.ShiPinNewVideoOCX
                 TMCC.tmFindFileCfg_t anotherP = (TMCC.tmFindFileCfg_t)Marshal.PtrToStructure(p2, typeof(TMCC.tmFindFileCfg_t));
 
 
-                _sss.Add(anotherP.sFileName, anotherP);
-                listBox1.Items.Add(anotherP.sFileName);
+                tmpdic.Add(anotherP.sFileName, anotherP);
+                tmplis.Items.Add(anotherP.sFileName);
 
                 do
                 {
@@ -467,15 +619,18 @@ namespace AnXinWH.ShiPinNewVideoOCX
                     }
                     anotherP = (TMCC.tmFindFileCfg_t)Marshal.PtrToStructure(p3, typeof(TMCC.tmFindFileCfg_t));
 
-                    _sss.Add(anotherP.sFileName, anotherP);
-                    listBox1.Items.Add(anotherP.sFileName);
+                    tmpdic.Add(anotherP.sFileName, anotherP);
+                    tmplis.Items.Add(anotherP.sFileName);
 
                 } while (true);
                 TMCC.TMCC_FindCloseFile(_hfile);
+
+                return tmpdic;
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(notice + ": " + ex.Message);
+                return tmpdic;
                 //throw ex;
             }
             finally
@@ -531,14 +686,24 @@ namespace AnXinWH.ShiPinNewVideoOCX
             }
         }
 
-        private void listBox1_DoubleClick(object sender, EventArgs e)
+        private void play_DoubleClick(ListBox lis, Dictionary<string, TMCC.tmFindFileCfg_t> dic, string notice)
         {
-            if (listBox1.SelectedItem != null)
+            if (lis.SelectedItem != null)
             {
-                var tmpname = listBox1.SelectedItem.ToString();
-                lbl0Msg.Text = "回放视频中." + tmpname;
-                playOldFileListName(tmpname);
+                var tmpname = lis.SelectedItem.ToString();
+                lbl0Msg.Text = notice + ", 回放视频中." + tmpname;
+                playOldFileListName(tmpname, dic, notice);
             }
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ISECNewVideo_Load(object sender, EventArgs e)
+        {
+
         }
 
 

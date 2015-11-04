@@ -23,16 +23,33 @@
         $(function () {
             var a = document.getElementById("a");
             try {
+                var getVersion = a.jsGetVersion();
+
+                if (getVersion != "1.0.0.7") {
+                    alert("请升级新版本控件。");
+                }
+
+                document.title = 'ISEC Video V' + getVersion;
+
+                ////http://192.168.1.120/index.html?receiptNo=1343434&InstartTime=2015-11-02 13:20:00&InendTime=2015-11-2 14:00:30&OutstartTime=2015-11-02 13:20:00&OutendTime=2015-11-2 14:00:30&ShelfstartTime=2015-11-02 13:20:00&ShelfendTime=2015-11-2 14:00:30
                 var receiptNo = GetArgsFromHref(document.location.href, "receiptNo");
                 if (receiptNo) {
                     a.SetReceiptNo("仓单号:" + receiptNo.toString());
                 } else {
                     a.SetReceiptNo("没有仓单号。");
                 }
-                var startTime = GetArgsFromHref(document.location.href, "startTime");
-                var endTime = GetArgsFromHref(document.location.href, "endTime");
+                var InstartTime = GetArgsFromHref(document.location.href, "InstartTime");
+                var InendTime = GetArgsFromHref(document.location.href, "InendTime");
+                var OutstartTime = GetArgsFromHref(document.location.href, "OutstartTime");
+                var OutendTime = GetArgsFromHref(document.location.href, "OutendTime");
+                var ShelfstartTime = GetArgsFromHref(document.location.href, "ShelfstartTime");
+                var ShelfendTime = GetArgsFromHref(document.location.href, "ShelfendTime");
 
-                var dd = a.SetTime(startTime, endTime);
+                a.jsSetTimeShelf(ShelfstartTime, ShelfendTime);
+                a.jsSetTimeOut(OutstartTime, OutendTime);
+
+                var dd = a.jsSetTimeIn(InstartTime, InendTime);
+
                 if (dd.toString() != "ok") {
 
                     alert(dd);

@@ -140,7 +140,31 @@ namespace AnXinWH.ShiPinNewVideoOCX
             public uint dwCommand;			/*控制命令	*/
 
         }
+          //播放文件的当前信息
+          public class tmPlayStateCfg_t
+          {
+              public uint dwSize; //本结构大小
+              public byte byCurrentState; //当前播放状态
+              public byte byResetTime; //需要复位时间戳
+              public byte byResetFile; //需要复位时间戳
+              public byte byIndex; //当前文件下载数
 
+              public uint dwTotalFrames; //总共帧数
+              public uint dwCurrentFrame; //当前帧数
+
+              public uint dwTotalTimes; //总时间(毫秒)
+              public uint dwCurrentTimes; //当前时间(毫秒)
+
+              public tmTimeInfo_t struStartTime; //当前播放文件的开始时间
+
+              public uint dwTotalSize; //总文件大小
+              public uint dwCurrentSize; //当前文件大小
+
+              public void init()
+              {
+                  struStartTime = new tmTimeInfo_t();
+              }
+          }
 
         //文件索引结构定义
         public class tmAvIndexEntry_t

@@ -33,7 +33,7 @@
             // 
             // isecNewVideo1
             // 
-            this.isecNewVideo1._sss = null;
+            this.isecNewVideo1._dicIn = null;
             this.isecNewVideo1.Location = new System.Drawing.Point(12, 12);
             this.isecNewVideo1.Name = "isecNewVideo1";
             this.isecNewVideo1.Size = new System.Drawing.Size(709, 568);
