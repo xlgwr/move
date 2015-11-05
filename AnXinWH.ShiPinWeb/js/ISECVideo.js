@@ -1,5 +1,6 @@
 ﻿function GetArgsFromHref(sHref, sArgName) {
-    var args = sHref.split("?");
+    
+    var args = decodeURIComponent(sHref).split("?");
     var retval = "";
 
     //null param

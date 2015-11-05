@@ -176,11 +176,11 @@ namespace AnXinWH.ShiPinNewVideoOCX
 
                     if (iflag == 0)
                     {
-                        lbl0Msg.Text = notice + ",播放视频成功,时间:" + name;
+                        lbl0Msg.Text = notice + ",播放视频成功:" + name;//,时间
                     }
                     else
                     {
-                        lbl0Msg.Text = notice + ",播放视频失败,时间:" + name + "请再次尝试.谢谢.";
+                        lbl0Msg.Text = notice + ",播放视频失败:" + name + ",请再次尝试.谢谢.";
                     }
 
                 }
