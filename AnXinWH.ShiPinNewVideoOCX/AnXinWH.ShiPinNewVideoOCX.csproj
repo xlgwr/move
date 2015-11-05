@@ -55,6 +55,12 @@
     <Compile Include="ISECNewVideo.Designer.cs">
       <DependentUpon>ISECNewVideo.cs</DependentUpon>
     </Compile>
+    <Compile Include="ISECNewVideoNow.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ISECNewVideoNow.Designer.cs">
+      <DependentUpon>ISECNewVideoNow.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -63,6 +69,9 @@
   <ItemGroup>
     <EmbeddedResource Include="ISECNewVideo.resx">
       <DependentUpon>ISECNewVideo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ISECNewVideoNow.resx">
+      <DependentUpon>ISECNewVideoNow.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
