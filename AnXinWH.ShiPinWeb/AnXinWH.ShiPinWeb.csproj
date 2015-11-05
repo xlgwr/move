@@ -64,12 +64,6 @@
     <Content Include="ISECVideo.msi">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="ISECVideoZXV.msi">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <None Include="ISECVideoZXVAll.msi">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <Content Include="ZVfilePlay.exe" />
     <Content Include="ISECNewVideo.msi">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

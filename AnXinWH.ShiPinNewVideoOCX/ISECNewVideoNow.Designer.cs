@@ -43,7 +43,7 @@
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.lbl0Msg);
-            this.groupBox2.Location = new System.Drawing.Point(6, 500);
+            this.groupBox2.Location = new System.Drawing.Point(9, 5);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(748, 73);
             this.groupBox2.TabIndex = 20;
@@ -54,7 +54,7 @@
             this.lbl0Msg.AutoSize = true;
             this.lbl0Msg.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lbl0Msg.ForeColor = System.Drawing.Color.Red;
-            this.lbl0Msg.Location = new System.Drawing.Point(15, 26);
+            this.lbl0Msg.Location = new System.Drawing.Point(15, 28);
             this.lbl0Msg.Name = "lbl0Msg";
             this.lbl0Msg.Size = new System.Drawing.Size(35, 16);
             this.lbl0Msg.TabIndex = 10;
@@ -64,7 +64,7 @@
             // 
             this.groupBox1.Controls.Add(this.pictureBox1);
             this.groupBox1.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.groupBox1.Location = new System.Drawing.Point(3, 3);
+            this.groupBox1.Location = new System.Drawing.Point(9, 78);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(748, 494);
             this.groupBox1.TabIndex = 19;

@@ -22,11 +22,10 @@ namespace AnXinWH.ShiPinNewVideoOCX
         IntPtr hLogin = IntPtr.Zero;
         IntPtr _currPlayfile = IntPtr.Zero;
         IntPtr _hfile = IntPtr.Zero;
-        TMCC.tmVideoInCfg_t videoIn = new TMCC.tmVideoInCfg_t();
 
-        static Dictionary<string, TMCC.tmFindFileCfg_t> _dicIn { get; set; }
-        static Dictionary<string, TMCC.tmFindFileCfg_t> _dicOut { get; set; }
-        static Dictionary<string, TMCC.tmFindFileCfg_t> _dicShelf { get; set; }
+        static Dictionary<string, videoCfg> _dicIn { get; set; }
+        static Dictionary<string, videoCfg> _dicOut { get; set; }
+        static Dictionary<string, videoCfg> _dicShelf { get; set; }
 
         public string ReceiveNo { get; private set; }
 
@@ -142,7 +141,7 @@ namespace AnXinWH.ShiPinNewVideoOCX
             }
         }
 
-        void playOldFileListName(string name, Dictionary<string, TMCC.tmFindFileCfg_t> dic, string notice)
+        void playOldFileListName(string name, Dictionary<string, videoCfg> dic, string notice)
         {
             try
             {
@@ -151,7 +150,7 @@ namespace AnXinWH.ShiPinNewVideoOCX
 
                     closeAll();
 
-                    var anotherP = dic[name];
+                    var anotherP = dic[name].fileCfg;
 
                     TMCC.tmPlayConditionCfg_t struCond = new TMCC.tmPlayConditionCfg_t();
 
@@ -529,9 +528,11 @@ namespace AnXinWH.ShiPinNewVideoOCX
 
         #endregion
 
-        private Dictionary<string, TMCC.tmFindFileCfg_t> getListMoveFromStartAnd(DateTime startTime, DateTime endTime, ListBox tmplis, string notice)
+        private Dictionary<string, videoCfg> getListMoveFromStartAnd(DateTime startTime, DateTime endTime, ListBox tmplis, string notice)
         {
-            var tmpdic = new Dictionary<string, TMCC.tmFindFileCfg_t>();
+            var tmpdic = new Dictionary<string, videoCfg>();
+            videoCfg tmpvideo = null;
+            var tmpfilename = "视频" + (tmpdic.Count + 1).ToString();
             try
             {
                 Cursor.Current = Cursors.WaitCursor;
@@ -602,9 +603,16 @@ namespace AnXinWH.ShiPinNewVideoOCX
 
                 TMCC.tmFindFileCfg_t anotherP = (TMCC.tmFindFileCfg_t)Marshal.PtrToStructure(p2, typeof(TMCC.tmFindFileCfg_t));
 
+                ///*************************************
+                tmpfilename = "视频" + (tmpdic.Count + 1).ToString();
 
-                tmpdic.Add(anotherP.sFileName, anotherP);
-                tmplis.Items.Add(anotherP.sFileName);
+                tmpvideo = new videoCfg();
+                tmpvideo.filename = anotherP.sFileName;
+                tmpvideo.fileCfg = anotherP;
+                tmpdic.Add(tmpfilename, tmpvideo);
+
+                tmplis.Items.Add(tmpfilename);
+                ///*************************************
 
                 do
                 {
@@ -619,8 +627,15 @@ namespace AnXinWH.ShiPinNewVideoOCX
                     }
                     anotherP = (TMCC.tmFindFileCfg_t)Marshal.PtrToStructure(p3, typeof(TMCC.tmFindFileCfg_t));
 
-                    tmpdic.Add(anotherP.sFileName, anotherP);
-                    tmplis.Items.Add(anotherP.sFileName);
+                    ///*************************************
+                    tmpfilename = "视频" + (tmpdic.Count + 1).ToString();
+                    var tmpvideoDO = new videoCfg();
+                    tmpvideoDO.filename = anotherP.sFileName;
+                    tmpvideoDO.fileCfg = anotherP;
+                    tmpdic.Add(tmpfilename, tmpvideoDO);
+
+                    tmplis.Items.Add(tmpfilename);
+                    ///*************************************
 
                 } while (true);
                 TMCC.TMCC_FindCloseFile(_hfile);
@@ -686,7 +701,7 @@ namespace AnXinWH.ShiPinNewVideoOCX
             }
         }
 
-        private void play_DoubleClick(ListBox lis, Dictionary<string, TMCC.tmFindFileCfg_t> dic, string notice)
+        private void play_DoubleClick(ListBox lis, Dictionary<string, videoCfg> dic, string notice)
         {
             if (lis.SelectedItem != null)
             {
@@ -757,5 +772,11 @@ namespace AnXinWH.ShiPinNewVideoOCX
         }
 
 
+    }
+
+    public class videoCfg
+    {
+        public string filename { get; set; }
+        public TMCC.tmFindFileCfg_t fileCfg { get; set; }
     }
 }
