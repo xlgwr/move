@@ -12,6 +12,23 @@ namespace AnXinWH.ShiPinNewVideoOCX
         public const int TMCC_MAJOR_CMD_VIDEOINCFG = 0x116;		/*视频输入配置*/
         public const int TMCC_MINOR_CMD_VIDEOIN = 0x00;		    /*输入配置*/
 
+        /*远程文件打开控制结构定义*/
+        public const UInt32 PLAY_CONTROL_PLAY = 0;	//*播放,以iPlayData作为播放参数(0-保留当前设置,1-回复默认)*/
+        public const UInt32 PLAY_CONTROL_STOP = 1;		//*停止*/
+        public const UInt32 PLAY_CONTROL_PAUSE = 2;		//*暂停,注意停止直接调用相关关闭函数即可*/
+        public const UInt32 PLAY_CONTROL_FAST = 3;	//*快放,以iSpeed作为速度*/
+        public const UInt32 PLAY_CONTROL_SLOW = 4;	//*慢放,以iSpeed作为速度*/
+        public const UInt32 PLAY_CONTROL_SEEKPOS = 5;	//*seek,以iCurrentPosition*/
+        public const UInt32 PLAY_CONTROL_SEEKTIME = 6;	//*seek,以dwCurrentTime作为时间*/
+        public const UInt32 PLAY_CONTROL_STEMP = 7;	//*stemp,单帧播放*/
+        public const UInt32 PLAY_CONTROL_SWITCH = 8;	//*切换文件,以szFileName作为文件名/或struTime时间*/
+        public const UInt32 PLAY_CONTROL_MUTE = 9;	//*音频开关,以iEnableAudio作为开关*/
+        public const UInt32 PLAY_CONTROL_UPEND = 10;	//*倒放*/
+        public const UInt32 PLAY_CONTROL_GETAVINDEX = 11;	//*得到本地文件的索引*/
+        public const UInt32 PLAY_CONTROL_SETAVINDEX = 12;	//*设置播放文件的索引*/
+        public const UInt32 PLAY_CONTROL_AUTORESETBUFTIME = 13;	//*设置是否自动调节缓冲时间*/
+        public const UInt32 PLAY_CONTROL_SEEKTIME_NEW = 14;	//*seek,以struTime作为时间  绝对时间   jukin add for gb*/
+
 
         [DllImport("tmControlClient.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern int TMCC_SetTimeOut(IntPtr flag, int dwTime);
@@ -92,7 +109,7 @@ namespace AnXinWH.ShiPinNewVideoOCX
         public static extern IntPtr TMCC_OpenFile(IntPtr ptr, IntPtr pPlayInfo, IntPtr hPlayWnd);
 
         [DllImport("tmControlClient.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int TMCC_ControlFile(IntPtr ptr, IntPtr  hPlayWnd);
+        public static extern int TMCC_ControlFile(IntPtr ptr, IntPtr hPlayWnd);
 
 
         [DllImport("tmControlClient.dll", CallingConvention = CallingConvention.Cdecl)]
@@ -104,6 +121,22 @@ namespace AnXinWH.ShiPinNewVideoOCX
 
         [DllImport("tmControlClient.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern int TMCC_FindCloseFile(IntPtr hTmFile);
+
+        public static int Avdec_PlayToDo(IntPtr p, UInt32 com, int iSpeed)
+        {
+            tmPlayControlCfg_t cfg = new tmPlayControlCfg_t();
+
+            cfg.dwSize = (UInt32)Marshal.SizeOf(cfg);
+            cfg.dwCommand = com;
+            cfg.iSpeed = iSpeed;
+
+            IntPtr p5cfg = Marshal.AllocHGlobal(Marshal.SizeOf(cfg));
+            Marshal.StructureToPtr(cfg, p5cfg, false);
+
+            return TMCC_ControlFile(p, p5cfg);
+
+        }
+
 
         //实时流回调
         public delegate void StreamCallback(IntPtr hTmCC, ref tmRealStreamInfo_t pStreamInfo, IntPtr context);
@@ -133,38 +166,41 @@ namespace AnXinWH.ShiPinNewVideoOCX
             public SizeDelegate Size;
         }
 
-          [StructLayoutAttribute(LayoutKind.Sequential)]
+        [StructLayoutAttribute(LayoutKind.Sequential)]
         public struct tmPlayControlCfg_t
         {
             public uint dwSize;				/*本结构大小*/
             public uint dwCommand;			/*控制命令	*/
 
+
+            public int iSpeed;				/*播放的速度*/
+
         }
-          //播放文件的当前信息
-          public class tmPlayStateCfg_t
-          {
-              public uint dwSize; //本结构大小
-              public byte byCurrentState; //当前播放状态
-              public byte byResetTime; //需要复位时间戳
-              public byte byResetFile; //需要复位时间戳
-              public byte byIndex; //当前文件下载数
+        //播放文件的当前信息
+        public class tmPlayStateCfg_t
+        {
+            public uint dwSize; //本结构大小
+            public byte byCurrentState; //当前播放状态
+            public byte byResetTime; //需要复位时间戳
+            public byte byResetFile; //需要复位时间戳
+            public byte byIndex; //当前文件下载数
 
-              public uint dwTotalFrames; //总共帧数
-              public uint dwCurrentFrame; //当前帧数
+            public uint dwTotalFrames; //总共帧数
+            public uint dwCurrentFrame; //当前帧数
 
-              public uint dwTotalTimes; //总时间(毫秒)
-              public uint dwCurrentTimes; //当前时间(毫秒)
+            public uint dwTotalTimes; //总时间(毫秒)
+            public uint dwCurrentTimes; //当前时间(毫秒)
 
-              public tmTimeInfo_t struStartTime; //当前播放文件的开始时间
+            public tmTimeInfo_t struStartTime; //当前播放文件的开始时间
 
-              public uint dwTotalSize; //总文件大小
-              public uint dwCurrentSize; //当前文件大小
+            public uint dwTotalSize; //总文件大小
+            public uint dwCurrentSize; //当前文件大小
 
-              public void init()
-              {
-                  struStartTime = new tmTimeInfo_t();
-              }
-          }
+            public void init()
+            {
+                struStartTime = new tmTimeInfo_t();
+            }
+        }
 
         //文件索引结构定义
         public class tmAvIndexEntry_t

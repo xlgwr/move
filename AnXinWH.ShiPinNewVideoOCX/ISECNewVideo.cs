@@ -166,13 +166,11 @@ namespace AnXinWH.ShiPinNewVideoOCX
                     IntPtr p6 = TMCC.TMCC_OpenFile(hLogin, p4, this.pictureBox1.Handle);
 
                     _currPlayfile = p6;
+                    _notice = notice;
+                    _videoname = name;
 
-                    TMCC.tmPlayControlCfg_t cfg = new TMCC.tmPlayControlCfg_t();
-                    cfg.dwSize = (UInt32)Marshal.SizeOf(cfg);
-                    cfg.dwCommand = 0;
-
-
-                    var iflag = TMCC.TMCC_ControlFile(p6, p4);
+                    m_iPlaySpeed = 0;
+                    var iflag = TMCC.Avdec_PlayToDo(p6, TMCC.PLAY_CONTROL_PLAY, 0);
 
                     if (iflag == 0)
                     {
@@ -771,7 +769,98 @@ namespace AnXinWH.ShiPinNewVideoOCX
 
         }
 
+        private void toolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            m_iPlaySpeed += 1;
+            if (m_iPlaySpeed >= 15)
+            {
+                m_iPlaySpeed = 15;
+            }
 
+            var iflag = TMCC.Avdec_PlayToDo(_currPlayfile, TMCC.PLAY_CONTROL_FAST, m_iPlaySpeed);
+
+            if (iflag == 0)
+            {
+                lbl0Msg.Text = _notice + ",快速 " + m_iPlaySpeed + "X 播放视频成功:" + _videoname;//,时间
+            }
+            else
+            {
+                lbl0Msg.Text = _notice + ",快速 " + m_iPlaySpeed + "X 播放视频失败:" + _videoname + ",请再次尝试.谢谢.";
+            }
+        }
+
+        private void toolMenuPlay1_Click(object sender, EventArgs e)
+        {
+            m_iPlaySpeed = 0;
+            var iflag = TMCC.Avdec_PlayToDo(_currPlayfile, TMCC.PLAY_CONTROL_PLAY, 0);
+
+            if (iflag == 0)
+            {
+                lbl0Msg.Text = _notice + ",播放视频成功:" + _videoname;//,时间
+            }
+            else
+            {
+                lbl0Msg.Text = _notice + ",播放视频失败:" + _videoname + ",请再次尝试.谢谢.";
+            }
+        }
+
+
+
+        public string _notice { get; set; }
+
+        public string _videoname { get; set; }
+
+        private void toolStop1_Click(object sender, EventArgs e)
+        {
+            m_iPlaySpeed = 0;
+            var iflag = TMCC.Avdec_PlayToDo(_currPlayfile, TMCC.PLAY_CONTROL_STOP, 0);
+
+            if (iflag == 0)
+            {
+                lbl0Msg.Text = _notice + ",停止播放视频成功:" + _videoname;//,时间
+            }
+            else
+            {
+                lbl0Msg.Text = _notice + ",停止播放视频失败:" + _videoname + ",请再次尝试.谢谢.";
+            }
+        }
+
+        private void toolMenuStopPlay2_Click(object sender, EventArgs e)
+        {
+            m_iPlaySpeed = 0;
+            var iflag = TMCC.Avdec_PlayToDo(_currPlayfile, TMCC.PLAY_CONTROL_PAUSE, 0);
+
+            if (iflag == 0)
+            {
+                lbl0Msg.Text = _notice + ",暂停播放视频成功:" + _videoname;//,时间
+            }
+            else
+            {
+                lbl0Msg.Text = _notice + ",暂停播放视频失败:" + _videoname + ",请再次尝试.谢谢.";
+            }
+        }
+
+        public int m_iPlaySpeed { get; set; }
+
+        private void toolSlowPlay1_Click(object sender, EventArgs e)
+        {
+            m_iPlaySpeed += 1;
+            if (m_iPlaySpeed >= 5)
+            {
+                m_iPlaySpeed = 5;
+            }
+
+            var iflag = TMCC.Avdec_PlayToDo(_currPlayfile, TMCC.PLAY_CONTROL_SLOW, m_iPlaySpeed);
+
+            if (iflag == 0)
+            {
+                lbl0Msg.Text = _notice + ",慢速 " + m_iPlaySpeed + "X 播放视频成功:" + _videoname;//,时间
+            }
+            else
+            {
+                lbl0Msg.Text = _notice + ",慢速 " + m_iPlaySpeed + "X 播放视频失败:" + _videoname + ",请再次尝试.谢谢.";
+            }
+        }
     }
 
     public class videoCfg

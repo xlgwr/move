@@ -34,6 +34,10 @@
             this.lbl0Msg = new System.Windows.Forms.Label();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolMenuPlay1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolMenuStopPlay2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolMenuQuickPlay0 = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.listBox3 = new System.Windows.Forms.ListBox();
             this.listBox2 = new System.Windows.Forms.ListBox();
@@ -41,8 +45,10 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.toolSlowPlay1 = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.contextMenuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -83,6 +89,7 @@
             // pictureBox1
             // 
             this.pictureBox1.BackColor = System.Drawing.SystemColors.ButtonShadow;
+            this.pictureBox1.ContextMenuStrip = this.contextMenuStrip1;
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
             this.pictureBox1.Location = new System.Drawing.Point(123, 22);
             this.pictureBox1.Name = "pictureBox1";
@@ -91,6 +98,37 @@
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolMenuPlay1,
+            this.toolMenuStopPlay2,
+            this.toolMenuQuickPlay0,
+            this.toolSlowPlay1});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 114);
+            // 
+            // toolMenuPlay1
+            // 
+            this.toolMenuPlay1.Name = "toolMenuPlay1";
+            this.toolMenuPlay1.Size = new System.Drawing.Size(152, 22);
+            this.toolMenuPlay1.Text = "正常播放";
+            this.toolMenuPlay1.Click += new System.EventHandler(this.toolMenuPlay1_Click);
+            // 
+            // toolMenuStopPlay2
+            // 
+            this.toolMenuStopPlay2.Name = "toolMenuStopPlay2";
+            this.toolMenuStopPlay2.Size = new System.Drawing.Size(152, 22);
+            this.toolMenuStopPlay2.Text = "暂停播放";
+            this.toolMenuStopPlay2.Click += new System.EventHandler(this.toolMenuStopPlay2_Click);
+            // 
+            // toolMenuQuickPlay0
+            // 
+            this.toolMenuQuickPlay0.Name = "toolMenuQuickPlay0";
+            this.toolMenuQuickPlay0.Size = new System.Drawing.Size(152, 22);
+            this.toolMenuQuickPlay0.Text = "快速播放";
+            this.toolMenuQuickPlay0.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
             // 
             // groupBox1
             // 
@@ -171,6 +209,13 @@
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // toolSlowPlay1
+            // 
+            this.toolSlowPlay1.Name = "toolSlowPlay1";
+            this.toolSlowPlay1.Size = new System.Drawing.Size(152, 22);
+            this.toolSlowPlay1.Text = "慢速播放";
+            this.toolSlowPlay1.Click += new System.EventHandler(this.toolSlowPlay1_Click);
+            // 
             // ISECNewVideo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -183,6 +228,7 @@
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.contextMenuStrip1.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
@@ -202,5 +248,10 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem toolMenuQuickPlay0;
+        private System.Windows.Forms.ToolStripMenuItem toolMenuPlay1;
+        private System.Windows.Forms.ToolStripMenuItem toolMenuStopPlay2;
+        private System.Windows.Forms.ToolStripMenuItem toolSlowPlay1;
     }
 }
