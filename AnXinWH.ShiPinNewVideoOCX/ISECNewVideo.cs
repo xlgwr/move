@@ -93,6 +93,7 @@ namespace AnXinWH.ShiPinNewVideoOCX
         {
             //throw new NotImplementedException();
             lbl0Msg.Text = "";
+            _isScroll = false;
 
             _InstartTime = DateTime.Now.AddHours(-1);
             _InendTime = DateTime.Now;
@@ -170,18 +171,22 @@ namespace AnXinWH.ShiPinNewVideoOCX
                     _currPlayfile = p6;
                     _notice = notice;
                     _videoname = name;
+                    _currPlayfileConfigList = anotherP;
 
                     m_iPlaySpeed = 0;
                     var iflag = TMCC.Avdec_PlayToDo(p6, TMCC.PLAY_CONTROL_PLAY, 0);
 
                     if (iflag == 0)
                     {
-                        lbl0Msg.Text = notice + ",播放视频成功:" + name;//,时间
+                        timer1.Enabled = true;
+                        _currMsg = notice + "【" + name + "】播放成功.";//,时间
                     }
                     else
                     {
-                        lbl0Msg.Text = notice + ",播放视频失败:" + name + ",请再次尝试.谢谢.";
+                        _currMsg = notice + "【" + name + "】播放失败,请再次尝试.谢谢.";
+
                     }
+                    lbl0Msg.Text = _currMsg;
 
                 }
                 else
@@ -656,54 +661,6 @@ namespace AnXinWH.ShiPinNewVideoOCX
             }
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                closeAll();
-
-
-                var ret = 0;
-                ret = TMCC.TMCC_SetAutoReConnect(hPreView, true);
-                ret = TMCC.TMCC_SetDisplayShow(hPreView, true);
-                ret = TMCC.TMCC_SetStreamBufferTime(hPreView, uint.Parse("0"));
-                streamback = StreamDataCallBack;
-                ret = TMCC.TMCC_RegisterStreamCallBack(hPreView, streamback, hPreView);
-                frameback = AvFrameCallBack;
-                ret = TMCC.TMCC_RegisterAVFrameCallBack(hPreView, frameback, hPreView);
-                ret = TMCC.TMCC_SetImageOutFmt(hPreView, 3);
-                TMCC.tmPlayRealStreamCfg_t stream = new TMCC.tmPlayRealStreamCfg_t();
-                stream.Init();
-                stream.dwSize = (UInt32)Marshal.SizeOf(stream);
-
-                stream.szAddress = Get(32, _getConfigHost.cmsip.ToCharArray());
-                stream.szTurnAddress = Get(32, _getConfigHost.cmsip.ToCharArray());
-                stream.szUser = Get(32, _getConfigHost.userName.ToCharArray());
-                stream.szPass = Get(32, _getConfigHost.pswd.ToCharArray());
-                stream.iPort = _getConfigHost.cmsPort;
-
-                stream.byChannel = _getConfigHost.byChannel;// byte.Parse("0");
-                stream.byStream = _getConfigHost.byStream;// byte.Parse("0");
-
-                ret = TMCC.TMCC_ConnectStream(hPreView, ref stream, pictureBox1.Handle);
-                var error = TMCC.TMCC_GetLastError();
-
-                if (ret != TMCC.TMCC_ERR_SUCCESS)
-                {
-                    SetMsg(lbl0Msg, "预览视频失败。" + DateTime.Now.ToString());
-                    MessageBox.Show("预览视频失败");
-                }
-                else
-                {
-                    SetMsg(lbl0Msg, "预览实时视频成功。" + DateTime.Now.ToString());
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
         private void play_DoubleClick(ListBox lis, Dictionary<string, videoCfg> dic, string notice)
         {
             if (lis.SelectedItem != null)
@@ -713,11 +670,51 @@ namespace AnXinWH.ShiPinNewVideoOCX
                 playOldFileListName(tmpname, dic, notice);
             }
         }
-
         private void timer1_Tick(object sender, EventArgs e)
         {
+            if (_isScroll)
+            {
+                return;
+            }
+            if (_currPlayfile != null)
+            {
+                var getFileStatus = TMCC.Avdec_GetTmPlayStateCfg_t(_currPlayfile);
 
+                var st = _currPlayfileConfigList.struStartTime;
+
+                var startTime = st.wYear.ToString() + "-" + st.byMonth.ToString() + "-" + st.byDay + " " + st.byHour + ":" + st.byMinute + ":" + st.bySecond;
+
+                var alltime = Convert.ToInt32(getFileStatus.dwTotalTimes / 1000);
+                var currtime = Convert.ToInt32(getFileStatus.dwCurrentTimes / 1000);
+
+
+                if (alltime > 0)
+                {
+                    if (currtime >= alltime)
+                    {
+                        timer1.Enabled = false;
+                        lbl0Msg.Text = _currMsg + ",已播放完成.";
+                        return;
+                    }
+
+                    trackBar1.Maximum = alltime;
+                    //trackBar1.Value = currtime;
+
+                    lbl0Msg.Text = _currMsg + "开始时间:" + startTime.ToString() + ",总时间:" + trackBar1.Maximum + " 秒,\n 已播放:" + currtime + " 秒";
+                }
+                else
+                {
+                    lbl0Msg.Text = _currMsg;
+                }
+            }
+            else
+            {
+                timer1.Enabled = false;
+            }
         }
+        #region no
+
+
 
         private void ISECNewVideo_Load(object sender, EventArgs e)
         {
@@ -773,6 +770,7 @@ namespace AnXinWH.ShiPinNewVideoOCX
         {
 
         }
+        #endregion
 
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
         {
@@ -786,12 +784,14 @@ namespace AnXinWH.ShiPinNewVideoOCX
 
             if (iflag == 0)
             {
-                lbl0Msg.Text = _notice + ",快速 " + m_iPlaySpeed + "X 播放视频成功:" + _videoname;//,时间
+                _currMsg = _notice + "【" + _videoname + "】 ,快速 " + m_iPlaySpeed + "X 播放成功.";//,时间
+
             }
             else
             {
-                lbl0Msg.Text = _notice + ",快速 " + m_iPlaySpeed + "X 播放视频失败:" + _videoname + ",请再次尝试.谢谢.";
+                _currMsg = _notice + "【" + _videoname + "】 ,快速 " + m_iPlaySpeed + "X 播放失败,请再次尝试.谢谢.";
             }
+            lbl0Msg.Text = _currMsg;
         }
 
         private void toolMenuPlay1_Click(object sender, EventArgs e)
@@ -801,12 +801,13 @@ namespace AnXinWH.ShiPinNewVideoOCX
 
             if (iflag == 0)
             {
-                lbl0Msg.Text = _notice + ",播放视频成功:" + _videoname;//,时间
+                _currMsg = _notice + "【" + _videoname + "】 ,播放视频成功.";//,时间
             }
             else
             {
-                lbl0Msg.Text = _notice + ",播放视频失败:" + _videoname + ",请再次尝试.谢谢.";
+                _currMsg = _notice + "【" + _videoname + "】 ,播放视频失败,请再次尝试.谢谢.";
             }
+            lbl0Msg.Text = _currMsg;
         }
 
 
@@ -822,12 +823,13 @@ namespace AnXinWH.ShiPinNewVideoOCX
 
             if (iflag == 0)
             {
-                lbl0Msg.Text = _notice + ",停止播放视频成功:" + _videoname;//,时间
+                _currMsg = _notice + "【" + _videoname + "】停止播放视频成功.";//,时间
             }
             else
             {
-                lbl0Msg.Text = _notice + ",停止播放视频失败:" + _videoname + ",请再次尝试.谢谢.";
+                _currMsg = _notice + "【" + _videoname + "】停止播放视频失败,请再次尝试.谢谢.";
             }
+            lbl0Msg.Text = _currMsg;
         }
 
         private void toolMenuStopPlay2_Click(object sender, EventArgs e)
@@ -837,12 +839,13 @@ namespace AnXinWH.ShiPinNewVideoOCX
 
             if (iflag == 0)
             {
-                lbl0Msg.Text = _notice + ",暂停播放视频成功:" + _videoname;//,时间
+                _currMsg = _notice + "【" + _videoname + "】暂停播放视频成功.";//,时间
             }
             else
             {
-                lbl0Msg.Text = _notice + ",暂停播放视频失败:" + _videoname + ",请再次尝试.谢谢.";
+                _currMsg = _notice + "【" + _videoname + "】暂停播放视频失败,请再次尝试.谢谢.";
             }
+            lbl0Msg.Text = _currMsg;
         }
 
         public int m_iPlaySpeed { get; set; }
@@ -859,12 +862,100 @@ namespace AnXinWH.ShiPinNewVideoOCX
 
             if (iflag == 0)
             {
-                lbl0Msg.Text = _notice + ",慢速 " + m_iPlaySpeed + "X 播放视频成功:" + _videoname;//,时间
+                _currMsg = _notice + "【" + _videoname + "】慢速 " + m_iPlaySpeed + "X 播放视频成功.";//,时间
             }
             else
             {
-                lbl0Msg.Text = _notice + ",慢速 " + m_iPlaySpeed + "X 播放视频失败:" + _videoname + ",请再次尝试.谢谢.";
+                _currMsg = _notice + "【" + _videoname + "】慢速 " + m_iPlaySpeed + "X 播放视频失败,请再次尝试.谢谢.";
             }
+            lbl0Msg.Text = _currMsg;
+        }
+
+        private void trackBar1_Scroll(object sender, EventArgs e)
+        {
+            _isScroll = true;
+            var tmpflag = -1;
+            try
+            {
+                if (_currPlayfile != null)
+                {
+
+                    var currpost = Convert.ToUInt32(trackBar1.Value * 1000);
+
+                    if (trackBar1.Value < trackBar1.Maximum)
+                    {
+
+                        tmpflag = TMCC.Avdec_SetCurrentTime(_currPlayfile, TMCC.PLAY_CONTROL_SEEKTIME, currpost);
+
+                        if (tmpflag==0)
+                        {
+                            _isScroll = false; 
+                        }
+                    }
+
+                }
+                _isScroll = false;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                _isScroll = false;
+            }
+
+        }
+
+        public string _currMsg { get; set; }
+
+        public TMCC.tmFindFileCfg_t _currPlayfileConfigList { get; set; }
+
+        private void trackBar1_KeyDown(object sender, KeyEventArgs e)
+        {
+
+        }
+
+        private void trackBar1_MouseCaptureChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void trackBar1_MouseDown(object sender, MouseEventArgs e)
+        {
+            //timer1.Enabled = false;
+        }
+
+        private void trackBar1_MouseUp(object sender, MouseEventArgs e)
+        {
+            // timer1.Enabled = true;
+        }
+
+        public bool _isScroll { get; set; }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            toolMenuPlay1_Click(null, null);
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            toolMenuStopPlay2_Click(null, null);
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            toolStripMenuItem1_Click(null, null);
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            toolSlowPlay1_Click(null, null);
         }
     }
 

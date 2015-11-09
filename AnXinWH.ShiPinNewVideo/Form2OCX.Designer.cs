@@ -33,10 +33,14 @@
             // 
             // isecNewVideo1
             // 
-            this.isecNewVideo1._dicIn = null;
-            this.isecNewVideo1.Location = new System.Drawing.Point(12, 12);
+            this.isecNewVideo1._currMsg = null;
+            this.isecNewVideo1._isScroll = false;
+            this.isecNewVideo1._notice = null;
+            this.isecNewVideo1._videoname = null;
+            this.isecNewVideo1.Location = new System.Drawing.Point(12, 11);
+            this.isecNewVideo1.m_iPlaySpeed = 0;
             this.isecNewVideo1.Name = "isecNewVideo1";
-            this.isecNewVideo1.Size = new System.Drawing.Size(709, 568);
+            this.isecNewVideo1.Size = new System.Drawing.Size(811, 659);
             this.isecNewVideo1.TabIndex = 0;
             this.isecNewVideo1.tmpmsg = null;
             // 
@@ -44,10 +48,11 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(731, 586);
+            this.ClientSize = new System.Drawing.Size(820, 677);
             this.Controls.Add(this.isecNewVideo1);
             this.Name = "Form2OCX";
             this.Text = "Form2OCX";
+            this.Load += new System.EventHandler(this.Form2OCX_Load);
             this.ResumeLayout(false);
 
         }

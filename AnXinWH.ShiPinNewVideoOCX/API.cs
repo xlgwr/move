@@ -108,6 +108,11 @@ namespace AnXinWH.ShiPinNewVideoOCX
         [DllImport("tmControlClient.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern IntPtr TMCC_OpenFile(IntPtr ptr, IntPtr pPlayInfo, IntPtr hPlayWnd);
 
+
+        [DllImport("tmControlClient.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int TMCC_GetFilePlayState(IntPtr ptr, IntPtr pPlayInfo);
+
+
         [DllImport("tmControlClient.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern int TMCC_ControlFile(IntPtr ptr, IntPtr hPlayWnd);
 
@@ -136,6 +141,40 @@ namespace AnXinWH.ShiPinNewVideoOCX
             return TMCC_ControlFile(p, p5cfg);
 
         }
+
+        public static int Avdec_SetCurrentTime(IntPtr p, UInt32 com, UInt32 fCurrentTime)
+        {
+            tmPlayControlCfg_t cfg = new tmPlayControlCfg_t();
+
+            cfg.dwSize = (UInt32)Marshal.SizeOf(cfg);
+            cfg.dwCommand = com;
+            cfg.iSpeed = 0;
+            cfg.dwCurrentTime = fCurrentTime;
+
+            IntPtr p5cfg = Marshal.AllocHGlobal(Marshal.SizeOf(cfg));
+            Marshal.StructureToPtr(cfg, p5cfg, true);
+
+            return TMCC_ControlFile(p, p5cfg);
+
+        }
+        public static tmPlayStateCfg_t Avdec_GetTmPlayStateCfg_t(IntPtr p)
+        {
+            tmPlayStateCfg_t cfg = new tmPlayStateCfg_t();
+
+
+            cfg.dwSize = (UInt32)Marshal.SizeOf(cfg);
+
+            IntPtr p5cfg = Marshal.AllocHGlobal(Marshal.SizeOf(cfg));
+            Marshal.StructureToPtr(cfg, p5cfg, true);
+
+            TMCC_GetFilePlayState(p, p5cfg);
+
+            TMCC.tmPlayStateCfg_t tmcfg = (TMCC.tmPlayStateCfg_t)Marshal.PtrToStructure(p5cfg, typeof(TMCC.tmPlayStateCfg_t));
+            
+            return tmcfg;
+
+        }
+
 
 
         //实时流回调
@@ -175,8 +214,11 @@ namespace AnXinWH.ShiPinNewVideoOCX
 
             public int iSpeed;				/*播放的速度*/
 
+            public UInt32 dwCurrentTime;		/*新的播放位置(毫秒)*/
+
         }
         //播放文件的当前信息
+        [StructLayoutAttribute(LayoutKind.Sequential)]
         public class tmPlayStateCfg_t
         {
             public uint dwSize; //本结构大小
@@ -196,10 +238,6 @@ namespace AnXinWH.ShiPinNewVideoOCX
             public uint dwTotalSize; //总文件大小
             public uint dwCurrentSize; //当前文件大小
 
-            public void init()
-            {
-                struStartTime = new tmTimeInfo_t();
-            }
         }
 
         //文件索引结构定义
@@ -461,6 +499,7 @@ namespace AnXinWH.ShiPinNewVideoOCX
             public byte bySecond;
             public byte byTemp;
             public uint dwMicroSecond;
+
         }
 
         [StructLayoutAttribute(LayoutKind.Sequential)]
