@@ -17,11 +17,14 @@ namespace AnXinWH.ShiPinNewVideoOCX
                 tmpconfig.userName = "system";// System.Configuration.ConfigurationManager.AppSettings["userName"].ToString();
                 tmpconfig.pswd = "system";// System.Configuration.ConfigurationManager.AppSettings["pswd"].ToString();
 
+                tmpconfig.byChannel = 0;
+                tmpconfig.byStream = 0;
 
                 tmpconfig.ValidateType = 0;
                 tmpconfig.UserMacAddr = "";
                 tmpconfig.UserUsbKey = "";
                 tmpconfig.Bound = 0;
+
 
                 return tmpconfig;
             }
@@ -42,5 +45,11 @@ namespace AnXinWH.ShiPinNewVideoOCX
         public string UserMacAddr { get; set; }
         public string UserUsbKey { get; set; }
         public int Bound { get; set; }
+
+
+        public byte byChannel { get; set; }
+        public byte byStream { get; set; }
+
+        
     }
 }

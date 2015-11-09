@@ -23,6 +23,8 @@ namespace AnXinWH.ShiPinNewVideoOCX
         IntPtr _currPlayfile = IntPtr.Zero;
         IntPtr _hfile = IntPtr.Zero;
 
+        public static configHost _getConfigHost = comm.getConfigHost();
+
         static Dictionary<string, videoCfg> _dicIn { get; set; }
         static Dictionary<string, videoCfg> _dicOut { get; set; }
         static Dictionary<string, videoCfg> _dicShelf { get; set; }
@@ -123,10 +125,10 @@ namespace AnXinWH.ShiPinNewVideoOCX
             TMCC.tmConnectInfo_t Info = new TMCC.tmConnectInfo_t();
             Info.Init();
             Info.dwSize = (UInt32)Marshal.SizeOf(Info);
-            Info.pIp = Get(32, "192.168.1.4".ToCharArray());//txtIP.Text
-            Info.szPass = Get(32, "system".ToCharArray());
-            Info.szUser = Get(32, "system".ToCharArray());
-            Info.iPort = Convert.ToInt32("6002".Trim());//"6002"txPort.Text
+            Info.pIp = Get(32, _getConfigHost.cmsip.ToCharArray());//txtIP.Text"192.168.1.4"
+            Info.szPass = Get(32, _getConfigHost.pswd.ToCharArray());// "system"
+            Info.szUser = Get(32, _getConfigHost.userName.ToCharArray()); //"system"
+            Info.iPort = _getConfigHost.cmsPort;//"6002"txPort.Text
             Info.iUserLevel = 0;
 
             var ret = TMCC.TMCC_Connect(hLogin, ref Info, false);
@@ -584,9 +586,10 @@ namespace AnXinWH.ShiPinNewVideoOCX
                 ConditionCfg.byOldServer = 1;
                 ConditionCfg.byBackupData = 0;
                 ConditionCfg.dwServerPort = 6002;
-                ConditionCfg.sServerAddress = "192.168.1.4";//.Get(32, txtIP.Text.ToCharArray());// string.Format("{0}", txtIP.Text.ToCharArray());
-                ConditionCfg.sUserName = "system";//.Get(32, txUser.Text.ToCharArray());// string.Format("{0}", txUser.Text.ToCharArray());
-                ConditionCfg.sUserPass = "system";//.Get(32, txPswd.Text.ToCharArray());// string.Format("{0}", txPswd.Text.ToCharArray());
+
+                ConditionCfg.sServerAddress = _getConfigHost.cmsip;// "192.168.1.4";//.Get(32, txtIP.Text.ToCharArray());// string.Format("{0}", txtIP.Text.ToCharArray());
+                ConditionCfg.sUserName = _getConfigHost.userName;// "system";//.Get(32, txUser.Text.ToCharArray());// string.Format("{0}", txUser.Text.ToCharArray());
+                ConditionCfg.sUserPass = _getConfigHost.pswd;// "system";//.Get(32, txPswd.Text.ToCharArray());// string.Format("{0}", txPswd.Text.ToCharArray());
 
                 FileCfg.dwSize = (UInt32)Marshal.SizeOf(FileCfg);
 
@@ -672,13 +675,15 @@ namespace AnXinWH.ShiPinNewVideoOCX
                 TMCC.tmPlayRealStreamCfg_t stream = new TMCC.tmPlayRealStreamCfg_t();
                 stream.Init();
                 stream.dwSize = (UInt32)Marshal.SizeOf(stream);
-                stream.szAddress = Get(32, "192.168.1.4".ToCharArray());
-                stream.szTurnAddress = Get(32, "192.168.1.4".ToCharArray());
-                stream.szUser = Get(32, "system".ToCharArray());
-                stream.szPass = Get(32, "system".ToCharArray());
-                stream.iPort = Convert.ToInt32(6002);
-                stream.byChannel = byte.Parse("0");
-                stream.byStream = byte.Parse("0");
+
+                stream.szAddress = Get(32, _getConfigHost.cmsip.ToCharArray());
+                stream.szTurnAddress = Get(32, _getConfigHost.cmsip.ToCharArray());
+                stream.szUser = Get(32, _getConfigHost.userName.ToCharArray());
+                stream.szPass = Get(32, _getConfigHost.pswd.ToCharArray());
+                stream.iPort = _getConfigHost.cmsPort;
+
+                stream.byChannel = _getConfigHost.byChannel;// byte.Parse("0");
+                stream.byStream = _getConfigHost.byStream;// byte.Parse("0");
 
                 ret = TMCC.TMCC_ConnectStream(hPreView, ref stream, pictureBox1.Handle);
                 var error = TMCC.TMCC_GetLastError();
@@ -771,10 +776,10 @@ namespace AnXinWH.ShiPinNewVideoOCX
 
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            m_iPlaySpeed += 1;
-            if (m_iPlaySpeed >= 15)
+            m_iPlaySpeed += 2;
+            if (m_iPlaySpeed >= 10)
             {
-                m_iPlaySpeed = 15;
+                m_iPlaySpeed = 10;
             }
 
             var iflag = TMCC.Avdec_PlayToDo(_currPlayfile, TMCC.PLAY_CONTROL_FAST, m_iPlaySpeed);
