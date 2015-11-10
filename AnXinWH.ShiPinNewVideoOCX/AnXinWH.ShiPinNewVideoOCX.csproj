@@ -49,11 +49,23 @@
     <Compile Include="API.cs" />
     <Compile Include="comm.cs" />
     <Compile Include="IObjectSafety.cs" />
+    <Compile Include="ISECNewVideoN.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ISECNewVideoN.Designer.cs">
+      <DependentUpon>ISECNewVideoN.cs</DependentUpon>
+    </Compile>
     <Compile Include="ISECNewVideo.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="ISECNewVideo.Designer.cs">
       <DependentUpon>ISECNewVideo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ISECNewVideoNowN.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ISECNewVideoNowN.Designer.cs">
+      <DependentUpon>ISECNewVideoNowN.cs</DependentUpon>
     </Compile>
     <Compile Include="ISECNewVideoNow.cs">
       <SubType>UserControl</SubType>
@@ -67,8 +79,14 @@
     <None Include="ISECNewVideoOCX.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="ISECNewVideoN.resx">
+      <DependentUpon>ISECNewVideoN.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ISECNewVideo.resx">
       <DependentUpon>ISECNewVideo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ISECNewVideoNowN.resx">
+      <DependentUpon>ISECNewVideoNowN.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ISECNewVideoNow.resx">
       <DependentUpon>ISECNewVideoNow.cs</DependentUpon>

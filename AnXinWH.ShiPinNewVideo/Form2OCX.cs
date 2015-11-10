@@ -17,6 +17,10 @@ namespace AnXinWH.ShiPinNewVideo
 
         private void Form2OCX_Load(object sender, EventArgs e)
         {
+            this.StartPosition = FormStartPosition.CenterScreen;
+            this.MaximizeBox = false;
+
+
             isecNewVideo1.jsSetTimeOut(DateTime.Now.AddDays(-1), DateTime.Now);
             isecNewVideo1.jsSetTimeShelf(DateTime.Now.AddDays(-1), DateTime.Now);
             isecNewVideo1.jsSetTimeIn(DateTime.Now.AddDays(-1), DateTime.Now);

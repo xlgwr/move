@@ -17,7 +17,7 @@
     </div>
     <hr />
     <div>
-        <object id="a" classid="clsid:66F195EB-3753-45FA-93A6-6B58F33DBC85"></object>
+        <object id="a" classid="clsid:9BD75AC7-A2E5-4D8C-9D38-74BEE3D2958C"></object>
     </div>
     <script type="text/javascript">
         $(function () {
@@ -31,7 +31,7 @@
 
                 document.title = 'ISEC Video V' + getVersion;
 
-                ////http://192.168.1.120/index.html?receiptNo=1343434&rfidNo=814228&IST=2015-11-04 13:20:00&IET=2015-11-5 14:00:30&OST=2015-11-05 13:20:00&OET=2015-11-5 14:00:30&SST=2015-11-04 13:20:00&SET=2015-11-5 14:00:30
+                ////http://192.168.1.120/indexn.html?receiptNo=1343434&rfidNo=814228&IST=2015-11-04 13:20:00&IET=2015-11-5 14:00:30&OST=2015-11-05 13:20:00&OET=2015-11-5 14:00:30&SST=2015-11-04 13:20:00&SET=2015-11-5 14:00:30
                 var receiptNo = GetArgsFromHref(document.location.href, "receiptNo");
                 var tmprfid = GetArgsFromHref(document.location.href, "rfidNo");
 
@@ -45,6 +45,7 @@
                 } else {
                     a.SetReceiptNo("没有仓单号。");
                 }
+
                 var InstartTime = GetArgsFromHref(document.location.href, "IST");
                 var InendTime = GetArgsFromHref(document.location.href, "IET");
                 var OutstartTime = GetArgsFromHref(document.location.href, "OST");

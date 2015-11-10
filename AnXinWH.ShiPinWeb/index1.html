@@ -25,19 +25,26 @@
             try {
                 var getVersion = a.jsGetVersion();
 
-                if (getVersion != "1.0.1.0") {
+                if (getVersion != "1.0.1.1") {
                     alert("请升级新版本控件。");
                 }
 
                 document.title = 'ISEC Video 实时视频 V' + getVersion;
 
-                ////http://192.168.1.120/index.html?receiptNo=1343434
+                ////http://192.168.1.120/index.html?receiptNo=1343434&rfidNo=814228
                 var receiptNo = GetArgsFromHref(document.location.href, "receiptNo");
+                var tmprfid = GetArgsFromHref(document.location.href, "rfidNo");
+
                 if (receiptNo) {
-                    a.SetReceiptNo("仓单号:" + receiptNo.toString());
+                    if (tmprfid) {
+                        a.SetReceiptNo("仓单号:" + receiptNo.toString() + ",RFID:" + tmprfid);
+                    } else {
+                        a.SetReceiptNo("仓单号:" + receiptNo.toString() + ",无 RFID");
+                    }
+
                 } else {
                     a.SetReceiptNo("没有仓单号。");
-                }              
+                }
 
             } catch (e) {
                 alert("加载控件失败，请下载或加载控件。Error:" + e.message);

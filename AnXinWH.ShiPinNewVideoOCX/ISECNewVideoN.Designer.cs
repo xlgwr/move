@@ -1,6 +1,6 @@
 ﻿namespace AnXinWH.ShiPinNewVideoOCX
 {
-    partial class ISECNewVideo
+    partial class ISECNewVideoN
     {
         /// <summary> 
         /// 必需的设计器变量。

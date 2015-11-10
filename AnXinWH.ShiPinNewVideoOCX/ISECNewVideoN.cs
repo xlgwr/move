@@ -14,8 +14,8 @@ using System.Reflection;
 namespace AnXinWH.ShiPinNewVideoOCX
 {
 
-    [Guid("66F195EB-3753-45FA-93A6-6B58F33DBC85")]
-    public partial class ISECNewVideo : UserControl, IObjectSafety, IDisposable
+    [Guid("9BD75AC7-A2E5-4D8C-9D38-74BEE3D2958C")]
+    public partial class ISECNewVideoN : UserControl, IObjectSafety, IDisposable
     {
         #region att
         IntPtr hPreView = IntPtr.Zero;
@@ -23,7 +23,7 @@ namespace AnXinWH.ShiPinNewVideoOCX
         IntPtr _currPlayfile = IntPtr.Zero;
         IntPtr _hfile = IntPtr.Zero;
 
-        public static configHost _getConfigHost = comm.getConfigHost();
+        public static configHost _getConfigHost = comm.getConfigHostN();
 
         static Dictionary<string, videoCfg> _dicIn { get; set; }
         static Dictionary<string, videoCfg> _dicOut { get; set; }
@@ -51,7 +51,7 @@ namespace AnXinWH.ShiPinNewVideoOCX
         int iTemp = 0;
 
         #endregion
-        public ISECNewVideo()
+        public ISECNewVideoN()
         {
             InitializeComponent();
 
@@ -967,10 +967,5 @@ namespace AnXinWH.ShiPinNewVideoOCX
             toolSlowPlay1_Click(null, null);
         }
     }
-
-    public class videoCfg
-    {
-        public string filename { get; set; }
-        public TMCC.tmFindFileCfg_t fileCfg { get; set; }
-    }
+       
 }

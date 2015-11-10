@@ -12,7 +12,37 @@ namespace AnXinWH.ShiPinNewVideoOCX
             {
                 var tmpconfig = new configHost();
 
-                tmpconfig.cmsip = "192.168.1.4";// System.Configuration.ConfigurationManager.AppSettings["cmsip"].ToString();
+                //szisec.f3322.net
+                tmpconfig.cmsip = "szisec.f3322.net";//// System.Configuration.ConfigurationManager.AppSettings["cmsip"].ToString();
+                tmpconfig.cmsPort = 6002;//int.Parse(System.Configuration.ConfigurationManager.AppSettings["cmsPort"]);
+                tmpconfig.userName = "system";// System.Configuration.ConfigurationManager.AppSettings["userName"].ToString();
+                tmpconfig.pswd = "system";// System.Configuration.ConfigurationManager.AppSettings["pswd"].ToString();
+
+                tmpconfig.byChannel = 0;
+                tmpconfig.byStream = 0;
+
+                tmpconfig.ValidateType = 0;
+                tmpconfig.UserMacAddr = "";
+                tmpconfig.UserUsbKey = "";
+                tmpconfig.Bound = 0;
+
+
+                return tmpconfig;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+        public static configHost getConfigHostN()
+        {
+            try
+            {
+                var tmpconfig = new configHost();
+
+                //szisec.f3322.net
+                tmpconfig.cmsip = "192.168.1.4";//// System.Configuration.ConfigurationManager.AppSettings["cmsip"].ToString();
                 tmpconfig.cmsPort = 6002;//int.Parse(System.Configuration.ConfigurationManager.AppSettings["cmsPort"]);
                 tmpconfig.userName = "system";// System.Configuration.ConfigurationManager.AppSettings["userName"].ToString();
                 tmpconfig.pswd = "system";// System.Configuration.ConfigurationManager.AppSettings["pswd"].ToString();
@@ -50,6 +80,6 @@ namespace AnXinWH.ShiPinNewVideoOCX
         public byte byChannel { get; set; }
         public byte byStream { get; set; }
 
-        
+
     }
 }
