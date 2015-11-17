@@ -97,10 +97,12 @@ namespace AnXinWH.ShiPinNewVideo
                 var startTime = dateTimePicker1.Value;
                 var endTime = dateTimePicker2.Value;
 
+                FileCfg.dwSize = (UInt32)Marshal.SizeOf(FileCfg);
 
                 ConditionCfg.dwSize = (UInt32)Marshal.SizeOf(ConditionCfg);
                 ConditionCfg.byChannel = 0;		//通道
                 ConditionCfg.byFileType = 0xFF;		//录像文件类型
+                ConditionCfg.bySearchImage = 0;
                 ConditionCfg.bySearchAllTime = 1;
 
 
@@ -127,7 +129,6 @@ namespace AnXinWH.ShiPinNewVideo
                 ConditionCfg.sUserName = "system";//.Get(32, txUser.Text.ToCharArray());// string.Format("{0}", txUser.Text.ToCharArray());
                 ConditionCfg.sUserPass = "system";//.Get(32, txPswd.Text.ToCharArray());// string.Format("{0}", txPswd.Text.ToCharArray());
 
-                FileCfg.dwSize = (UInt32)Marshal.SizeOf(FileCfg);
 
                 IntPtr p1 = Marshal.AllocHGlobal(Marshal.SizeOf(ConditionCfg));
                 Marshal.StructureToPtr(ConditionCfg, p1, false);
@@ -216,11 +217,12 @@ namespace AnXinWH.ShiPinNewVideo
 
                     TMCC.tmPlayConditionCfg_t struCond = new TMCC.tmPlayConditionCfg_t();
 
+                    struCond.init();
                     struCond.dwSize = (UInt32)Marshal.SizeOf(struCond);
 
                     struCond.byChannel = 0;
-                    struCond.struStartTime = anotherP.struStartTime;
-                    struCond.struStopTime = anotherP.struStopTime;
+                    struCond.time.struStartTime = anotherP.struStartTime;
+                    struCond.time.struStopTime = anotherP.struStopTime;
 
                     IntPtr p4 = Marshal.AllocHGlobal(Marshal.SizeOf(struCond));
                     Marshal.StructureToPtr(struCond, p4, false);
@@ -230,11 +232,12 @@ namespace AnXinWH.ShiPinNewVideo
                     _currPlayfile = p6;
 
                     TMCC.tmPlayControlCfg_t cfg = new TMCC.tmPlayControlCfg_t();
+
                     cfg.dwSize = (UInt32)Marshal.SizeOf(cfg);
                     cfg.dwCommand = 0;
 
 
-                    var iflag = TMCC.TMCC_ControlFile(p6, p4);
+                    var iflag = TMCC.TMCC_ControlFile(p6, ref cfg);
 
                     if (iflag == 0)
                     {
@@ -277,6 +280,7 @@ namespace AnXinWH.ShiPinNewVideo
                 if (_currPlayfile != null)
                 {
                     TMCC.TMCC_CloseFile(_currPlayfile);
+                    _currPlayfile = IntPtr.Zero;
                 }
             }
             catch (Exception ex)
@@ -382,6 +386,39 @@ namespace AnXinWH.ShiPinNewVideo
                 MessageBox.Show(ex.Message);
             }
 
+        }
+        int testpos = 100;
+        private void playOnMini(int pos)
+        {
+            var tmpflag = -1;
+            this.Cursor = Cursors.WaitCursor;
+            try
+            {
+                if (_currPlayfile != null)
+                {
+                    tmpflag = TMCC.Avdec_SetCurrentTime(_currPlayfile, TMCC.PLAY_CONTROL_SEEKTIME,pos);
+
+                    if (tmpflag==0)
+                    {
+                       // MessageBox.Show("Test");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                this.Cursor = Cursors.Default;
+            }
+
+        }
+        private void button3_Click(object sender, EventArgs e)
+        {
+
+            int tmpos = 5 * 1000;
+            playOnMini(tmpos);
         }
 
     }

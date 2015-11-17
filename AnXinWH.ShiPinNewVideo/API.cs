@@ -11,6 +11,30 @@ namespace AnXinWH.ShiPinNewVideo
         public const int TMCC_MINOR_CMD_MANUALCAPTURE = 0x10;		    /*远程手动抓图传到本地*/
         public const int TMCC_MAJOR_CMD_VIDEOINCFG = 0x116;		/*视频输入配置*/
         public const int TMCC_MINOR_CMD_VIDEOIN = 0x00;		    /*输入配置*/
+        /*远程文件播放方式*/
+        public const int REMOTEPLAY_MODE_BUFFILE = 0x00;	/*解码显示播放，需要本地缓冲，此方式占用网络带快大*/
+        public const int REMOTEPLAY_MODE_NOBUFFILE = 0x01;	/*解码显示，不带本地缓冲，此方式占用网络带宽与码流大小一致*/
+        public const int REMOTEPLAY_MODE_OLDFILE = 0x02;	/*老方式播放文件，主要是a2的摄像机*/
+        public const int REMOTEPLAY_MODE_LOCALFILE = 0x03; /*本地文件*/
+        public const int REMOTEPLAY_MODE_READFILE = 0x04;	/*不解码显示，为TMCC_ReadFile提供支持*/
+        public const int REMOTEPLAY_MODE_CONTROLFILE = 0x05;	/*服务器控制视频的速率*/
+
+        /*远程文件打开控制结构定义*/
+        public const UInt32 PLAY_CONTROL_PLAY = 0;	//*播放,以iPlayData作为播放参数(0-保留当前设置,1-回复默认)*/
+        public const UInt32 PLAY_CONTROL_STOP = 1;		//*停止*/
+        public const UInt32 PLAY_CONTROL_PAUSE = 2;		//*暂停,注意停止直接调用相关关闭函数即可*/
+        public const UInt32 PLAY_CONTROL_FAST = 3;	//*快放,以iSpeed作为速度*/
+        public const UInt32 PLAY_CONTROL_SLOW = 4;	//*慢放,以iSpeed作为速度*/
+        public const UInt32 PLAY_CONTROL_SEEKPOS = 5;	//*seek,以iCurrentPosition*/
+        public const UInt32 PLAY_CONTROL_SEEKTIME = 6;	//*seek,以dwCurrentTime作为时间*/
+        public const UInt32 PLAY_CONTROL_STEMP = 7;	//*stemp,单帧播放*/
+        public const UInt32 PLAY_CONTROL_SWITCH = 8;	//*切换文件,以szFileName作为文件名/或struTime时间*/
+        public const UInt32 PLAY_CONTROL_MUTE = 9;	//*音频开关,以iEnableAudio作为开关*/
+        public const UInt32 PLAY_CONTROL_UPEND = 10;	//*倒放*/
+        public const UInt32 PLAY_CONTROL_GETAVINDEX = 11;	//*得到本地文件的索引*/
+        public const UInt32 PLAY_CONTROL_SETAVINDEX = 12;	//*设置播放文件的索引*/
+        public const UInt32 PLAY_CONTROL_AUTORESETBUFTIME = 13;	//*设置是否自动调节缓冲时间*/
+        public const UInt32 PLAY_CONTROL_SEEKTIME_NEW = 14;	//*seek,以struTime作为时间  绝对时间   jukin add for gb*/
 
 
         [DllImport("tmControlClient.dll", CallingConvention = CallingConvention.Cdecl)]
@@ -92,7 +116,8 @@ namespace AnXinWH.ShiPinNewVideo
         public static extern IntPtr TMCC_OpenFile(IntPtr ptr, IntPtr pPlayInfo, IntPtr hPlayWnd);
 
         [DllImport("tmControlClient.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int TMCC_ControlFile(IntPtr ptr, IntPtr  hPlayWnd);
+        public static extern int TMCC_ControlFile(IntPtr ptr, ref tmPlayControlCfg_t playCtl);
+        //public static extern int TMCC_ControlFile(IntPtr ptr, IntPtr hPlayWnd);
 
 
         [DllImport("tmControlClient.dll", CallingConvention = CallingConvention.Cdecl)]
@@ -117,6 +142,23 @@ namespace AnXinWH.ShiPinNewVideo
         //连接消息回调函数，通过它可以得到异步方式和断开连接状态
         public delegate int fnStreamReadCallBackDelegate(IntPtr hTmCC, IntPtr pStreamInfo, IntPtr context);
 
+
+
+        //by xlg
+        public static int Avdec_SetCurrentTime(IntPtr p, UInt32 com, double fCurrentTime)
+        {
+            tmPlayControlCfg_t cfg = new tmPlayControlCfg_t();
+
+            cfg.dwSize = (UInt32)Marshal.SizeOf(cfg);
+            cfg.dwCommand = 6;
+            cfg.dwCurrentTime = 120*1000;// (uint)fCurrentTime;
+
+            //IntPtr p5cfg = Marshal.AllocHGlobal(Marshal.SizeOf(cfg));
+            //Marshal.StructureToPtr(cfg, p5cfg, true);
+
+            return TMCC_ControlFile(p, ref cfg);
+
+        }
         public class tmFileAccessInterface_t
         {
             public delegate IntPtr OpenDelegate(string lpFileName, string lpMode, IntPtr context);
@@ -133,16 +175,58 @@ namespace AnXinWH.ShiPinNewVideo
             public SizeDelegate Size;
         }
 
-          [StructLayoutAttribute(LayoutKind.Sequential)]
+        [StructLayout(LayoutKind.Explicit)]
         public struct tmPlayControlCfg_t
         {
-            public uint dwSize;				/*本结构大小*/
-            public uint dwCommand;			/*控制命令	*/
+            [FieldOffset(0)]
+            public UInt32 dwSize;
+            [FieldOffset(4)]
+            public UInt32 dwCommand;
+            [FieldOffset(8)]
+            public int iPlayData;
+            [FieldOffset(8)]
+            public int iSpeed;
+            [FieldOffset(8)]
+            public int iEnableAudio;
+            [FieldOffset(8)]
+            public int iCurrentPosition;
+            [FieldOffset(8)]
+            public UInt32 dwCurrentTime;
+            [FieldOffset(8)]
+            public bool bForward;
+            [FieldOffset(8)]
+            public bool bClearDisplay;
+            [FieldOffset(8)]
+            public bool bAutoResetBufTime;
+            [FieldOffset(8)]
+            public tmTimeInfo_t struTime;
+
 
         }
-
+        [StructLayoutAttribute(LayoutKind.Sequential)]
+        public struct playContrfile
+        {
+            public byte byAutoCreateIndex; //是否自动生成索引
+            public byte byAutoPlay; //打开后是否自动播放
+            [MarshalAs(UnmanagedType.ByValArray, SizeConst = 2)]
+            public byte[] byTemp;
+            [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 128)]
+            public string sFileName; //切换到文件名
+        }
+        [StructLayoutAttribute(LayoutKind.Sequential)]
+        public struct playindex
+        {
+            public tmAvIndexEntry_t pAvIndex; //索引缓冲
+            public int iAvIndexCount; //缓冲中的索引数
+            public int iAvIndexMaxCount; //缓冲的总索引数
+            public void init()
+            {
+                pAvIndex = new tmAvIndexEntry_t();
+            }
+        }
 
         //文件索引结构定义
+        [StructLayoutAttribute(LayoutKind.Sequential)]
         public class tmAvIndexEntry_t
         {
             public uint ckid;
@@ -151,7 +235,7 @@ namespace AnXinWH.ShiPinNewVideo
             public uint dwChunkLength;
         }
 
-        [StructLayoutAttribute(LayoutKind.Sequential, CharSet = CharSet.Ansi, Size = 128)]
+        [StructLayoutAttribute(LayoutKind.Sequential)]
         public struct _time
         {
             public tmTimeInfo_t struStartTime; //文件的开始时间
@@ -204,8 +288,44 @@ namespace AnXinWH.ShiPinNewVideo
         }
 
         [StructLayoutAttribute(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
+        public struct playtime
+        {
+            public tmTimeInfo_t struStartTime; //文件的开始时间
+            public tmTimeInfo_t struStopTime; //文件的结束时间
+            public byte byCheckStopTime; //是否检测结束时间
+            public byte byAlarmType; //报警类型
+            public byte byFileFormat; //0-JPEG,1-JPEG2000,2-RGB555,3-RGB565,4-RGB24,
+            //5-RGB32,6-YUV444,7-YUV422,8-YUV420,9-BKMPEG4,10-H264文件格式20-AVI,21-MKV
+            public byte byBackupData; //是否是备份文件
+            public byte byDiskName; //所在磁盘
+            public byte byConvertToJpeg; //非JPEG强制转换成JPEG
+            [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 18)]
+            public string byReserves;
+            [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 32)]
+            public string sServerAddress; //服务器地址
+            public uint dwServerPort; //服务器端口
+            [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 32)]
+            public string sUserName; //用户名
+            [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 32)]
+            public string sUserPass; //用户密码
+        }
 
+        [StructLayoutAttribute(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
+        public struct playfile
+        {
+            public byte byAutoCreateIndex; //是否自动生成索引
+            public byte byAutoPlay; //打开后是否自动播放
+            [MarshalAs(UnmanagedType.ByValArray, SizeConst = 2)]
+            public byte[] byTemp;
+            [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 128)]
+            public string sFileName; //文件名
+            public tmFileAccessInterface_t pFileCallBack; //文件访问回调函数
+            public IntPtr pFileContext; //文件访问相关句柄
+            public tmAvIndexEntry_t pAvIndex; //索引缓冲
+            public int iAvIndexCount; //缓冲中的索引数
+        }
         //文件播放条件定义
+        [StructLayoutAttribute(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
         public struct tmPlayConditionCfg_t
         {
             public uint dwSize;
@@ -213,40 +333,26 @@ namespace AnXinWH.ShiPinNewVideo
             public byte byChannel; //通道 
             public byte byPlayImage; //是否操作图片
 
+            public playtime time;
+            public playfile file;
 
-            public tmTimeInfo_t struStartTime; //文件的开始时间
-            public tmTimeInfo_t struStopTime; //文件的结束时间
-            //public byte byCheckStopTime; //是否检测结束时间
-            //public byte byAlarmType; //报警类型
-            //public byte byFileFormat; //0-JPEG,1-JPEG2000,2-RGB555,3-RGB565,4-RGB24,
-            //public byte byBackupData; //是否是备份文件
-            //public byte byDiskName; //所在磁盘
-            //public byte byConvertToJpeg; //非JPEG强制转换成JPEG
+            //public tmTimeInfo_t struStartTime; //文件的开始时间
+            //public tmTimeInfo_t struStopTime; //文件的结束时间
 
-            //[StructLayout(LayoutKind.Explicit, Size=128)]
-            //public struct _infos
-            //{
-            //    [FieldOffset(0)]
-            //    public _time time; 
-            //    [FieldOffset(0)]
-            //    public _file file; 
-            //}
+            public byte byBufferBeforePlay; //开始播放是否需要缓冲数据
+            public byte byEnableServer; //是否启用网络参数
+            public byte byPlayType; //播放方式
+            public byte byDecoderType; //解码方式
+            public uint dwBufferSizeBeforePlay; //缓冲大小
 
-            //public _infos info;
-
-            //public byte byBufferBeforePlay; //开始播放是否需要缓冲数据
-            //public byte byEnableServer; //是否启用网络参数
-            //public byte byPlayType; //播放方式
-            //public byte byDecoderType; //解码方式
-            //public uint dwBufferSizeBeforePlay; //缓冲大小
-
-
-            //public fnStreamReadCallBackDelegate fnStreamReadCallBack;
-            //public IntPtr fnStreamReadContext;
+            public fnStreamReadCallBackDelegate fnStreamReadCallBack;
+            public IntPtr fnStreamReadContext;
+            public void init()
+            {
+                time = new playtime();
+                file = new playfile();
+            }
         }
-
-
-
 
         [StructLayoutAttribute(LayoutKind.Sequential)]
         public struct tmConnectInfo_t
@@ -377,7 +483,6 @@ namespace AnXinWH.ShiPinNewVideo
                 [FieldOffset(0)]
                 public byte byFileType; //搜索类型 0xFF-全部，'N'-定时，'M'-移动，'A'-报警，'H'-手动，'O'-其它
             }
-
 
             public ushort wFactoryId; //厂商ID
             public tmTimeInfo_t struStartTime; //搜索的开始时间

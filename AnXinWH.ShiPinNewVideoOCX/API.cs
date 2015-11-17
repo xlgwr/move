@@ -11,6 +11,13 @@ namespace AnXinWH.ShiPinNewVideoOCX
         public const int TMCC_MINOR_CMD_MANUALCAPTURE = 0x10;		    /*远程手动抓图传到本地*/
         public const int TMCC_MAJOR_CMD_VIDEOINCFG = 0x116;		/*视频输入配置*/
         public const int TMCC_MINOR_CMD_VIDEOIN = 0x00;		    /*输入配置*/
+        /*远程文件播放方式*/
+        public const int REMOTEPLAY_MODE_BUFFILE = 0x00;	/*解码显示播放，需要本地缓冲，此方式占用网络带快大*/
+        public const int REMOTEPLAY_MODE_NOBUFFILE = 0x01;	/*解码显示，不带本地缓冲，此方式占用网络带宽与码流大小一致*/
+        public const int REMOTEPLAY_MODE_OLDFILE = 0x02;	/*老方式播放文件，主要是a2的摄像机*/
+        public const int REMOTEPLAY_MODE_LOCALFILE = 0x03; /*本地文件*/
+        public const int REMOTEPLAY_MODE_READFILE = 0x04;	/*不解码显示，为TMCC_ReadFile提供支持*/
+        public const int REMOTEPLAY_MODE_CONTROLFILE = 0x05;	/*服务器控制视频的速率*/
 
         /*远程文件打开控制结构定义*/
         public const UInt32 PLAY_CONTROL_PLAY = 0;	//*播放,以iPlayData作为播放参数(0-保留当前设置,1-回复默认)*/
@@ -136,7 +143,7 @@ namespace AnXinWH.ShiPinNewVideoOCX
             cfg.iSpeed = iSpeed;
 
             IntPtr p5cfg = Marshal.AllocHGlobal(Marshal.SizeOf(cfg));
-            Marshal.StructureToPtr(cfg, p5cfg, false);
+            Marshal.StructureToPtr(cfg, p5cfg, true);
 
             return TMCC_ControlFile(p, p5cfg);
 
@@ -148,7 +155,6 @@ namespace AnXinWH.ShiPinNewVideoOCX
 
             cfg.dwSize = (UInt32)Marshal.SizeOf(cfg);
             cfg.dwCommand = com;
-            cfg.iSpeed = 0;
             cfg.dwCurrentTime = fCurrentTime;
 
             IntPtr p5cfg = Marshal.AllocHGlobal(Marshal.SizeOf(cfg));
@@ -170,7 +176,7 @@ namespace AnXinWH.ShiPinNewVideoOCX
             TMCC_GetFilePlayState(p, p5cfg);
 
             TMCC.tmPlayStateCfg_t tmcfg = (TMCC.tmPlayStateCfg_t)Marshal.PtrToStructure(p5cfg, typeof(TMCC.tmPlayStateCfg_t));
-            
+
             return tmcfg;
 
         }
@@ -205,16 +211,31 @@ namespace AnXinWH.ShiPinNewVideoOCX
             public SizeDelegate Size;
         }
 
-        [StructLayoutAttribute(LayoutKind.Sequential)]
+       [StructLayout(LayoutKind.Explicit)]
         public struct tmPlayControlCfg_t
         {
-            public uint dwSize;				/*本结构大小*/
-            public uint dwCommand;			/*控制命令	*/
-
-
-            public int iSpeed;				/*播放的速度*/
-
-            public UInt32 dwCurrentTime;		/*新的播放位置(毫秒)*/
+            [FieldOffset(0)]
+            public UInt32 dwSize;
+            [FieldOffset(4)]
+            public UInt32 dwCommand;
+            [FieldOffset(8)]
+            public int iPlayData;
+            [FieldOffset(8)]
+            public int iSpeed;
+            [FieldOffset(8)]
+            public int iEnableAudio;
+            [FieldOffset(8)]
+            public int iCurrentPosition;
+            [FieldOffset(8)]
+            public UInt32 dwCurrentTime;
+            [FieldOffset(8)]
+            public bool bForward;
+            [FieldOffset(8)]
+            public bool bClearDisplay;
+            [FieldOffset(8)]
+            public bool bAutoResetBufTime;
+            [FieldOffset(8)]
+            public tmTimeInfo_t struTime;
 
         }
         //播放文件的当前信息
@@ -301,46 +322,27 @@ namespace AnXinWH.ShiPinNewVideoOCX
             public int iAvIndexCount; //缓冲中的索引数
         }
 
-        [StructLayoutAttribute(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
-
         //文件播放条件定义
+        [StructLayoutAttribute(LayoutKind.Sequential)]
         public struct tmPlayConditionCfg_t
         {
             public uint dwSize;
             public ushort wFactoryId; //厂商ID
             public byte byChannel; //通道 
-            public byte byPlayImage; //是否操作图片
-
 
             public tmTimeInfo_t struStartTime; //文件的开始时间
             public tmTimeInfo_t struStopTime; //文件的结束时间
-            //public byte byCheckStopTime; //是否检测结束时间
-            //public byte byAlarmType; //报警类型
-            //public byte byFileFormat; //0-JPEG,1-JPEG2000,2-RGB555,3-RGB565,4-RGB24,
-            //public byte byBackupData; //是否是备份文件
-            //public byte byDiskName; //所在磁盘
-            //public byte byConvertToJpeg; //非JPEG强制转换成JPEG
 
-            //[StructLayout(LayoutKind.Explicit, Size=128)]
-            //public struct _infos
-            //{
-            //    [FieldOffset(0)]
-            //    public _time time; 
-            //    [FieldOffset(0)]
-            //    public _file file; 
-            //}
+            public byte byBufferBeforePlay; //开始播放是否需要缓冲数据
+            public uint dwBufferSizeBeforePlay; //缓冲大小
 
-            //public _infos info;
+            public tmFileAccessInterface_t pFileCallBack;			/*文件访问回调函数*/
+            public IntPtr pFileContext;			/*文件访问相关句柄*/
+            public tmAvIndexEntry_t pAvIndex;				/*索引缓冲*/
+            public int iAvIndexCount;			/*缓冲中的索引数*/
 
-            //public byte byBufferBeforePlay; //开始播放是否需要缓冲数据
-            //public byte byEnableServer; //是否启用网络参数
-            //public byte byPlayType; //播放方式
-            //public byte byDecoderType; //解码方式
-            //public uint dwBufferSizeBeforePlay; //缓冲大小
-
-
-            //public fnStreamReadCallBackDelegate fnStreamReadCallBack;
-            //public IntPtr fnStreamReadContext;
+            public fnStreamReadCallBackDelegate fnStreamReadCallBack;
+            public IntPtr fnStreamReadContext;
         }
 
 

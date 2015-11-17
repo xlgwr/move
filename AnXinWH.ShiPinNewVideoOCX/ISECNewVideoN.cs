@@ -159,9 +159,13 @@ namespace AnXinWH.ShiPinNewVideoOCX
 
                     struCond.dwSize = (UInt32)Marshal.SizeOf(struCond);
 
-                    struCond.byChannel = 0;
+                    struCond.byChannel = _getConfigHost.byChannel;
                     struCond.struStartTime = anotherP.struStartTime;
                     struCond.struStopTime = anotherP.struStopTime;
+
+                    struCond.byBufferBeforePlay = 1;
+                    struCond.dwBufferSizeBeforePlay = 1024 * 1024 * 20;
+
 
                     IntPtr p4 = Marshal.AllocHGlobal(Marshal.SizeOf(struCond));
                     Marshal.StructureToPtr(struCond, p4, false);
@@ -178,6 +182,10 @@ namespace AnXinWH.ShiPinNewVideoOCX
 
                     if (iflag == 0)
                     {
+                        _trackBar1alltime = -1;
+                        _trackBar1currtime = 0;
+                        trackBar1.Maximum = 0;
+                        trackBar1.Value = 0;
                         timer1.Enabled = true;
                         _currMsg = notice + "【" + name + "】播放成功.";//,时间
                     }
@@ -452,6 +460,8 @@ namespace AnXinWH.ShiPinNewVideoOCX
         {
             //throw new NotImplementedException();
             closeAll();
+            //TMCC.TMCC_Done(hPreView);
+            //TMCC.TMCC_Done(hLogin);     
         }
 
         #region IObjectSafety 成员
@@ -567,7 +577,7 @@ namespace AnXinWH.ShiPinNewVideoOCX
 
 
                 ConditionCfg.dwSize = (UInt32)Marshal.SizeOf(ConditionCfg);
-                ConditionCfg.byChannel = 0;		//通道
+                ConditionCfg.byChannel = _getConfigHost.byChannel;		//通道
                 ConditionCfg.byFileType = 0xFF;		//录像文件类型
                 ConditionCfg.bySearchAllTime = 1;
 
@@ -654,7 +664,7 @@ namespace AnXinWH.ShiPinNewVideoOCX
 
                 TMCC.TMCC_FindCloseFile(_hfile);
 
-                
+
                 return tmpdic;
             }
             catch (Exception ex)
@@ -693,23 +703,24 @@ namespace AnXinWH.ShiPinNewVideoOCX
 
                 var startTime = st.wYear.ToString() + "-" + st.byMonth.ToString() + "-" + st.byDay + " " + st.byHour + ":" + st.byMinute + ":" + st.bySecond;
 
-                var alltime = Convert.ToInt32(getFileStatus.dwTotalTimes / 1000);
-                var currtime = Convert.ToInt32(getFileStatus.dwCurrentTimes / 1000);
+                _trackBar1alltime = Convert.ToInt32(getFileStatus.dwTotalTimes / 1000);
+                _trackBar1currtime = Convert.ToInt32(getFileStatus.dwCurrentTimes / 1000);
 
 
-                if (alltime > 0)
+                if (_trackBar1alltime > 0)
                 {
-                    if (currtime >= alltime)
+                    if (_trackBar1currtime >= _trackBar1alltime)
                     {
                         timer1.Enabled = false;
                         lbl0Msg.Text = _currMsg + ",已播放完成.";
                         return;
                     }
-
-                    trackBar1.Maximum = alltime;
+                    if (trackBar1.Maximum != _trackBar1alltime)
+                    {
+                        trackBar1.Maximum = _trackBar1alltime;
+                    }
                     //trackBar1.Value = currtime;
-
-                    lbl0Msg.Text = _currMsg + "开始时间:" + startTime.ToString() + ",总时间:" + trackBar1.Maximum + " 秒,\n 已播放:" + currtime + " 秒";
+                    lbl0Msg.Text = _currMsg + "开始时间:" + startTime.ToString() + ",总时间:" + _trackBar1alltime + " 秒,\n 已播放:" + _trackBar1currtime + " 秒";
                 }
                 else
                 {
@@ -879,31 +890,22 @@ namespace AnXinWH.ShiPinNewVideoOCX
             }
             lbl0Msg.Text = _currMsg;
         }
-
-        private void trackBar1_Scroll(object sender, EventArgs e)
+        private void playOnMini(UInt32 pos)
         {
-            _isScroll = true;
             var tmpflag = -1;
             try
             {
                 if (_currPlayfile != null)
                 {
 
-                    var currpost = Convert.ToUInt32(trackBar1.Value * 1000);
-
-                    if (trackBar1.Value < trackBar1.Maximum)
+                    if (_trackBar1currtime < _trackBar1alltime)
                     {
 
-                        tmpflag = TMCC.Avdec_SetCurrentTime(_currPlayfile, TMCC.PLAY_CONTROL_SETAVINDEX, currpost);
+                        tmpflag = TMCC.Avdec_SetCurrentTime(_currPlayfile, TMCC.PLAY_CONTROL_SEEKTIME, pos);
 
-                        if (tmpflag==0)
-                        {
-                            _isScroll = false; 
-                        }
                     }
 
                 }
-                _isScroll = false;
             }
             catch (Exception ex)
             {
@@ -911,7 +913,6 @@ namespace AnXinWH.ShiPinNewVideoOCX
             }
             finally
             {
-                _isScroll = false;
             }
 
         }
@@ -942,11 +943,6 @@ namespace AnXinWH.ShiPinNewVideoOCX
 
         public bool _isScroll { get; set; }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void button1_Click(object sender, EventArgs e)
         {
             toolMenuPlay1_Click(null, null);
@@ -966,6 +962,24 @@ namespace AnXinWH.ShiPinNewVideoOCX
         {
             toolSlowPlay1_Click(null, null);
         }
+
+        public int _trackBar1alltime { get; set; }
+
+        public int _trackBar1currtime { get; set; }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            playOnMini(120 * 1000);
+        }
+
+        private void trackBar1_Scroll(object sender, EventArgs e)
+        {
+            if (trackBar1.Value != _trackBar1currtime)
+            {
+                uint dvalue = (uint)trackBar1.Value * 1000;
+                playOnMini(dvalue);
+            }
+        }
     }
-       
+
 }

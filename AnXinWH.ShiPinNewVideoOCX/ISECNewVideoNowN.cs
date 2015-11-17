@@ -157,7 +157,7 @@ namespace AnXinWH.ShiPinNewVideoOCX
                 if (hPreView != null)
                 {
                     TMCC.TMCC_CloseStream(hPreView);
-                    TMCC.TMCC_ClearDisplay(hPreView);
+                    TMCC.TMCC_ClearDisplay(hPreView);          
                 }
             }
             catch (Exception ex)
@@ -240,6 +240,8 @@ namespace AnXinWH.ShiPinNewVideoOCX
         {
             //throw new NotImplementedException();
             closeAll();
+            //TMCC.TMCC_Done(hPreView);
+            //TMCC.TMCC_Done(hLogin);     
         }
 
         #region IObjectSafety 成员
