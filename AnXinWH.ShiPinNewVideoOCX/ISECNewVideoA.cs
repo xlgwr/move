@@ -150,6 +150,7 @@ namespace AnXinWH.ShiPinNewVideoOCX
 
                 _currPlayfile = p6;
                 _notice = notice;
+                _byChannel = byChannel;
                 _videoname = tmpvideo.nameVideo;
                 _currPlayfileConfigList = anotherP;
 
@@ -158,30 +159,43 @@ namespace AnXinWH.ShiPinNewVideoOCX
 
                 if (iflag == 0)
                 {
-                    var diffsecStart = start - tmpVideoStart;
-                    var stopDiffMill = endtime - tmpVideoStart;
-                    var diffsecEnd = endtime - tmpVideoEnd;
                     _currPlayfilep = true;
 
                     var getFileStatus = TMCC.Avdec_GetTmPlayStateCfg_t(_currPlayfile);
                     _trackBar1alltime = Convert.ToInt32(getFileStatus.dwTotalTimes / 1000);
                     _trackBar1currtime = Convert.ToInt32(getFileStatus.dwCurrentTimes / 1000);
-                    _stopDiffMill = Convert.ToInt32(stopDiffMill.TotalMilliseconds / 1000);
+
+                    var diffsecStart = start - tmpVideoStart;
+
+                    var diffsecEnd = DateTime.Compare(endtime, tmpVideoEnd);
+
+                    if (diffsecEnd > 0)
+                    {
+                        _playNext = true;
+                        _nextStartPlay = tmpVideoEnd.AddSeconds(1);
+                        _nextEndPlay = endtime;
+
+                        _stopDiffMill = Convert.ToInt32(getFileStatus.dwTotalTimes / 1000);
+                    }
+                    else
+                    {
+                        _playNext = false;
+                        var stopDiffMill = endtime - tmpVideoStart;
+                        _stopDiffMill = Convert.ToInt32(stopDiffMill.TotalMilliseconds / 1000);
+                    }
+
 
                     if (diffsecStart.TotalMilliseconds > 0)
                     {
-                        if (diffsecEnd.TotalMilliseconds > 0)
-                        {
-                            _playNext = true;
-                        }
+
+
+                        timer1.Enabled = true;
+                        _currMsg = notice + "\n播放成功.";//,时间
                         playOnMini(diffsecStart.TotalMilliseconds);
                     }
 
                     //trackBar1.Maximum = 0;
                     //trackBar1.Value = 0;
-                    timer1.Enabled = true;
-
-                    _currMsg = notice + "\n播放成功.";//,时间
                 }
                 else
                 {
@@ -208,7 +222,7 @@ namespace AnXinWH.ShiPinNewVideoOCX
             {
                 var getFileStatus = TMCC.Avdec_GetTmPlayStateCfg_t(_currPlayfile);
                 _trackBar1alltime = Convert.ToInt32(getFileStatus.dwTotalTimes / 1000);
-                _trackBar1currtime = Convert.ToInt32(getFileStatus.dwCurrentTimes / 1000);
+                _trackBar1currtime = Convert.ToInt32(getFileStatus.dwCurrentTimes / 1000) + 3;
 
                 var st = _currPlayfileConfigList.struStartTime;
                 var startTime = st.wYear.ToString() + "-" + st.byMonth.ToString() + "-" + st.byDay + " " + st.byHour + ":" + st.byMinute + ":" + st.bySecond;
@@ -217,19 +231,31 @@ namespace AnXinWH.ShiPinNewVideoOCX
                 {
                     if (_trackBar1currtime >= _trackBar1alltime)
                     {
-                        timer1.Enabled = false;
-                        _currPlayfilep = false;
-                        TMCC.TMCC_CloseFile(_currPlayfile);
-                        lbl0Msg.Text = _currMsg + ",已播放完成.";
+                        if (_playNext)
+                        {
+                            lbl0Msg.Text = _currMsg + ",正在加载中。。。。。。。";
+                            if (_lisIn.Count >= 1)
+                            {
+                                playOldFileListName(_lisIn[1], _notice, _nextStartPlay, _nextEndPlay, _byChannel);                               
+                            }
+                            _playNext = false;
+                        }
+                        else
+                        {
+                            TMCC.TMCC_CloseFile(_currPlayfile);
+                            timer1.Enabled = false;
+                            _currPlayfilep = false;
+                            lbl0Msg.Text = _currMsg + ",已播放完成.";
+                        }
                         return;
                     }
                     else
                     {
                         if (_trackBar1currtime >= _stopDiffMill)
                         {
+                            TMCC.TMCC_CloseFile(_currPlayfile);
                             timer1.Enabled = false;
                             _currPlayfilep = false;
-                            TMCC.TMCC_CloseFile(_currPlayfile);
                             lbl0Msg.Text = _currMsg + ",已播放完成.";
                             return;
                         }
@@ -365,7 +391,7 @@ namespace AnXinWH.ShiPinNewVideoOCX
                         return title.ToString() + " 开始时间有误：" + start.ToString();
                     }
 
-                    var notice = title.ToString() + ":" + _InstartTime.ToString("yyyy-MM-dd HH:mm:ss") + "----> " + _InendTime.ToString("yyyy-MM-dd HH:mm:ss"); ;
+                    var notice = title.ToString() + ":";// + _InstartTime.ToString("yyyy-MM-dd HH:mm:ss") + "----> " + _InendTime.ToString("yyyy-MM-dd HH:mm:ss"); ;
 
                     byte.TryParse(bychange.ToString(), out tmpbyChangel);
 
@@ -794,7 +820,7 @@ namespace AnXinWH.ShiPinNewVideoOCX
                 if (_currPlayfile != null)
                 {
 
-                    if (_trackBar1currtime < _trackBar1alltime)
+                    if (_trackBar1currtime <= _trackBar1alltime)
                     {
 
                         tmpflag = TMCC.Avdec_SetCurrentTime(_currPlayfile, TMCC.PLAY_CONTROL_SEEKTIME, (uint)pos);
@@ -866,7 +892,7 @@ namespace AnXinWH.ShiPinNewVideoOCX
         private void button2_Click(object sender, EventArgs e)
         {
             //playOnMini(120 * 1000);
-            jsSetTimeStockIn("回放测试",dateTimePicker1.Value, 20, 0);
+            jsSetTimeStockIn("回放测试", dateTimePicker1.Value, 20, 0);
         }
 
         private void trackBar1_Scroll(object sender, EventArgs e)
@@ -883,8 +909,17 @@ namespace AnXinWH.ShiPinNewVideoOCX
         public bool _playNext { get; set; }
 
         public int _stopDiffMill { get; set; }
+        public int _stopDiffMillNext { get; set; }
 
         public bool _currPlayfilep { get; set; }
+
+        public byte _byChannel { get; set; }
+
+        public DateTime _pretmpVideoEnd { get; set; }
+
+        public DateTime _nextStartPlay { get; set; }
+
+        public DateTime _nextEndPlay { get; set; }
     }
 
 }
