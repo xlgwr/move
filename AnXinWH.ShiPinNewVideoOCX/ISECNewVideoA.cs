@@ -14,8 +14,8 @@ using System.Reflection;
 namespace AnXinWH.ShiPinNewVideoOCX
 {
 
-    [Guid("9BD75AC7-A2E5-4D8C-9D38-74BEE3D2958C")]
-    public partial class ISECNewVideoN : UserControl, IObjectSafety, IDisposable
+    [Guid("8C8EC5F2-3C4E-48E1-A389-F5ECCB1B8178")]
+    public partial class ISECNewVideoA : UserControl, IObjectSafety, IDisposable
     {
         #region att
         IntPtr hPreView = IntPtr.Zero;
@@ -25,9 +25,7 @@ namespace AnXinWH.ShiPinNewVideoOCX
 
         public static configHost _getConfigHost = comm.getConfigHostN();
 
-        static Dictionary<string, videoCfg> _dicIn { get; set; }
-        static Dictionary<string, videoCfg> _dicOut { get; set; }
-        static Dictionary<string, videoCfg> _dicShelf { get; set; }
+        static List<lisVideo> _lisIn { get; set; }
 
         public string ReceiveNo { get; private set; }
 
@@ -51,17 +49,13 @@ namespace AnXinWH.ShiPinNewVideoOCX
         int iTemp = 0;
 
         #endregion
-        public ISECNewVideoN()
+        public ISECNewVideoA()
         {
             InitializeComponent();
 
             try
             {
                 this.Disposed += ISECNewVideo_Disposed;
-                listBox1.DoubleClick += listBox1_DoubleClick;
-                listBox2.DoubleClick += listBox2_DoubleClick;
-                listBox3.DoubleClick += listBox3_DoubleClick;
-
                 initForm();
                 initVideo();
             }
@@ -69,24 +63,6 @@ namespace AnXinWH.ShiPinNewVideoOCX
             {
                 MessageBox.Show(ex.Message);
             }
-        }
-
-        void listBox3_DoubleClick(object sender, EventArgs e)
-        {
-            //throw new NotImplementedException();
-            play_DoubleClick(listBox3, _dicOut, "出库视频");
-        }
-
-        void listBox2_DoubleClick(object sender, EventArgs e)
-        {
-            //throw new NotImplementedException();
-            play_DoubleClick(listBox2, _dicShelf, "上架视频");
-        }
-
-        void listBox1_DoubleClick(object sender, EventArgs e)
-        {
-            //throw new NotImplementedException();
-            play_DoubleClick(listBox1, _dicIn, "入库视频");
         }
         #region function
         private void initForm()
@@ -98,12 +74,9 @@ namespace AnXinWH.ShiPinNewVideoOCX
             _InstartTime = DateTime.Now.AddHours(-1);
             _InendTime = DateTime.Now;
 
-            //dateTimePicker1.Format = DateTimePickerFormat.Custom;
-            //dateTimePicker1.CustomFormat = "yyyy-MM-dd HH:mm:ss";
-            //dateTimePicker1.Text = DateTime.Now.AddHours(-7).ToString();
-
-            //dateTimePicker2.Format = DateTimePickerFormat.Custom;
-            //dateTimePicker2.CustomFormat = "yyyy-MM-dd HH:mm:ss";
+            dateTimePicker1.Format = DateTimePickerFormat.Custom;
+            dateTimePicker1.CustomFormat = "yyyy-MM-dd HH:mm:ss";
+            dateTimePicker1.Value = DateTime.Now.AddHours(-3);
 
         }
 
@@ -143,75 +116,135 @@ namespace AnXinWH.ShiPinNewVideoOCX
                 TMCC.TMCC_Connect(hLogin, ref Info, true);
             }
         }
-
-        void playOldFileListName(string name, Dictionary<string, videoCfg> dic, string notice)
+        void playOldFileListName(lisVideo tmpvideo, string notice, DateTime start, DateTime endtime, byte byChannel)
         {
             try
             {
-                if (dic.ContainsKey(name))
+                closeAll();
+
+                var anotherP = tmpvideo.videoCfg.fileCfg;
+
+                TMCC.tmPlayConditionCfg_t struCond = new TMCC.tmPlayConditionCfg_t();
+
+                struCond.dwSize = (UInt32)Marshal.SizeOf(struCond);
+
+                struCond.byChannel = byChannel; //_getConfigHost.byChannel;
+
+                struCond.struStartTime = anotherP.struStartTime;
+                struCond.struStopTime = anotherP.struStopTime;
+
+                struCond.byBufferBeforePlay = 1;
+                struCond.dwBufferSizeBeforePlay = 1024 * 1024 * 20;
+
+                DateTime tmpVideoStart = new DateTime(struCond.struStartTime.wYear, struCond.struStartTime.byMonth, struCond.struStartTime.byDay,
+                                               struCond.struStartTime.byHour, struCond.struStartTime.byMinute, struCond.struStartTime.bySecond,
+                                               (Int32)struCond.struStartTime.dwMicroSecond);
+                DateTime tmpVideoEnd = new DateTime(struCond.struStopTime.wYear, struCond.struStopTime.byMonth, struCond.struStopTime.byDay,
+                                           struCond.struStopTime.byHour, struCond.struStopTime.byMinute, struCond.struStopTime.bySecond,
+                                           (Int32)struCond.struStopTime.dwMicroSecond);
+
+                IntPtr p4 = Marshal.AllocHGlobal(Marshal.SizeOf(struCond));
+                Marshal.StructureToPtr(struCond, p4, false);
+
+                IntPtr p6 = TMCC.TMCC_OpenFile(hLogin, p4, this.pictureBox1.Handle);
+
+                _currPlayfile = p6;
+                _notice = notice;
+                _videoname = tmpvideo.nameVideo;
+                _currPlayfileConfigList = anotherP;
+
+                m_iPlaySpeed = 0;
+                var iflag = TMCC.Avdec_PlayToDo(p6, TMCC.PLAY_CONTROL_PLAY, 0);
+
+                if (iflag == 0)
                 {
+                    var diffsecStart = start - tmpVideoStart;
+                    var stopDiffMill = endtime - tmpVideoStart;
+                    var diffsecEnd = endtime - tmpVideoEnd;
+                    _currPlayfilep = true;
 
-                    closeAll();
+                    var getFileStatus = TMCC.Avdec_GetTmPlayStateCfg_t(_currPlayfile);
+                    _trackBar1alltime = Convert.ToInt32(getFileStatus.dwTotalTimes / 1000);
+                    _trackBar1currtime = Convert.ToInt32(getFileStatus.dwCurrentTimes / 1000);
+                    _stopDiffMill = Convert.ToInt32(stopDiffMill.TotalMilliseconds / 1000);
 
-                    var anotherP = dic[name].fileCfg;
-
-                    TMCC.tmPlayConditionCfg_t struCond = new TMCC.tmPlayConditionCfg_t();
-
-                    struCond.dwSize = (UInt32)Marshal.SizeOf(struCond);
-
-                    struCond.byChannel = _getConfigHost.byChannel;
-                    struCond.struStartTime = anotherP.struStartTime;
-                    struCond.struStopTime = anotherP.struStopTime;
-
-                    struCond.byBufferBeforePlay = 1;
-                    struCond.dwBufferSizeBeforePlay = 1024 * 1024 * 20;
-
-
-                    IntPtr p4 = Marshal.AllocHGlobal(Marshal.SizeOf(struCond));
-                    Marshal.StructureToPtr(struCond, p4, false);
-
-                    IntPtr p6 = TMCC.TMCC_OpenFile(hLogin, p4, this.pictureBox1.Handle);
-
-                    _currPlayfile = p6;
-                    _notice = notice;
-                    _videoname = name;
-                    _currPlayfileConfigList = anotherP;
-
-                    m_iPlaySpeed = 0;
-                    var iflag = TMCC.Avdec_PlayToDo(p6, TMCC.PLAY_CONTROL_PLAY, 0);
-
-                    if (iflag == 0)
+                    if (diffsecStart.TotalMilliseconds > 0)
                     {
-                        _trackBar1alltime = -1;
-                        _trackBar1currtime = 0;
-                        //trackBar1.Maximum = 0;
-                        //trackBar1.Value = 0;
-                        timer1.Enabled = true;
-                        _currMsg = notice + "【" + name + "】播放成功.";//,时间
+                        if (diffsecEnd.TotalMilliseconds > 0)
+                        {
+                            _playNext = true;
+                        }
+                        playOnMini(diffsecStart.TotalMilliseconds);
                     }
-                    else
-                    {
-                        _currMsg = notice + "【" + name + "】播放失败,请再次尝试.谢谢.";
 
-                    }
-                    lbl0Msg.Text = _currMsg;
+                    //trackBar1.Maximum = 0;
+                    //trackBar1.Value = 0;
+                    timer1.Enabled = true;
 
+                    _currMsg = notice + "\n【" + tmpvideo.nameVideo + "】播放成功.";//,时间
                 }
                 else
                 {
-                    MessageBox.Show(notice + "," + name + "不存在.请选择正确的文件名。");
-                    return;
+                    _currMsg = notice + "\n【" + tmpvideo.nameVideo + "】播放失败,请再次尝试.谢谢.";
+
                 }
+                lbl0Msg.Text = _currMsg;
+
             }
             catch (Exception ex)
             {
+                _currPlayfilep = false;
                 MessageBox.Show(notice + ",Play Error:" + ex.Message);
                 //throw ex;
             }
+        }
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            if (_isScroll)
+            {
+                return;
+            }
+            if (_currPlayfilep)
+            {
+                var getFileStatus = TMCC.Avdec_GetTmPlayStateCfg_t(_currPlayfile);
+                _trackBar1alltime = Convert.ToInt32(getFileStatus.dwTotalTimes / 1000);
+                _trackBar1currtime = Convert.ToInt32(getFileStatus.dwCurrentTimes / 1000);
 
+                var st = _currPlayfileConfigList.struStartTime;
+                var startTime = st.wYear.ToString() + "-" + st.byMonth.ToString() + "-" + st.byDay + " " + st.byHour + ":" + st.byMinute + ":" + st.bySecond;
 
-
-
+                if (_trackBar1alltime > 0)
+                {
+                    if (_trackBar1currtime >= _trackBar1alltime)
+                    {
+                        timer1.Enabled = false;
+                        _currPlayfilep = false;
+                        TMCC.TMCC_CloseFile(_currPlayfile);
+                        lbl0Msg.Text = _currMsg + ",已播放完成.";
+                        return;
+                    }
+                    else
+                    {
+                        if (_trackBar1currtime >= _stopDiffMill)
+                        {
+                            timer1.Enabled = false;
+                            _currPlayfilep = false;
+                            TMCC.TMCC_CloseFile(_currPlayfile);
+                            lbl0Msg.Text = _currMsg + ",已播放完成.";
+                            return;
+                        }
+                    }
+                    lbl0Msg.Text = _currMsg;// +"开始时间:" + startTime.ToString() + ",总时间:" + _trackBar1alltime + " 秒,\n 已播放:" + _trackBar1currtime + " 秒";
+                }
+                else
+                {
+                    lbl0Msg.Text = _currMsg;
+                }
+            }
+            else
+            {
+                timer1.Enabled = false;
+            }
         }
         void closeAll()
         {
@@ -306,142 +339,40 @@ namespace AnXinWH.ShiPinNewVideoOCX
             }
 
         }
-        public string jsSetTimeIn(object start, object end)
+
+        public string jsSetTimeStockIn(object start, object seekSeconds, object bychange)
         {
+            var tmpoff = 10;
+            byte tmpbyChangel = 0;
             try
             {
-                if (start != null && end != null)
+                if (start != null)
                 {
-                    DateTime tmpStart = DateTime.Now;
-
-                    DateTime tmpEnd = DateTime.Now;
+                    DateTime tmpStart = DateTime.Now.AddDays(-1);
                     if (DateTime.TryParse(start.ToString(), out tmpStart))
                     {
-                        _InstartTime = tmpStart;
-                        //dateTimePicker1.Value = startTime;
+                        var tmpoff_flag = Int32.TryParse(seekSeconds.ToString(), out tmpoff);
+
+                        _stockInSeekSeconds = tmpoff;
+                        _InstartTime = tmpStart.AddSeconds(-tmpoff);
+                        _InendTime = tmpStart.AddSeconds(tmpoff);
                     }
                     else
                     {
                         return "入库视频 开始时间有误：" + start.ToString();
                     }
 
-                    if (DateTime.TryParse(end.ToString(), out tmpEnd))
+                    var notice = "入库视频:" + _InstartTime.ToString("yyyy-MM-dd HH:mm:ss") + "----> " + _InendTime.ToString("yyyy-MM-dd HH:mm:ss"); ;
+
+                    byte.TryParse(bychange.ToString(), out tmpbyChangel);
+
+                    _lisIn = getListMoveFromStartAnd(_InstartTime, _InendTime, "入库视频", tmpbyChangel);
+
+                    if (_lisIn.Count > 0)
                     {
-                        _InendTime = tmpEnd;
-                        //dateTimePicker2.Value = endTime;
-                    }
-                    else
-                    {
-                        return "入库视频 结束时间有误：" + end.ToString();
-                    }
-                    var notice = _InstartTime.ToString("yyyy-MM-dd HH:mm:ss") + "----> " + _InendTime.ToString("yyyy-MM-dd HH:mm:ss"); ;
-
-                    _dicIn = getListMoveFromStartAnd(_InstartTime, _InendTime, listBox1, "入库视频");
-
-                    if (listBox1.Items.Count > 0 && _dicIn.Count > 0)
-                    {
-                        listBox1.SelectedIndex = 0;
-                        listBox1_DoubleClick(null, null);
-                    }
-
-                    return "ok";
-                }
-                return "Error.提供的数据有误。";
-
-            }
-            catch (Exception ex)
-            {
-                return "jsError:" + ex.Message;
-            }
-
-        }
-
-        public string jsSetTimeOut(object start, object end)
-        {
-            try
-            {
-                if (start != null && end != null)
-                {
-                    DateTime tmpStart = DateTime.Now;
-
-                    DateTime tmpEnd = DateTime.Now;
-                    if (DateTime.TryParse(start.ToString(), out tmpStart))
-                    {
-                        _OutstartTime = tmpStart;
-                        //dateTimePicker1.Value = startTime;
-                    }
-                    else
-                    {
-                        return "出库视频 开始时间有误：" + start.ToString();
-                    }
-
-                    if (DateTime.TryParse(end.ToString(), out tmpEnd))
-                    {
-                        _OutendTime = tmpEnd;
-                        //dateTimePicker2.Value = endTime;
-                    }
-                    else
-                    {
-                        return "出库视频 结束时间有误：" + end.ToString();
-                    }
-                    var notice = _OutstartTime.ToString("yyyy-MM-dd HH:mm:ss") + "----> " + _OutendTime.ToString("yyyy-MM-dd HH:mm:ss"); ;
-
-                    _dicOut = getListMoveFromStartAnd(_OutstartTime, _OutendTime, listBox3, "出库视频");
-
-                    if (listBox3.Items.Count > 0)
-                    {
-                        listBox3.SelectedIndex = 0;
-                        //listBox2_DoubleClick(null, null);
-                    }
-
-                    return "ok";
-                }
-                return "Error.提供的数据有误。";
-
-            }
-            catch (Exception ex)
-            {
-                return "jsError:" + ex.Message;
-            }
-
-        }
-
-        public string jsSetTimeShelf(object start, object end)
-        {
-            try
-            {
-                if (start != null && end != null)
-                {
-                    DateTime tmpStart = DateTime.Now;
-
-                    DateTime tmpEnd = DateTime.Now;
-                    if (DateTime.TryParse(start.ToString(), out tmpStart))
-                    {
-                        _ShelfstartTime = tmpStart;
-                        //dateTimePicker1.Value = startTime;
-                    }
-                    else
-                    {
-                        return "上架视频 开始时间有误：" + start.ToString();
-                    }
-
-                    if (DateTime.TryParse(end.ToString(), out tmpEnd))
-                    {
-                        _ShelfendTime = tmpEnd;
-                        //dateTimePicker2.Value = endTime;
-                    }
-                    else
-                    {
-                        return "上架视频 结束时间有误：" + end.ToString();
-                    }
-                    var notice = _ShelfstartTime.ToString("yyyy-MM-dd HH:mm:ss") + "----> " + _ShelfendTime.ToString("yyyy-MM-dd HH:mm:ss"); ;
-
-                    _dicShelf = getListMoveFromStartAnd(_ShelfstartTime, _ShelfendTime, listBox2, "出库视频");
-
-                    if (listBox2.Items.Count > 0)
-                    {
-                        listBox2.SelectedIndex = 0;
-                        //listBox2_DoubleClick(null, null);
+                        var tmpname = _lisIn[0];
+                        lbl0Msg.Text = notice + ", 回放视频中." + tmpname;
+                        playOldFileListName(tmpname, notice, _InstartTime, _InendTime, tmpbyChangel);
                     }
 
                     return "ok";
@@ -543,9 +474,9 @@ namespace AnXinWH.ShiPinNewVideoOCX
 
         #endregion
 
-        private Dictionary<string, videoCfg> getListMoveFromStartAnd(DateTime startTime, DateTime endTime, ListBox tmplis, string notice)
+        private List<lisVideo> getListMoveFromStartAnd(DateTime startTime, DateTime endTime, string notice, byte byChannel)
         {
-            var tmpdic = new Dictionary<string, videoCfg>();
+            var tmpdic = new List<lisVideo>();
             videoCfg tmpvideo = null;
             var tmpfilename = "视频" + (tmpdic.Count + 1).ToString();
             try
@@ -569,15 +500,12 @@ namespace AnXinWH.ShiPinNewVideoOCX
                     return tmpdic;
                 }
 
-                tmplis.Items.Clear();
-
-
                 TMCC.tmFindConditionCfg_t ConditionCfg = new TMCC.tmFindConditionCfg_t();
                 TMCC.tmFindFileCfg_t FileCfg = new TMCC.tmFindFileCfg_t();
 
 
                 ConditionCfg.dwSize = (UInt32)Marshal.SizeOf(ConditionCfg);
-                ConditionCfg.byChannel = _getConfigHost.byChannel;		//通道
+                ConditionCfg.byChannel = byChannel; //_getConfigHost.byChannel;		//通道
                 ConditionCfg.byFileType = 0xFF;		//录像文件类型
                 ConditionCfg.bySearchAllTime = 1;
 
@@ -627,13 +555,14 @@ namespace AnXinWH.ShiPinNewVideoOCX
                 {
                     return tmpdic;
                 }
-
                 tmpvideo = new videoCfg();
                 tmpvideo.filename = anotherP.sFileName;
                 tmpvideo.fileCfg = anotherP;
-                tmpdic.Add(tmpfilename, tmpvideo);
+                lisVideo tmpListVideo = new lisVideo();
+                tmpListVideo.nameVideo = tmpfilename;
+                tmpListVideo.videoCfg = tmpvideo;
+                tmpdic.Add(tmpListVideo);
 
-                tmplis.Items.Add(tmpfilename);
                 ///*************************************
 
                 do
@@ -654,9 +583,10 @@ namespace AnXinWH.ShiPinNewVideoOCX
                     var tmpvideoDO = new videoCfg();
                     tmpvideoDO.filename = anotherP.sFileName;
                     tmpvideoDO.fileCfg = anotherP;
-                    tmpdic.Add(tmpfilename, tmpvideoDO);
-
-                    tmplis.Items.Add(tmpfilename);
+                    lisVideo tmpListVideoN = new lisVideo();
+                    tmpListVideoN.nameVideo = tmpfilename;
+                    tmpListVideoN.videoCfg = tmpvideoDO;
+                    tmpdic.Add(tmpListVideoN);
                     ///*************************************
 
                 } while (true);
@@ -680,58 +610,6 @@ namespace AnXinWH.ShiPinNewVideoOCX
             }
         }
 
-        private void play_DoubleClick(ListBox lis, Dictionary<string, videoCfg> dic, string notice)
-        {
-            if (lis.SelectedItem != null)
-            {
-                var tmpname = lis.SelectedItem.ToString();
-                lbl0Msg.Text = notice + ", 回放视频中." + tmpname;
-                playOldFileListName(tmpname, dic, notice);
-            }
-        }
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            if (_isScroll)
-            {
-                return;
-            }
-            if (_currPlayfile != null)
-            {
-                var getFileStatus = TMCC.Avdec_GetTmPlayStateCfg_t(_currPlayfile);
-
-                var st = _currPlayfileConfigList.struStartTime;
-
-                var startTime = st.wYear.ToString() + "-" + st.byMonth.ToString() + "-" + st.byDay + " " + st.byHour + ":" + st.byMinute + ":" + st.bySecond;
-
-                _trackBar1alltime = Convert.ToInt32(getFileStatus.dwTotalTimes / 1000);
-                _trackBar1currtime = Convert.ToInt32(getFileStatus.dwCurrentTimes / 1000);
-
-
-                if (_trackBar1alltime > 0)
-                {
-                    if (_trackBar1currtime >= _trackBar1alltime)
-                    {
-                        timer1.Enabled = false;
-                        lbl0Msg.Text = _currMsg + ",已播放完成.";
-                        return;
-                    }
-                    //if (trackBar1.Maximum != _trackBar1alltime)
-                    //{
-                    //    trackBar1.Maximum = _trackBar1alltime;
-                    //}
-                    //trackBar1.Value = currtime;
-                    lbl0Msg.Text = _currMsg + "开始时间:" + startTime.ToString() + ",总时间:" + _trackBar1alltime + " 秒,\n 已播放:" + _trackBar1currtime + " 秒";
-                }
-                else
-                {
-                    lbl0Msg.Text = _currMsg;
-                }
-            }
-            else
-            {
-                timer1.Enabled = false;
-            }
-        }
         #region no
 
 
@@ -804,30 +682,39 @@ namespace AnXinWH.ShiPinNewVideoOCX
 
             if (iflag == 0)
             {
-                _currMsg = _notice + "【" + _videoname + "】 ,快速 " + m_iPlaySpeed + "X 播放成功.";//,时间
+                _currMsg = _notice + "\n【" + _videoname + "】 ,快速 " + m_iPlaySpeed + "X 播放成功.";//,时间
 
             }
             else
             {
-                _currMsg = _notice + "【" + _videoname + "】 ,快速 " + m_iPlaySpeed + "X 播放失败,请再次尝试.谢谢.";
+                _currMsg = _notice + "\n【" + _videoname + "】 ,快速 " + m_iPlaySpeed + "X 播放失败,请再次尝试.谢谢.";
             }
             lbl0Msg.Text = _currMsg;
         }
 
         private void toolMenuPlay1_Click(object sender, EventArgs e)
         {
-            m_iPlaySpeed = 0;
-            var iflag = TMCC.Avdec_PlayToDo(_currPlayfile, TMCC.PLAY_CONTROL_PLAY, 0);
-
-            if (iflag == 0)
+            if (_currPlayfilep)
             {
-                _currMsg = _notice + "【" + _videoname + "】 ,播放视频成功.";//,时间
+                m_iPlaySpeed = 0;
+                var iflag = TMCC.Avdec_PlayToDo(_currPlayfile, TMCC.PLAY_CONTROL_PLAY, 0);
+
+                if (iflag == 0)
+                {
+                    _currMsg = _notice + "\n【" + _videoname + "】 ,播放视频成功.";//,时间
+                }
+                else
+                {
+                    _currMsg = _notice + "\n【" + _videoname + "】 ,播放视频失败,请再次尝试.谢谢.";
+                }
+
             }
             else
             {
-                _currMsg = _notice + "【" + _videoname + "】 ,播放视频失败,请再次尝试.谢谢.";
+                _currMsg = _notice + "\n【" + _videoname + "】 ,视频播放没有播放.";
             }
             lbl0Msg.Text = _currMsg;
+
         }
 
 
@@ -843,11 +730,11 @@ namespace AnXinWH.ShiPinNewVideoOCX
 
             if (iflag == 0)
             {
-                _currMsg = _notice + "【" + _videoname + "】停止播放视频成功.";//,时间
+                _currMsg = _notice + "\n【" + _videoname + "】停止播放视频成功.";//,时间
             }
             else
             {
-                _currMsg = _notice + "【" + _videoname + "】停止播放视频失败,请再次尝试.谢谢.";
+                _currMsg = _notice + "\n【" + _videoname + "】停止播放视频失败,请再次尝试.谢谢.";
             }
             lbl0Msg.Text = _currMsg;
         }
@@ -859,11 +746,11 @@ namespace AnXinWH.ShiPinNewVideoOCX
 
             if (iflag == 0)
             {
-                _currMsg = _notice + "【" + _videoname + "】暂停播放视频成功.";//,时间
+                _currMsg = _notice + "\n【" + _videoname + "】暂停播放视频成功.";//,时间
             }
             else
             {
-                _currMsg = _notice + "【" + _videoname + "】暂停播放视频失败,请再次尝试.谢谢.";
+                _currMsg = _notice + "\n【" + _videoname + "】暂停播放视频失败,请再次尝试.谢谢.";
             }
             lbl0Msg.Text = _currMsg;
         }
@@ -882,15 +769,15 @@ namespace AnXinWH.ShiPinNewVideoOCX
 
             if (iflag == 0)
             {
-                _currMsg = _notice + "【" + _videoname + "】慢速 " + m_iPlaySpeed + "X 播放视频成功.";//,时间
+                _currMsg = _notice + "\n【" + _videoname + "】慢速 " + m_iPlaySpeed + "X 播放视频成功.";//,时间
             }
             else
             {
-                _currMsg = _notice + "【" + _videoname + "】慢速 " + m_iPlaySpeed + "X 播放视频失败,请再次尝试.谢谢.";
+                _currMsg = _notice + "\n【" + _videoname + "】慢速 " + m_iPlaySpeed + "X 播放视频失败,请再次尝试.谢谢.";
             }
             lbl0Msg.Text = _currMsg;
         }
-        private void playOnMini(UInt32 pos)
+        private void playOnMini(Double pos)
         {
             var tmpflag = -1;
             try
@@ -901,7 +788,7 @@ namespace AnXinWH.ShiPinNewVideoOCX
                     if (_trackBar1currtime < _trackBar1alltime)
                     {
 
-                        tmpflag = TMCC.Avdec_SetCurrentTime(_currPlayfile, TMCC.PLAY_CONTROL_SEEKTIME, pos);
+                        tmpflag = TMCC.Avdec_SetCurrentTime(_currPlayfile, TMCC.PLAY_CONTROL_SEEKTIME, (uint)pos);
 
                     }
 
@@ -969,7 +856,8 @@ namespace AnXinWH.ShiPinNewVideoOCX
 
         private void button2_Click(object sender, EventArgs e)
         {
-            playOnMini(120 * 1000);
+            //playOnMini(120 * 1000);
+            jsSetTimeStockIn(dateTimePicker1.Value, 20, 0);
         }
 
         private void trackBar1_Scroll(object sender, EventArgs e)
@@ -980,6 +868,14 @@ namespace AnXinWH.ShiPinNewVideoOCX
             //    playOnMini(dvalue);
             //}
         }
+
+        public int _stockInSeekSeconds { get; set; }
+
+        public bool _playNext { get; set; }
+
+        public int _stopDiffMill { get; set; }
+
+        public bool _currPlayfilep { get; set; }
     }
 
 }

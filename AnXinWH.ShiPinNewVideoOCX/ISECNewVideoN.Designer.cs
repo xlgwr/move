@@ -50,13 +50,11 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.trackBar1 = new System.Windows.Forms.TrackBar();
             this.button2 = new System.Windows.Forms.Button();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox2
@@ -96,7 +94,6 @@
             // pictureBox1
             // 
             this.pictureBox1.BackColor = System.Drawing.SystemColors.ButtonShadow;
-            this.pictureBox1.ContextMenuStrip = this.contextMenuStrip1;
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
             this.pictureBox1.Location = new System.Drawing.Point(123, 22);
             this.pictureBox1.Name = "pictureBox1";
@@ -147,7 +144,6 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.button2);
-            this.groupBox1.Controls.Add(this.trackBar1);
             this.groupBox1.Controls.Add(this.button5);
             this.groupBox1.Controls.Add(this.button4);
             this.groupBox1.Controls.Add(this.button3);
@@ -169,7 +165,7 @@
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(547, 545);
+            this.button5.Location = new System.Drawing.Point(555, 524);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(97, 35);
             this.button5.TabIndex = 9;
@@ -179,7 +175,7 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(437, 545);
+            this.button4.Location = new System.Drawing.Point(445, 524);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(97, 35);
             this.button4.TabIndex = 8;
@@ -189,7 +185,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(326, 545);
+            this.button3.Location = new System.Drawing.Point(334, 524);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(97, 35);
             this.button3.TabIndex = 7;
@@ -199,7 +195,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(214, 545);
+            this.button1.Location = new System.Drawing.Point(222, 524);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(97, 35);
             this.button1.TabIndex = 6;
@@ -270,22 +266,13 @@
             this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // trackBar1
-            // 
-            this.trackBar1.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.trackBar1.Location = new System.Drawing.Point(123, 496);
-            this.trackBar1.Name = "trackBar1";
-            this.trackBar1.Size = new System.Drawing.Size(668, 45);
-            this.trackBar1.TabIndex = 12;
-            this.trackBar1.Scroll += new System.EventHandler(this.trackBar1_Scroll);
-            // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(123, 551);
+            this.button2.Location = new System.Drawing.Point(52, 530);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.Size = new System.Drawing.Size(146, 23);
             this.button2.TabIndex = 13;
-            this.button2.Text = "button2";
+            this.button2.Text = "跳到2分钟播放";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -303,7 +290,6 @@
             this.contextMenuStrip1.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -330,7 +316,6 @@
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.TrackBar trackBar1;
         private System.Windows.Forms.Button button2;
     }
 }

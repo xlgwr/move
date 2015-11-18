@@ -15,7 +15,8 @@ namespace AnXinWH.ShiPinNewVideo
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             //Application.Run(new Form1());
-            Application.Run(new Form2OCX());
+            //Application.Run(new Form2OCX());
+            Application.Run(new Form3OCXA());
 
         }
     }

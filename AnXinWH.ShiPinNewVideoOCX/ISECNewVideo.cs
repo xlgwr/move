@@ -968,9 +968,5 @@ namespace AnXinWH.ShiPinNewVideoOCX
         }
     }
 
-    public class videoCfg
-    {
-        public string filename { get; set; }
-        public TMCC.tmFindFileCfg_t fileCfg { get; set; }
-    }
+   
 }

@@ -49,6 +49,12 @@
     <Compile Include="API.cs" />
     <Compile Include="comm.cs" />
     <Compile Include="IObjectSafety.cs" />
+    <Compile Include="ISECNewVideoA.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ISECNewVideoA.Designer.cs">
+      <DependentUpon>ISECNewVideoA.cs</DependentUpon>
+    </Compile>
     <Compile Include="ISECNewVideoN.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -79,6 +85,9 @@
     <None Include="ISECNewVideoOCX.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="ISECNewVideoA.resx">
+      <DependentUpon>ISECNewVideoA.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ISECNewVideoN.resx">
       <DependentUpon>ISECNewVideoN.cs</DependentUpon>
     </EmbeddedResource>

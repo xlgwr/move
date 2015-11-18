@@ -60,6 +60,12 @@
     <Compile Include="Form2OCX.Designer.cs">
       <DependentUpon>Form2OCX.cs</DependentUpon>
     </Compile>
+    <Compile Include="Form3OCXA.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form3OCXA.Designer.cs">
+      <DependentUpon>Form3OCXA.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
@@ -67,6 +73,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form2OCX.resx">
       <DependentUpon>Form2OCX.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form3OCXA.resx">
+      <DependentUpon>Form3OCXA.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

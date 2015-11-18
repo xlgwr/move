@@ -136,16 +136,26 @@ namespace AnXinWH.ShiPinNewVideoOCX
 
         public static int Avdec_PlayToDo(IntPtr p, UInt32 com, int iSpeed)
         {
-            tmPlayControlCfg_t cfg = new tmPlayControlCfg_t();
+            try
+            {
+                tmPlayControlCfg_t cfg = new tmPlayControlCfg_t();
 
-            cfg.dwSize = (UInt32)Marshal.SizeOf(cfg);
-            cfg.dwCommand = com;
-            cfg.iSpeed = iSpeed;
+                cfg.dwSize = (UInt32)Marshal.SizeOf(cfg);
+                cfg.dwCommand = com;
+                cfg.iSpeed = iSpeed;
 
-            IntPtr p5cfg = Marshal.AllocHGlobal(Marshal.SizeOf(cfg));
-            Marshal.StructureToPtr(cfg, p5cfg, true);
+                IntPtr p5cfg = Marshal.AllocHGlobal(Marshal.SizeOf(cfg));
+                Marshal.StructureToPtr(cfg, p5cfg, true);
 
-            return TMCC_ControlFile(p, p5cfg);
+                return TMCC_ControlFile(p, p5cfg);
+            }
+            catch (Exception ex)
+            {
+
+                System.Windows.Forms.MessageBox.Show(ex.Message);
+                return -1;
+            }
+
 
         }
 
@@ -211,7 +221,7 @@ namespace AnXinWH.ShiPinNewVideoOCX
             public SizeDelegate Size;
         }
 
-       [StructLayout(LayoutKind.Explicit)]
+        [StructLayout(LayoutKind.Explicit)]
         public struct tmPlayControlCfg_t
         {
             [FieldOffset(0)]

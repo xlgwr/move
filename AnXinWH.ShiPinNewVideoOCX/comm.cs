@@ -83,4 +83,14 @@ namespace AnXinWH.ShiPinNewVideoOCX
 
 
     }
+     public class videoCfg
+    {
+        public string filename { get; set; }
+        public TMCC.tmFindFileCfg_t fileCfg { get; set; }
+    }
+    public class lisVideo
+    {
+        public string nameVideo { get; set; }
+        public videoCfg videoCfg { get; set; }
+    }
 }
