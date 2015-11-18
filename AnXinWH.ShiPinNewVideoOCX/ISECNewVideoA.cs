@@ -234,17 +234,18 @@ namespace AnXinWH.ShiPinNewVideoOCX
                         if (_playNext)
                         {
                             lbl0Msg.Text = _currMsg + ",正在加载中。。。。。。。";
+                            _playNext = false;
                             if (_lisIn.Count >= 1)
                             {
                                 playOldFileListName(_lisIn[1], _notice, _nextStartPlay, _nextEndPlay, _byChannel);                               
-                            }
-                            _playNext = false;
+                            }                            
                         }
                         else
                         {
                             TMCC.TMCC_CloseFile(_currPlayfile);
                             timer1.Enabled = false;
                             _currPlayfilep = false;
+                            pictureBox1.Refresh();
                             lbl0Msg.Text = _currMsg + ",已播放完成.";
                         }
                         return;
@@ -256,6 +257,7 @@ namespace AnXinWH.ShiPinNewVideoOCX
                             TMCC.TMCC_CloseFile(_currPlayfile);
                             timer1.Enabled = false;
                             _currPlayfilep = false;
+                            pictureBox1.Refresh();
                             lbl0Msg.Text = _currMsg + ",已播放完成.";
                             return;
                         }
