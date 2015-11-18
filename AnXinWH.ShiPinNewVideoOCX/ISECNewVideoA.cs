@@ -374,6 +374,10 @@ namespace AnXinWH.ShiPinNewVideoOCX
                         lbl0Msg.Text = notice + ", 回放视频中." + tmpname;
                         playOldFileListName(tmpname, notice, _InstartTime, _InendTime, tmpbyChangel);
                     }
+                    else
+                    {
+                        lbl0Msg.Text = notice + ", 无历史记录." ;
+                    }
 
                     return "ok";
                 }
