@@ -13,13 +13,14 @@ namespace AnXinWH.ShiPinNewVideo
         public Form3OCXA()
         {
             InitializeComponent();
+            
+            this.StartPosition = FormStartPosition.CenterScreen;
+            this.MaximizeBox = false;
         }
 
         private void Form3OCXA_Load(object sender, EventArgs e)
         {
-            this.StartPosition = FormStartPosition.CenterScreen;
-            this.MaximizeBox = false;
-
+           
             //isecNewVideoA1.jsSetTimeStockIn(DateTime.Now.AddDays(-1),20,0);
         }
     }

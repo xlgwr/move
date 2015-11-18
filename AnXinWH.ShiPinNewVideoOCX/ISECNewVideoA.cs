@@ -181,11 +181,11 @@ namespace AnXinWH.ShiPinNewVideoOCX
                     //trackBar1.Value = 0;
                     timer1.Enabled = true;
 
-                    _currMsg = notice + "\n【" + tmpvideo.nameVideo + "】播放成功.";//,时间
+                    _currMsg = notice + "\n播放成功.";//,时间
                 }
                 else
                 {
-                    _currMsg = notice + "\n【" + tmpvideo.nameVideo + "】播放失败,请再次尝试.谢谢.";
+                    _currMsg = notice + "\n播放失败,请再次尝试.谢谢.";
 
                 }
                 lbl0Msg.Text = _currMsg;
@@ -258,10 +258,13 @@ namespace AnXinWH.ShiPinNewVideoOCX
                 }
 
                 //close
-                if (_currPlayfile != null)
+                if (_currPlayfilep)
                 {
                     TMCC.TMCC_CloseFile(_currPlayfile);
+                    _currPlayfilep = false;
+                    pictureBox1.Refresh();
                 }
+                _currMsg = "";
             }
             catch (Exception ex)
             {
@@ -340,7 +343,7 @@ namespace AnXinWH.ShiPinNewVideoOCX
 
         }
 
-        public string jsSetTimeStockIn(object start, object seekSeconds, object bychange)
+        public string jsSetTimeStockIn(object title, object start, object seekSeconds, object bychange)
         {
             var tmpoff = 10;
             byte tmpbyChangel = 0;
@@ -359,14 +362,14 @@ namespace AnXinWH.ShiPinNewVideoOCX
                     }
                     else
                     {
-                        return "入库视频 开始时间有误：" + start.ToString();
+                        return title.ToString() + " 开始时间有误：" + start.ToString();
                     }
 
-                    var notice = "入库视频:" + _InstartTime.ToString("yyyy-MM-dd HH:mm:ss") + "----> " + _InendTime.ToString("yyyy-MM-dd HH:mm:ss"); ;
+                    var notice = title.ToString() + ":" + _InstartTime.ToString("yyyy-MM-dd HH:mm:ss") + "----> " + _InendTime.ToString("yyyy-MM-dd HH:mm:ss"); ;
 
                     byte.TryParse(bychange.ToString(), out tmpbyChangel);
 
-                    _lisIn = getListMoveFromStartAnd(_InstartTime, _InendTime, "入库视频", tmpbyChangel);
+                    _lisIn = getListMoveFromStartAnd(_InstartTime, _InendTime, title.ToString(), tmpbyChangel);
 
                     if (_lisIn.Count > 0)
                     {
@@ -376,7 +379,9 @@ namespace AnXinWH.ShiPinNewVideoOCX
                     }
                     else
                     {
-                        lbl0Msg.Text = notice + ", 无历史记录." ;
+                        closeAll();
+                        lbl0Msg.Text = notice + ", 无历史记录.";
+                        return "无历史记录";
                     }
 
                     return "ok";
@@ -686,12 +691,12 @@ namespace AnXinWH.ShiPinNewVideoOCX
 
             if (iflag == 0)
             {
-                _currMsg = _notice + "\n【" + _videoname + "】 ,快速 " + m_iPlaySpeed + "X 播放成功.";//,时间
+                _currMsg = _notice + "\n快速 " + m_iPlaySpeed + "X 播放成功.";//,时间
 
             }
             else
             {
-                _currMsg = _notice + "\n【" + _videoname + "】 ,快速 " + m_iPlaySpeed + "X 播放失败,请再次尝试.谢谢.";
+                _currMsg = _notice + "\n快速 " + m_iPlaySpeed + "X 播放失败,请再次尝试.谢谢.";
             }
             lbl0Msg.Text = _currMsg;
         }
@@ -705,17 +710,17 @@ namespace AnXinWH.ShiPinNewVideoOCX
 
                 if (iflag == 0)
                 {
-                    _currMsg = _notice + "\n【" + _videoname + "】 ,播放视频成功.";//,时间
+                    _currMsg = _notice + "\n播放视频成功.";//,时间
                 }
                 else
                 {
-                    _currMsg = _notice + "\n【" + _videoname + "】 ,播放视频失败,请再次尝试.谢谢.";
+                    _currMsg = _notice + "\n播放视频失败,请再次尝试.谢谢.";
                 }
 
             }
             else
             {
-                _currMsg = _notice + "\n【" + _videoname + "】 ,视频播放没有播放.";
+                _currMsg = _notice + "\n视频播放没有播放.";
             }
             lbl0Msg.Text = _currMsg;
 
@@ -861,7 +866,7 @@ namespace AnXinWH.ShiPinNewVideoOCX
         private void button2_Click(object sender, EventArgs e)
         {
             //playOnMini(120 * 1000);
-            jsSetTimeStockIn(dateTimePicker1.Value, 20, 0);
+            jsSetTimeStockIn("回放测试",dateTimePicker1.Value, 20, 0);
         }
 
         private void trackBar1_Scroll(object sender, EventArgs e)
