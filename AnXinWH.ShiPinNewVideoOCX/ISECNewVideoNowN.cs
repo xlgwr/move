@@ -15,7 +15,7 @@ using System.Reflection;
 
 namespace AnXinWH.ShiPinNewVideoOCX
 {
-   [Guid("280F509E-EEE6-4E3C-AC39-8B85506F262F")]
+    [Guid("280F509E-EEE6-4E3C-AC39-8B85506F262F")]
     public partial class ISECNewVideoNowN : UserControl, IObjectSafety, IDisposable
     {
         #region att
@@ -24,11 +24,11 @@ namespace AnXinWH.ShiPinNewVideoOCX
         IntPtr _currPlayfile = IntPtr.Zero;
         IntPtr _hfile = IntPtr.Zero;
 
-        public static configHost _getConfigHost = comm.getConfigHostN();
+        static configHost _getConfigHost = comm.getConfigHostN();
 
-        public string ReceiveNo { get; private set; }
+        public string ReceiveNo { get; protected set; }
         //collback
-        public string tmpmsg { get; set; }
+        string tmpmsg { get; set; }
 
         TMCC.StreamCallback streamback = null;
         TMCC.AvFrameCallback frameback = null;
@@ -44,7 +44,7 @@ namespace AnXinWH.ShiPinNewVideoOCX
                 this.Disposed += ISECNewVideo_Disposed;
 
                 initForm();
-                initVideo();
+                //initVideo();
             }
             catch (Exception ex)
             {
@@ -157,7 +157,7 @@ namespace AnXinWH.ShiPinNewVideoOCX
                 if (hPreView != null)
                 {
                     TMCC.TMCC_CloseStream(hPreView);
-                    TMCC.TMCC_ClearDisplay(hPreView);          
+                    TMCC.TMCC_ClearDisplay(hPreView);
                 }
             }
             catch (Exception ex)
@@ -219,6 +219,17 @@ namespace AnXinWH.ShiPinNewVideoOCX
             {
                 ReceiveNo = o.ToString();
                 groupBox1.Text = ReceiveNo;
+            }
+        }
+        public void jsStartVideo(object o)
+        {
+            if (o != null)
+            {
+                byte byChannel = 0;
+                byte.TryParse(o.ToString(), out byChannel);
+                _getConfigHost.byChannel = byChannel;
+
+                initVideo();
             }
         }
         public string jsGetVersion()

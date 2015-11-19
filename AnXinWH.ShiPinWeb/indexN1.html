@@ -35,6 +35,8 @@
                 var receiptNo = GetArgsFromHref(document.location.href, "receiptNo");
                 var tmprfid = GetArgsFromHref(document.location.href, "rfidNo");
 
+                a.jsStartVideo(0);
+
                 if (receiptNo) {
                     if (tmprfid) {
                         a.SetReceiptNo("仓单号:" + receiptNo.toString() + ",RFID:" + tmprfid);
