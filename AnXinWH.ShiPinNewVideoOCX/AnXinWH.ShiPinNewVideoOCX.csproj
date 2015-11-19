@@ -49,6 +49,12 @@
     <Compile Include="API.cs" />
     <Compile Include="comm.cs" />
     <Compile Include="IObjectSafety.cs" />
+    <Compile Include="ISECNewVideo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ISECNewVideo.Designer.cs">
+      <DependentUpon>ISECNewVideo.cs</DependentUpon>
+    </Compile>
     <Compile Include="ISECNewVideoA.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -61,11 +67,11 @@
     <Compile Include="ISECNewVideoN.Designer.cs">
       <DependentUpon>ISECNewVideoN.cs</DependentUpon>
     </Compile>
-    <Compile Include="ISECNewVideo.cs">
+    <Compile Include="ISECNewVideoNow.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="ISECNewVideo.Designer.cs">
-      <DependentUpon>ISECNewVideo.cs</DependentUpon>
+    <Compile Include="ISECNewVideoNow.Designer.cs">
+      <DependentUpon>ISECNewVideoNow.cs</DependentUpon>
     </Compile>
     <Compile Include="ISECNewVideoNowN.cs">
       <SubType>UserControl</SubType>
@@ -73,32 +79,26 @@
     <Compile Include="ISECNewVideoNowN.Designer.cs">
       <DependentUpon>ISECNewVideoNowN.cs</DependentUpon>
     </Compile>
-    <Compile Include="ISECNewVideoNow.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="ISECNewVideoNow.Designer.cs">
-      <DependentUpon>ISECNewVideoNow.cs</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ISECNewVideoOCX.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="ISECNewVideo.resx">
+      <DependentUpon>ISECNewVideo.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ISECNewVideoA.resx">
       <DependentUpon>ISECNewVideoA.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ISECNewVideoN.resx">
       <DependentUpon>ISECNewVideoN.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ISECNewVideo.resx">
-      <DependentUpon>ISECNewVideo.cs</DependentUpon>
+    <EmbeddedResource Include="ISECNewVideoNow.resx">
+      <DependentUpon>ISECNewVideoNow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ISECNewVideoNowN.resx">
       <DependentUpon>ISECNewVideoNowN.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ISECNewVideoNow.resx">
-      <DependentUpon>ISECNewVideoNow.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

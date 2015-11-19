@@ -33,24 +33,17 @@
             // 
             // isecNewVideoA1
             // 
-            this.isecNewVideoA1._currMsg = null;
             this.isecNewVideoA1._isScroll = false;
-            this.isecNewVideoA1._notice = null;
-            this.isecNewVideoA1._trackBar1alltime = 0;
-            this.isecNewVideoA1._trackBar1currtime = 0;
-            this.isecNewVideoA1._videoname = null;
             this.isecNewVideoA1.Location = new System.Drawing.Point(12, 8);
-            this.isecNewVideoA1.m_iPlaySpeed = 0;
             this.isecNewVideoA1.Name = "isecNewVideoA1";
-            this.isecNewVideoA1.Size = new System.Drawing.Size(804, 660);
+            this.isecNewVideoA1.Size = new System.Drawing.Size(914, 620);
             this.isecNewVideoA1.TabIndex = 0;
-            this.isecNewVideoA1.tmpmsg = null;
             // 
             // Form3OCXA
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(822, 680);
+            this.ClientSize = new System.Drawing.Size(931, 625);
             this.Controls.Add(this.isecNewVideoA1);
             this.Name = "Form3OCXA";
             this.Text = "Form3OCXA";

@@ -57,6 +57,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="indexA.html" />
     <Content Include="indexN.html" />
     <Content Include="indexN1.html" />
     <Content Include="index1.html" />

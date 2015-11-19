@@ -56,7 +56,7 @@ namespace AnXinWH.ShiPinNewVideoOCX
         private void initForm()
         {
             //throw new NotImplementedException();
-            lbl0Msg.Text = "";
+            groupBox1.Text = "";
 
         }
 
@@ -135,12 +135,12 @@ namespace AnXinWH.ShiPinNewVideoOCX
 
                 if (ret != TMCC.TMCC_ERR_SUCCESS)
                 {
-                    SetMsg(lbl0Msg, "预览视频失败。" + DateTime.Now.ToString());
+                    SetMsg(groupBox1, "预览视频失败。" + DateTime.Now.ToString());
                     MessageBox.Show("预览视频失败");
                 }
                 else
                 {
-                    SetMsg(lbl0Msg, "预览实时视频成功。" + DateTime.Now.ToString());
+                    SetMsg(groupBox1, "预览实时视频成功。" + DateTime.Now.ToString());
                 }
             }
             catch (Exception ex)
@@ -173,7 +173,7 @@ namespace AnXinWH.ShiPinNewVideoOCX
             Array.Copy(arr, total, arr.Length);
             return total;
         }
-        void SetMsg(Label lbl, string msg)
+        void SetMsg(Control lbl, string msg)
         {
             lbl.Text = msg;
         }

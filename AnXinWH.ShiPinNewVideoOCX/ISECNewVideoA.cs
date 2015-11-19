@@ -23,7 +23,8 @@ namespace AnXinWH.ShiPinNewVideoOCX
         IntPtr _currPlayfile = IntPtr.Zero;
         IntPtr _hfile = IntPtr.Zero;
 
-        public static configHost _getConfigHost = comm.getConfigHostN();
+        bool hLoginp = false;
+        static configHost _getConfigHost = comm.getConfigHostN();
 
         static List<lisVideo> _lisIn { get; set; }
 
@@ -42,11 +43,51 @@ namespace AnXinWH.ShiPinNewVideoOCX
 
 
         //collback
-        public string tmpmsg { get; set; }
+        string tmpmsg { get; set; }
 
         TMCC.StreamCallback streamback = null;
         TMCC.AvFrameCallback frameback = null;
         int iTemp = 0;
+
+        int _seekSeconds { get; set; }
+
+        bool _playNext { get; set; }
+        int _stopDiffMill { get; set; }
+        int _stopDiffMillNext { get; set; }
+        bool _currPlayfilep { get; set; }
+
+        DateTime _pretmpVideoEnd { get; set; }
+        DateTime _nextStartPlay { get; set; }
+        DateTime _nextEndPlay { get; set; }
+        int _trackBar1alltime { get; set; }
+        int _trackBar1currtime { get; set; }
+
+
+        string _notice { get; set; }
+        string _videoname { get; set; }
+        int m_iPlaySpeed { get; set; }
+        string _currMsg { get; set; }
+        TMCC.tmFindFileCfg_t _currPlayfileConfigList { get; set; }
+        #endregion
+
+        #region public att
+        public byte _byChannel { get; private set; }
+
+
+        public byte _byInChannel { get; private set; }
+        public string _jsStockInDate { get; private set; }
+        public string _jsStockInseekSeconds { get; private set; }
+        public string _jsStockInNotic { get; private set; }
+
+        public byte _byOutChannel { get; private set; }
+        public string _jsStockOutDate { get; private set; }
+        public string _jsStockOutNotic { get; private set; }
+        public string _jsStockOutseekSeconds { get; private set; }
+
+        public byte _byShelfChannel { get; private set; }
+        public string _jsStockShelfDate { get; private set; }
+        public string _jsStockShelfNotic { get; private set; }
+        public string _jsStockShelfseekSeconds { get; private set; }
 
         #endregion
         public ISECNewVideoA()
@@ -78,6 +119,14 @@ namespace AnXinWH.ShiPinNewVideoOCX
             dateTimePicker1.CustomFormat = "yyyy-MM-dd HH:mm:ss";
             dateTimePicker1.Value = DateTime.Now.AddHours(-3);
 
+            _byChannel = 0;
+
+            _jsStockInDate = null;
+            _jsStockInNotic = null;
+            _jsStockOutDate = null;
+            _jsStockOutNotic = null;
+            _jsStockShelfDate = null;
+            _jsStockShelfNotic = null;
         }
 
         private void initVideo()
@@ -108,12 +157,15 @@ namespace AnXinWH.ShiPinNewVideoOCX
             var ret = TMCC.TMCC_Connect(hLogin, ref Info, false);
             if (ret != TMCC.TMCC_ERR_SUCCESS)
             {
+                hLoginp = false;
                 TMCC.TMCC_DisConnect(hLogin);
                 MessageBox.Show("登陆设备失败");
+
             }
             else
             {
                 TMCC.TMCC_Connect(hLogin, ref Info, true);
+                hLoginp = true;
             }
         }
         void playOldFileListName(lisVideo tmpvideo, string notice, DateTime start, DateTime endtime, byte byChannel)
@@ -237,8 +289,8 @@ namespace AnXinWH.ShiPinNewVideoOCX
                             _playNext = false;
                             if (_lisIn.Count >= 1)
                             {
-                                playOldFileListName(_lisIn[1], _notice, _nextStartPlay, _nextEndPlay, _byChannel);                               
-                            }                            
+                                playOldFileListName(_lisIn[1], _notice, _nextStartPlay, _nextEndPlay, _byChannel);
+                            }
                         }
                         else
                         {
@@ -246,7 +298,7 @@ namespace AnXinWH.ShiPinNewVideoOCX
                             timer1.Enabled = false;
                             _currPlayfilep = false;
                             pictureBox1.Refresh();
-                            lbl0Msg.Text = _currMsg + ",已播放完成.";
+                            lbl0Msg.Text = _notice + ",已播放完成.";
                         }
                         return;
                     }
@@ -258,7 +310,7 @@ namespace AnXinWH.ShiPinNewVideoOCX
                             timer1.Enabled = false;
                             _currPlayfilep = false;
                             pictureBox1.Refresh();
-                            lbl0Msg.Text = _currMsg + ",已播放完成.";
+                            lbl0Msg.Text = _notice + ",已播放完成.";
                             return;
                         }
                     }
@@ -370,13 +422,63 @@ namespace AnXinWH.ShiPinNewVideoOCX
             }
 
         }
+        public void jsStockIn(object title, object start, object seekSeconds, object bychange)
+        {
+            try
+            {
+                _byInChannel = byte.Parse(bychange.ToString());
+                _jsStockInseekSeconds = seekSeconds.ToString();
 
-        public string jsSetTimeStockIn(object title, object start, object seekSeconds, object bychange)
+                _jsStockInDate = start.ToString();
+                _jsStockInNotic = title.ToString();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        public void jsStockOut(object title, object start, object seekSeconds, object bychange)
+        {
+            try
+            {
+                _byOutChannel = byte.Parse(bychange.ToString());
+                _jsStockOutseekSeconds = seekSeconds.ToString();
+
+                _jsStockOutDate = start.ToString();
+                _jsStockOutNotic = title.ToString();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        public void jsStockShelf(object title, object start, object seekSeconds, object bychange)
+        {
+            try
+            {
+                _byShelfChannel = byte.Parse(bychange.ToString());
+                _jsStockShelfseekSeconds = seekSeconds.ToString();
+
+                _jsStockShelfDate = start.ToString();
+                _jsStockShelfNotic = title.ToString();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        string jsSetTimeStockIn(object title, object start, object seekSeconds, object bychange)
         {
             var tmpoff = 10;
             byte tmpbyChangel = 0;
+
             try
             {
+                if (!hLoginp)
+                {
+                    initVideo();
+                }
                 if (start != null)
                 {
                     DateTime tmpStart = DateTime.Now.AddDays(-1);
@@ -384,7 +486,7 @@ namespace AnXinWH.ShiPinNewVideoOCX
                     {
                         var tmpoff_flag = Int32.TryParse(seekSeconds.ToString(), out tmpoff);
 
-                        _stockInSeekSeconds = tmpoff;
+                        _seekSeconds = tmpoff;
                         _InstartTime = tmpStart.AddSeconds(-tmpoff);
                         _InendTime = tmpStart.AddSeconds(tmpoff);
                     }
@@ -646,67 +748,6 @@ namespace AnXinWH.ShiPinNewVideoOCX
                 //this.button1.Enabled = true;
             }
         }
-
-        #region no
-
-
-
-        private void ISECNewVideo_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void groupBox1_Enter(object sender, EventArgs e)
-        {
-
-        }
-
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lbl0Msg_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void groupBox2_Enter(object sender, EventArgs e)
-        {
-
-        }
-
-        private void listBox3_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void listBox2_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-        #endregion
-
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
         {
             m_iPlaySpeed += 2;
@@ -756,9 +797,7 @@ namespace AnXinWH.ShiPinNewVideoOCX
 
 
 
-        public string _notice { get; set; }
 
-        public string _videoname { get; set; }
 
         private void toolStop1_Click(object sender, EventArgs e)
         {
@@ -791,8 +830,6 @@ namespace AnXinWH.ShiPinNewVideoOCX
             }
             lbl0Msg.Text = _currMsg;
         }
-
-        public int m_iPlaySpeed { get; set; }
 
         private void toolSlowPlay1_Click(object sender, EventArgs e)
         {
@@ -841,9 +878,6 @@ namespace AnXinWH.ShiPinNewVideoOCX
 
         }
 
-        public string _currMsg { get; set; }
-
-        public TMCC.tmFindFileCfg_t _currPlayfileConfigList { get; set; }
 
         private void trackBar1_KeyDown(object sender, KeyEventArgs e)
         {
@@ -887,9 +921,7 @@ namespace AnXinWH.ShiPinNewVideoOCX
             toolSlowPlay1_Click(null, null);
         }
 
-        public int _trackBar1alltime { get; set; }
 
-        public int _trackBar1currtime { get; set; }
 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -906,22 +938,21 @@ namespace AnXinWH.ShiPinNewVideoOCX
             //}
         }
 
-        public int _stockInSeekSeconds { get; set; }
+        private void btn0StockIn_Click(object sender, EventArgs e)
+        {
+            jsSetTimeStockIn(_jsStockInNotic, _jsStockInDate, _jsStockInseekSeconds, _byInChannel);
+        }
 
-        public bool _playNext { get; set; }
+        private void btn1Shelf_Click(object sender, EventArgs e)
+        {
+            jsSetTimeStockIn(_jsStockShelfNotic, _jsStockShelfDate, _jsStockShelfseekSeconds, _byShelfChannel);
+        }
 
-        public int _stopDiffMill { get; set; }
-        public int _stopDiffMillNext { get; set; }
+        private void btn2StockOut_Click(object sender, EventArgs e)
+        {
+            jsSetTimeStockIn(_jsStockOutNotic, _jsStockOutDate, _jsStockOutseekSeconds, _byOutChannel);
+        }
 
-        public bool _currPlayfilep { get; set; }
-
-        public byte _byChannel { get; set; }
-
-        public DateTime _pretmpVideoEnd { get; set; }
-
-        public DateTime _nextStartPlay { get; set; }
-
-        public DateTime _nextEndPlay { get; set; }
     }
 
 }

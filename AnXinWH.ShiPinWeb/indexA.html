@@ -17,7 +17,7 @@
     </div>
     <hr />
     <div>
-        <object id="a" classid="clsid:280F509E-EEE6-4E3C-AC39-8B85506F262F"></object>
+        <object id="a" classid="clsid:8C8EC5F2-3C4E-48E1-A389-F5ECCB1B8178"></object>
     </div>
     <script type="text/javascript">
         $(function () {
@@ -29,9 +29,9 @@
                     alert("请升级新版本控件。");
                 }
 
-                document.title = 'ISEC Video 实时视频 V' + getVersion;
+                document.title = 'ISEC Video V' + getVersion;
 
-                ////http://192.168.1.120/indexn1.html?receiptNo=1343434&rfidNo=814228
+                ////http://192.168.1.120/indexn.html?receiptNo=1343434&rfidNo=814228
                 var receiptNo = GetArgsFromHref(document.location.href, "receiptNo");
                 var tmprfid = GetArgsFromHref(document.location.href, "rfidNo");
 
@@ -47,7 +47,7 @@
                 }
 
             } catch (e) {
-                alert("加载控件失败，请下载或加载控件。Error:" + e.message);
+                alert("加载控件失败,请下载或加载控件。Error:" + e.message);
             }
         });
     </script>

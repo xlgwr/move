@@ -40,8 +40,11 @@
             this.toolSlowPlay1 = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.button2 = new System.Windows.Forms.Button();
+            this.btnTest = new System.Windows.Forms.Button();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.btn0StockIn = new System.Windows.Forms.Button();
+            this.btn1Shelf = new System.Windows.Forms.Button();
+            this.btn2StockOut = new System.Windows.Forms.Button();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
@@ -53,34 +56,32 @@
             this.groupBox2.Controls.Add(this.lbl0Msg);
             this.groupBox2.Location = new System.Drawing.Point(4, -4);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(797, 65);
+            this.groupBox2.Size = new System.Drawing.Size(905, 52);
             this.groupBox2.TabIndex = 18;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Enter += new System.EventHandler(this.groupBox2_Enter);
             // 
             // lbl0Msg
             // 
             this.lbl0Msg.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lbl0Msg.ForeColor = System.Drawing.Color.Red;
-            this.lbl0Msg.Location = new System.Drawing.Point(4, 14);
+            this.lbl0Msg.Location = new System.Drawing.Point(4, 12);
             this.lbl0Msg.Name = "lbl0Msg";
-            this.lbl0Msg.Size = new System.Drawing.Size(787, 48);
-            this.lbl0Msg.TabIndex = 10;
+            this.lbl0Msg.Size = new System.Drawing.Size(898, 36);
+            this.lbl0Msg.TabIndex = 21;
             this.lbl0Msg.Text = "msg";
             this.lbl0Msg.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lbl0Msg.Click += new System.EventHandler(this.lbl0Msg_Click);
             // 
             // pictureBox1
             // 
             this.pictureBox1.BackColor = System.Drawing.SystemColors.ButtonShadow;
+            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(7, 22);
+            this.pictureBox1.Location = new System.Drawing.Point(3, 27);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(784, 474);
+            this.pictureBox1.Size = new System.Drawing.Size(772, 517);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
-            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // contextMenuStrip1
             // 
@@ -122,47 +123,84 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.dateTimePicker1);
-            this.groupBox1.Controls.Add(this.button2);
             this.groupBox1.Controls.Add(this.pictureBox1);
-            this.groupBox1.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.groupBox1.Location = new System.Drawing.Point(4, 66);
+            this.groupBox1.Font = new System.Drawing.Font("宋体", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.groupBox1.ForeColor = System.Drawing.Color.Red;
+            this.groupBox1.Location = new System.Drawing.Point(131, 50);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(797, 591);
-            this.groupBox1.TabIndex = 17;
+            this.groupBox1.Size = new System.Drawing.Size(778, 547);
+            this.groupBox1.TabIndex = 20;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
             // timer1
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // button2
+            // btnTest
             // 
-            this.button2.Location = new System.Drawing.Point(439, 520);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(97, 35);
-            this.button2.TabIndex = 12;
-            this.button2.Text = "回放测试";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.btnTest.Location = new System.Drawing.Point(4, 306);
+            this.btnTest.Name = "btnTest";
+            this.btnTest.Size = new System.Drawing.Size(121, 48);
+            this.btnTest.TabIndex = 4;
+            this.btnTest.Text = "回放测试";
+            this.btnTest.UseVisualStyleBackColor = true;
+            this.btnTest.Visible = false;
+            this.btnTest.Click += new System.EventHandler(this.button2_Click);
             // 
             // dateTimePicker1
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(224, 524);
+            this.dateTimePicker1.Location = new System.Drawing.Point(4, 360);
             this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(200, 23);
-            this.dateTimePicker1.TabIndex = 13;
+            this.dateTimePicker1.Size = new System.Drawing.Size(124, 21);
+            this.dateTimePicker1.TabIndex = 5;
+            this.dateTimePicker1.Visible = false;
+            // 
+            // btn0StockIn
+            // 
+            this.btn0StockIn.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btn0StockIn.Location = new System.Drawing.Point(4, 60);
+            this.btn0StockIn.Name = "btn0StockIn";
+            this.btn0StockIn.Size = new System.Drawing.Size(121, 48);
+            this.btn0StockIn.TabIndex = 0;
+            this.btn0StockIn.Text = "入库";
+            this.btn0StockIn.UseVisualStyleBackColor = true;
+            this.btn0StockIn.Click += new System.EventHandler(this.btn0StockIn_Click);
+            // 
+            // btn1Shelf
+            // 
+            this.btn1Shelf.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btn1Shelf.Location = new System.Drawing.Point(4, 114);
+            this.btn1Shelf.Name = "btn1Shelf";
+            this.btn1Shelf.Size = new System.Drawing.Size(121, 48);
+            this.btn1Shelf.TabIndex = 2;
+            this.btn1Shelf.Text = "上架";
+            this.btn1Shelf.UseVisualStyleBackColor = true;
+            this.btn1Shelf.Click += new System.EventHandler(this.btn1Shelf_Click);
+            // 
+            // btn2StockOut
+            // 
+            this.btn2StockOut.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btn2StockOut.Location = new System.Drawing.Point(4, 168);
+            this.btn2StockOut.Name = "btn2StockOut";
+            this.btn2StockOut.Size = new System.Drawing.Size(121, 48);
+            this.btn2StockOut.TabIndex = 3;
+            this.btn2StockOut.Text = "出库";
+            this.btn2StockOut.UseVisualStyleBackColor = true;
+            this.btn2StockOut.Click += new System.EventHandler(this.btn2StockOut_Click);
             // 
             // ISECNewVideoA
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.btn2StockOut);
+            this.Controls.Add(this.btn1Shelf);
+            this.Controls.Add(this.btn0StockIn);
+            this.Controls.Add(this.dateTimePicker1);
+            this.Controls.Add(this.btnTest);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Name = "ISECNewVideoA";
-            this.Size = new System.Drawing.Size(804, 660);
-            this.Load += new System.EventHandler(this.ISECNewVideo_Load);
+            this.Size = new System.Drawing.Size(912, 620);
             this.groupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
@@ -183,7 +221,10 @@
         private System.Windows.Forms.ToolStripMenuItem toolMenuPlay1;
         private System.Windows.Forms.ToolStripMenuItem toolMenuStopPlay2;
         private System.Windows.Forms.ToolStripMenuItem toolSlowPlay1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnTest;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.Button btn0StockIn;
+        private System.Windows.Forms.Button btn1Shelf;
+        private System.Windows.Forms.Button btn2StockOut;
     }
 }
