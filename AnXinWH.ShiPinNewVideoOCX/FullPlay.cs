@@ -28,7 +28,11 @@ namespace AnXinWH.ShiPinNewVideoOCX
             _a.closeAll();
             this.Close();
             _a.SetFormFullScreen(_a.m_IsFullScreen);
-           
+            if (_a._playNow)
+            {
+                _a.btn0Now_Click(null, null);
+            }
+
 
         }
     }

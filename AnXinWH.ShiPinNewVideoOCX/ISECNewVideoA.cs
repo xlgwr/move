@@ -111,6 +111,7 @@ namespace AnXinWH.ShiPinNewVideoOCX
         {
             if (lis.SelectedItem != null)
             {
+                _isDoublePlay = true;
                 var tmpname = lis.SelectedItem.ToString();
                 lbl0Msg.Text = notice + ", 播放视频:" + tmpname;
                 if (_dicAlarm.ContainsKey(tmpname))
@@ -120,7 +121,11 @@ namespace AnXinWH.ShiPinNewVideoOCX
                     _lisIn = getListMoveFromStartAnd(tmpvideo.start.AddSeconds(-tmpvideo.seekSeconds), tmpvideo.start.AddSeconds(tmpvideo.seekSeconds), tmpvideo.title, tmpvideo.bychange);
                     if (_lisIn.Count > 0)
                     {
-                        playOldFileListName(_lisIn[0], tmpvideo.title, tmpvideo.start.AddSeconds(-tmpvideo.seekSeconds), tmpvideo.start.AddSeconds(tmpvideo.seekSeconds), tmpvideo.bychange, this.pictureBox1.Handle);
+                        _notice = tmpvideo.title;
+                        _startTime = tmpvideo.start.AddSeconds(-tmpvideo.seekSeconds);
+                        _endTime = tmpvideo.start.AddSeconds(tmpvideo.seekSeconds);
+                        _byChannel = tmpvideo.bychange;
+                        playOldFileListName(_lisIn[0], _notice, _startTime, _endTime, _byChannel, this.pictureBox1.Handle);
                         //return;
                     }
                 }
@@ -207,6 +212,7 @@ namespace AnXinWH.ShiPinNewVideoOCX
             try
             {
                 closeAll();
+                _playNow = false;
 
                 var anotherP = tmpvideo.videoCfg.fileCfg;
 
@@ -323,7 +329,9 @@ namespace AnXinWH.ShiPinNewVideoOCX
                             _playNext = false;
                             if (_lisIn.Count >= 1)
                             {
-                                playOldFileListName(_lisIn[1], _notice, _nextStartPlay, _nextEndPlay, _byChannel, this.pictureBox1.Handle);
+                                _startTime = _nextStartPlay;
+                                _endTime = _nextEndPlay;
+                                playOldFileListName(_lisIn[1], _notice, _startTime, _endTime, _byChannel, this.pictureBox1.Handle);
                             }
                         }
                         else
@@ -439,10 +447,12 @@ namespace AnXinWH.ShiPinNewVideoOCX
         #endregion
 
 
-        void startPlayNow()
+        void startPlayNow(IntPtr hwind)
         {
             try
             {
+                _lisIn = new List<lisVideo>();
+                _playNow = true;
                 closeAll();
                 var ret = 0;
                 ret = TMCC.TMCC_SetAutoReConnect(hPreView, true);
@@ -467,7 +477,7 @@ namespace AnXinWH.ShiPinNewVideoOCX
                 stream.byChannel = _getConfigHost.byChannel;// byte.Parse("0");
                 stream.byStream = _getConfigHost.byStream;// byte.Parse("0");
 
-                ret = TMCC.TMCC_ConnectStream(hPreView, ref stream, pictureBox1.Handle);
+                ret = TMCC.TMCC_ConnectStream(hPreView, ref stream, hwind);
                 var error = TMCC.TMCC_GetLastError();
 
                 if (ret != TMCC.TMCC_ERR_SUCCESS)
@@ -651,7 +661,10 @@ namespace AnXinWH.ShiPinNewVideoOCX
                     {
                         var tmpname = _lisIn[0];
                         lbl0Msg.Text = notice + ", 回放视频中." + tmpname;
-                        playOldFileListName(tmpname, notice, _InstartTime, _InendTime, tmpbyChangel, this.pictureBox1.Handle);
+
+                        _startTime = _InstartTime;
+                        _endTime = _InendTime;
+                        playOldFileListName(tmpname, notice, _startTime, _endTime, tmpbyChangel, this.pictureBox1.Handle);
                     }
                     else
                     {
@@ -1099,9 +1112,9 @@ namespace AnXinWH.ShiPinNewVideoOCX
             jsSetTimeStockIn(_jsStockOutNotic, _jsStockOutDate, _jsStockOutseekSeconds, _byOutChannel);
         }
 
-        private void btn0Now_Click(object sender, EventArgs e)
+        public void btn0Now_Click(object sender, EventArgs e)
         {
-            startPlayNow();
+            startPlayNow(pictureBox1.Handle);
         }
         #region user32.dll
 
@@ -1151,33 +1164,67 @@ namespace AnXinWH.ShiPinNewVideoOCX
         }
         private void pictureBox1_DoubleClick(object sender, EventArgs e)
         {
-            if (_lisIn.Count > 0)
+            try
             {
-                m_IsFullScreen = !m_IsFullScreen;//点一次全屏，再点还原。  
-                this.SuspendLayout();
-                _fullplay = new FullPlay(this);
-                if (m_IsFullScreen)//全屏 ,按特定的顺序执行
+                //if (_isDoublePlay)
+                //{
+                //    return;
+                //}
+                if (_lisIn.Count > 0)
                 {
-                    SetFormFullScreen(m_IsFullScreen);
-                    _fullplay.FormBorderStyle = FormBorderStyle.None;
-                    _fullplay.WindowState = FormWindowState.Maximized;
-                    _fullplay.Activate();//
-                    _fullplay.TopMost = true;
-                    _fullplay.Show();
-                    playOldFileListName(_lisIn[0], _notice, _InstartTime, _InendTime, _byChannel, _fullplay.pictureBox1.Handle);
+                    m_IsFullScreen = !m_IsFullScreen;//点一次全屏，再点还原。  
+                    this.SuspendLayout();
+                    _fullplay = new FullPlay(this);
+                    if (m_IsFullScreen)//全屏 ,按特定的顺序执行
+                    {
+                        SetFormFullScreen(m_IsFullScreen);
+                        _fullplay.FormBorderStyle = FormBorderStyle.None;
+                        _fullplay.WindowState = FormWindowState.Maximized;
+                        _fullplay.TopMost = true;
+                        _fullplay.Show();
+                        playOldFileListName(_lisIn[0], _notice, _startTime, _endTime, _byChannel, _fullplay.pictureBox1.Handle);
+
+                    }
+                    //else//还原，按特定的顺序执行——窗体状态，窗体边框，设置任务栏和工作区域
+                    //{
+                    //    _fullplay.WindowState = FormWindowState.Normal;
+                    //    _fullplay.FormBorderStyle = FormBorderStyle.Sizable;
+                    //    SetFormFullScreen(m_IsFullScreen);
+                    //    _fullplay.TopMost = false;
+                    //    closeAll();
+                    //    _fullplay.Close();
+                    //}
 
                 }
-                //else//还原，按特定的顺序执行——窗体状态，窗体边框，设置任务栏和工作区域
-                //{
-                //    _fullplay.WindowState = FormWindowState.Normal;
-                //    _fullplay.FormBorderStyle = FormBorderStyle.Sizable;
-                //    SetFormFullScreen(m_IsFullScreen);
-                //    _fullplay.TopMost = false;
-                //    closeAll();
-                //    _fullplay.Close();
-                //}
-
+                else
+                {
+                    if (_playNow)
+                    {
+                        m_IsFullScreen = !m_IsFullScreen;//点一次全屏，再点还原。  
+                        this.SuspendLayout();
+                        _fullplay = new FullPlay(this);
+                        if (m_IsFullScreen)//全屏 ,按特定的顺序执行
+                        {
+                            SetFormFullScreen(m_IsFullScreen);
+                            _fullplay.FormBorderStyle = FormBorderStyle.None;
+                            _fullplay.WindowState = FormWindowState.Maximized;
+                            _fullplay.TopMost = true;
+                            _fullplay.Show();
+                            startPlayNow(_fullplay.pictureBox1.Handle);
+                        }
+                    }
+                }
             }
+            catch (Exception ex)
+            {
+                m_IsFullScreen = false;
+                closeAll();
+                _fullplay.TopMost = true;
+                _fullplay.Close();
+                SetFormFullScreen(m_IsFullScreen);
+                _playNow = false;
+            }
+
 
 
         }
@@ -1194,6 +1241,14 @@ namespace AnXinWH.ShiPinNewVideoOCX
         public Boolean m_IsFullScreen = false;//标记是否全屏
 
         public static FullPlay _fullplay;
+
+        public bool _playNow { get; set; }
+
+        public bool _isDoublePlay { get; set; }
+
+        public DateTime _endTime { get; set; }
+
+        public DateTime _startTime { get; set; }
     }
 
 }
