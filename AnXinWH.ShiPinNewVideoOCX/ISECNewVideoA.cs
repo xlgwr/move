@@ -29,7 +29,7 @@ namespace AnXinWH.ShiPinNewVideoOCX
         static List<lisVideo> _lisIn { get; set; }
         static Dictionary<string, video> _dicAlarm { get; set; }
 
-        public string ReceiveNo { get; private set; }
+        public string _receiveNo { get; private set; }
 
         static DateTime _InstartTime = DateTime.Now;
         static DateTime _InendTime = DateTime.Now;
@@ -120,7 +120,7 @@ namespace AnXinWH.ShiPinNewVideoOCX
                     _lisIn = getListMoveFromStartAnd(tmpvideo.start.AddSeconds(-tmpvideo.seekSeconds), tmpvideo.start.AddSeconds(tmpvideo.seekSeconds), tmpvideo.title, tmpvideo.bychange);
                     if (_lisIn.Count > 0)
                     {
-                        playOldFileListName(_lisIn[0], tmpvideo.title, tmpvideo.start.AddSeconds(-tmpvideo.seekSeconds), tmpvideo.start.AddSeconds(tmpvideo.seekSeconds), tmpvideo.bychange);
+                        playOldFileListName(_lisIn[0], tmpvideo.title, tmpvideo.start.AddSeconds(-tmpvideo.seekSeconds), tmpvideo.start.AddSeconds(tmpvideo.seekSeconds), tmpvideo.bychange, this.pictureBox1.Handle);
                         //return;
                     }
                 }
@@ -128,6 +128,7 @@ namespace AnXinWH.ShiPinNewVideoOCX
             }
         }
         #endregion
+
         #region function
         private void initForm()
         {
@@ -153,11 +154,13 @@ namespace AnXinWH.ShiPinNewVideoOCX
 
             //list doublie
             listBox1.DoubleClick += listBox1_DoubleClick;
+
+            _fullplay = new FullPlay(this);
         }
 
         void listBox1_DoubleClick(object sender, EventArgs e)
         {
-            play_DoubleClick(listBox1,"报警");
+            play_DoubleClick(listBox1, "报警");
         }
 
         private void initVideo()
@@ -199,7 +202,7 @@ namespace AnXinWH.ShiPinNewVideoOCX
                 hLoginp = true;
             }
         }
-        void playOldFileListName(lisVideo tmpvideo, string notice, DateTime start, DateTime endtime, byte byChannel)
+        void playOldFileListName(lisVideo tmpvideo, string notice, DateTime start, DateTime endtime, byte byChannel, IntPtr hwind)
         {
             try
             {
@@ -229,7 +232,7 @@ namespace AnXinWH.ShiPinNewVideoOCX
                 IntPtr p4 = Marshal.AllocHGlobal(Marshal.SizeOf(struCond));
                 Marshal.StructureToPtr(struCond, p4, false);
 
-                IntPtr p6 = TMCC.TMCC_OpenFile(hLogin, p4, this.pictureBox1.Handle);
+                IntPtr p6 = TMCC.TMCC_OpenFile(hLogin, p4, hwind);
 
                 _currPlayfile = p6;
                 _notice = notice;
@@ -320,7 +323,7 @@ namespace AnXinWH.ShiPinNewVideoOCX
                             _playNext = false;
                             if (_lisIn.Count >= 1)
                             {
-                                playOldFileListName(_lisIn[1], _notice, _nextStartPlay, _nextEndPlay, _byChannel);
+                                playOldFileListName(_lisIn[1], _notice, _nextStartPlay, _nextEndPlay, _byChannel, this.pictureBox1.Handle);
                             }
                         }
                         else
@@ -329,6 +332,8 @@ namespace AnXinWH.ShiPinNewVideoOCX
                             timer1.Enabled = false;
                             _currPlayfilep = false;
                             pictureBox1.Refresh();
+                            _fullplay.TopMost = false;
+                            _fullplay.Close();
                             lbl0Msg.Text = _notice + ",已播放完成.";
                         }
                         return;
@@ -341,6 +346,8 @@ namespace AnXinWH.ShiPinNewVideoOCX
                             timer1.Enabled = false;
                             _currPlayfilep = false;
                             pictureBox1.Refresh();
+                            _fullplay.TopMost = false;
+                            _fullplay.Close();
                             lbl0Msg.Text = _notice + ",已播放完成.";
                             return;
                         }
@@ -357,7 +364,7 @@ namespace AnXinWH.ShiPinNewVideoOCX
                 timer1.Enabled = false;
             }
         }
-        void closeAll()
+        public void closeAll()
         {
             try
             {
@@ -376,6 +383,8 @@ namespace AnXinWH.ShiPinNewVideoOCX
                     pictureBox1.Refresh();
                 }
                 _currMsg = "";
+                timer1.Enabled = false;
+                SetMsg(lbl0Msg, _currMsg);
             }
             catch (Exception ex)
             {
@@ -390,7 +399,7 @@ namespace AnXinWH.ShiPinNewVideoOCX
             Array.Copy(arr, total, arr.Length);
             return total;
         }
-        void SetMsg(Label lbl, string msg)
+        void SetMsg(Control lbl, string msg)
         {
             lbl.Text = msg;
         }
@@ -430,13 +439,59 @@ namespace AnXinWH.ShiPinNewVideoOCX
         #endregion
 
 
+        void startPlayNow()
+        {
+            try
+            {
+                closeAll();
+                var ret = 0;
+                ret = TMCC.TMCC_SetAutoReConnect(hPreView, true);
+                ret = TMCC.TMCC_SetDisplayShow(hPreView, true);
+                ret = TMCC.TMCC_SetStreamBufferTime(hPreView, uint.Parse("0"));
+                streamback = StreamDataCallBack;
+                ret = TMCC.TMCC_RegisterStreamCallBack(hPreView, streamback, hPreView);
+                frameback = AvFrameCallBack;
+                ret = TMCC.TMCC_RegisterAVFrameCallBack(hPreView, frameback, hPreView);
+                ret = TMCC.TMCC_SetImageOutFmt(hPreView, 3);
+                TMCC.tmPlayRealStreamCfg_t stream = new TMCC.tmPlayRealStreamCfg_t();
+                stream.Init();
+                stream.dwSize = (UInt32)Marshal.SizeOf(stream);
+
+                stream.szAddress = Get(32, _getConfigHost.cmsip.ToCharArray());
+                stream.szTurnAddress = Get(32, _getConfigHost.cmsip.ToCharArray());
+                stream.szUser = Get(32, _getConfigHost.userName.ToCharArray());
+                stream.szPass = Get(32, _getConfigHost.pswd.ToCharArray());
+                stream.iPort = _getConfigHost.cmsPort;
+
+
+                stream.byChannel = _getConfigHost.byChannel;// byte.Parse("0");
+                stream.byStream = _getConfigHost.byStream;// byte.Parse("0");
+
+                ret = TMCC.TMCC_ConnectStream(hPreView, ref stream, pictureBox1.Handle);
+                var error = TMCC.TMCC_GetLastError();
+
+                if (ret != TMCC.TMCC_ERR_SUCCESS)
+                {
+                    SetMsg(lbl0Msg, "预览视频失败。");// + DateTime.Now.ToString());
+                    //MessageBox.Show("预览视频失败");
+                }
+                else
+                {
+                    SetMsg(lbl0Msg, "预览实时视频成功。");// + DateTime.Now.ToString());
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
         #region for js todo
         public void SetReceiptNo(object o)
         {
             if (o != null)
             {
-                ReceiveNo = o.ToString();
-                groupBox1.Text = ReceiveNo;
+                _receiveNo = o.ToString();
+                SetMsg(groupBox1, _receiveNo);
             }
         }
         public string jsGetVersion()
@@ -545,7 +600,16 @@ namespace AnXinWH.ShiPinNewVideoOCX
                 MessageBox.Show(ex.Message);
             }
         }
-
+        public void jsStartVideo(object o)
+        {
+            if (o != null)
+            {
+                byte byChannel = 0;
+                byte.TryParse(o.ToString(), out byChannel);
+                _getConfigHost.byChannel = byChannel;
+                //initVideo();
+            }
+        }
         string jsSetTimeStockIn(object title, object start, object seekSeconds, object bychange)
         {
             var tmpoff = 10;
@@ -556,7 +620,11 @@ namespace AnXinWH.ShiPinNewVideoOCX
                 if (!hLoginp)
                 {
                     initVideo();
+
                 }
+
+                SetMsg(groupBox1, _receiveNo);
+
                 if (start != null)
                 {
                     DateTime tmpStart = DateTime.Now.AddDays(-1);
@@ -583,7 +651,7 @@ namespace AnXinWH.ShiPinNewVideoOCX
                     {
                         var tmpname = _lisIn[0];
                         lbl0Msg.Text = notice + ", 回放视频中." + tmpname;
-                        playOldFileListName(tmpname, notice, _InstartTime, _InendTime, tmpbyChangel);
+                        playOldFileListName(tmpname, notice, _InstartTime, _InendTime, tmpbyChangel, this.pictureBox1.Handle);
                     }
                     else
                     {
@@ -1031,6 +1099,101 @@ namespace AnXinWH.ShiPinNewVideoOCX
             jsSetTimeStockIn(_jsStockOutNotic, _jsStockOutDate, _jsStockOutseekSeconds, _byOutChannel);
         }
 
+        private void btn0Now_Click(object sender, EventArgs e)
+        {
+            startPlayNow();
+        }
+        #region user32.dll
+
+        [DllImport("user32.dll", EntryPoint = "ShowWindow")]
+        public static extern Int32 ShowWindow(Int32 hwnd, Int32 nCmdShow);
+        public const Int32 SW_SHOW = 5; public const Int32 SW_HIDE = 0;
+
+        [DllImport("user32.dll", EntryPoint = "SystemParametersInfo")]
+        private static extern Int32 SystemParametersInfo(Int32 uAction, Int32 uParam, ref Rectangle lpvParam, Int32 fuWinIni);
+        public const Int32 SPIF_UPDATEINIFILE = 0x1;
+        public const Int32 SPI_SETWORKAREA = 47;
+        public const Int32 SPI_GETWORKAREA = 48;
+
+        [DllImport("user32.dll", EntryPoint = "FindWindow")]
+        private static extern Int32 FindWindow(string lpClassName, string lpWindowName);
+
+        #endregion
+        /// <summary>  
+        /// 设置全屏或这取消全屏  
+        /// </summary>  
+        /// <param name="fullscreen">true:全屏 false:恢复</param>  
+        /// <param name="rectOld">设置的时候，此参数返回原始尺寸，恢复时用此参数设置恢复</param>  
+        /// <returns>设置结果</returns>  
+        public Boolean SetFormFullScreen(Boolean fullscreen)//, ref Rectangle rectOld
+        {
+            Rectangle rectOld = Rectangle.Empty;
+            Int32 hwnd = 0;
+            hwnd = FindWindow("Shell_TrayWnd", null);//获取任务栏的句柄
+
+            if (hwnd == 0) return false;
+
+            if (fullscreen)//全屏
+            {
+                ShowWindow(hwnd, SW_HIDE);//隐藏任务栏
+
+                SystemParametersInfo(SPI_GETWORKAREA, 0, ref rectOld, SPIF_UPDATEINIFILE);//get  屏幕范围
+                Rectangle rectFull = Screen.PrimaryScreen.Bounds;//全屏范围
+                SystemParametersInfo(SPI_SETWORKAREA, 0, ref rectFull, SPIF_UPDATEINIFILE);//窗体全屏幕显示
+            }
+            else//还原 
+            {
+                ShowWindow(hwnd, SW_SHOW);//显示任务栏
+
+                SystemParametersInfo(SPI_SETWORKAREA, 0, ref rectOld, SPIF_UPDATEINIFILE);//窗体还原
+            }
+            return true;
+        }
+        private void pictureBox1_DoubleClick(object sender, EventArgs e)
+        {
+            if (_lisIn.Count > 0)
+            {
+                m_IsFullScreen = !m_IsFullScreen;//点一次全屏，再点还原。  
+                this.SuspendLayout();
+                _fullplay = new FullPlay(this);
+                if (m_IsFullScreen)//全屏 ,按特定的顺序执行
+                {
+                    SetFormFullScreen(m_IsFullScreen);
+                    _fullplay.FormBorderStyle = FormBorderStyle.None;
+                    _fullplay.WindowState = FormWindowState.Maximized;
+                    _fullplay.Activate();//
+                    _fullplay.TopMost = true;
+                    _fullplay.Show();
+                    playOldFileListName(_lisIn[0], _notice, _InstartTime, _InendTime, _byChannel, _fullplay.pictureBox1.Handle);
+
+                }
+                //else//还原，按特定的顺序执行——窗体状态，窗体边框，设置任务栏和工作区域
+                //{
+                //    _fullplay.WindowState = FormWindowState.Normal;
+                //    _fullplay.FormBorderStyle = FormBorderStyle.Sizable;
+                //    SetFormFullScreen(m_IsFullScreen);
+                //    _fullplay.TopMost = false;
+                //    closeAll();
+                //    _fullplay.Close();
+                //}
+
+            }
+
+
+        }
+
+
+        public int _oldLeft { get; set; }
+
+        public int _oldTop { get; set; }
+
+        public int _oldheight { get; set; }
+
+        public int _oldwidth { get; set; }
+
+        public Boolean m_IsFullScreen = false;//标记是否全屏
+
+        public static FullPlay _fullplay;
     }
 
 }

@@ -243,7 +243,7 @@ namespace AnXinWH.ShiPinNewVideoOCX
             Array.Copy(arr, total, arr.Length);
             return total;
         }
-        void SetMsg(Label lbl, string msg)
+        void SetMsg(Control lbl, string msg)
         {
             lbl.Text = msg;
         }
@@ -282,7 +282,54 @@ namespace AnXinWH.ShiPinNewVideoOCX
 
         #endregion
 
+        void startPlayNow()
+        {
+            try
+            {
+                closeAll();
 
+
+                var ret = 0;
+                ret = TMCC.TMCC_SetAutoReConnect(hPreView, true);
+                ret = TMCC.TMCC_SetDisplayShow(hPreView, true);
+                ret = TMCC.TMCC_SetStreamBufferTime(hPreView, uint.Parse("0"));
+                streamback = StreamDataCallBack;
+                ret = TMCC.TMCC_RegisterStreamCallBack(hPreView, streamback, hPreView);
+                frameback = AvFrameCallBack;
+                ret = TMCC.TMCC_RegisterAVFrameCallBack(hPreView, frameback, hPreView);
+                ret = TMCC.TMCC_SetImageOutFmt(hPreView, 3);
+                TMCC.tmPlayRealStreamCfg_t stream = new TMCC.tmPlayRealStreamCfg_t();
+                stream.Init();
+                stream.dwSize = (UInt32)Marshal.SizeOf(stream);
+
+                stream.szAddress = Get(32, _getConfigHost.cmsip.ToCharArray());
+                stream.szTurnAddress = Get(32, _getConfigHost.cmsip.ToCharArray());
+                stream.szUser = Get(32, _getConfigHost.userName.ToCharArray());
+                stream.szPass = Get(32, _getConfigHost.pswd.ToCharArray());
+                stream.iPort = _getConfigHost.cmsPort;
+
+
+                stream.byChannel = _getConfigHost.byChannel;// byte.Parse("0");
+                stream.byStream = _getConfigHost.byStream;// byte.Parse("0");
+
+                ret = TMCC.TMCC_ConnectStream(hPreView, ref stream, pictureBox1.Handle);
+                var error = TMCC.TMCC_GetLastError();
+
+                if (ret != TMCC.TMCC_ERR_SUCCESS)
+                {
+                    SetMsg(groupBox1, "预览视频失败。" + DateTime.Now.ToString());
+                    MessageBox.Show("预览视频失败");
+                }
+                else
+                {
+                    SetMsg(groupBox1, "预览实时视频成功。" + DateTime.Now.ToString());
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
         #region for js todo
         public void SetReceiptNo(object o)
         {
@@ -305,6 +352,16 @@ namespace AnXinWH.ShiPinNewVideoOCX
                 return null;
             }
 
+        }
+        public void jsStartVideo(object o)
+        {
+            if (o != null)
+            {
+                byte byChannel = 0;
+                byte.TryParse(o.ToString(), out byChannel);
+                _getConfigHost.byChannel = byChannel;
+                //initVideo();
+            }
         }
         public string jsSetTimeIn(object start, object end)
         {
