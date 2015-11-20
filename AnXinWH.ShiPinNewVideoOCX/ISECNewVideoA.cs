@@ -69,10 +69,28 @@ namespace AnXinWH.ShiPinNewVideoOCX
         int m_iPlaySpeed { get; set; }
         string _currMsg { get; set; }
         TMCC.tmFindFileCfg_t _currPlayfileConfigList { get; set; }
+
+        static FullPlay _fullplay;
+
+
+        bool _isDoublePlay { get; set; }
+
+        DateTime _endTime { get; set; }
+
+        DateTime _startTime { get; set; }
+
         #endregion
 
         #region public att
         public byte _byChannel { get; private set; }
+        public bool _playNow { get; set; }
+
+        public Boolean m_IsFullScreen = false;//标记是否全屏
+
+        public byte _byXHChannel { get; private set; }
+        public string _jsStockXHDate { get; private set; }
+        public string _jsStockXHseekSeconds { get; private set; }
+        public string _jsStockXHNotic { get; private set; }
 
 
         public byte _byInChannel { get; private set; }
@@ -80,15 +98,38 @@ namespace AnXinWH.ShiPinNewVideoOCX
         public string _jsStockInseekSeconds { get; private set; }
         public string _jsStockInNotic { get; private set; }
 
+
         public byte _byOutChannel { get; private set; }
         public string _jsStockOutDate { get; private set; }
         public string _jsStockOutNotic { get; private set; }
         public string _jsStockOutseekSeconds { get; private set; }
 
+
         public byte _byShelfChannel { get; private set; }
         public string _jsStockShelfDate { get; private set; }
         public string _jsStockShelfNotic { get; private set; }
         public string _jsStockShelfseekSeconds { get; private set; }
+
+
+        public object _byTTChannel { get; set; }
+
+        public object _jsStockTTDate { get; set; }
+
+        public object _jsStockTTNotic { get; set; }
+
+
+        public object _byCYChannel { get; set; }
+
+        public object _jsStockCYDate { get; set; }
+
+        public object _jsStockCYNotic { get; set; }
+
+
+        public object _byCZChannel { get; set; }
+
+        public object _jsStockCZDate { get; set; }
+
+        public object _jsStockCZNotic { get; set; }
 
         #endregion
         public ISECNewVideoA()
@@ -565,12 +606,107 @@ namespace AnXinWH.ShiPinNewVideoOCX
                 MessageBox.Show(ex.Message);
             }
         }
-        public void jsStockIn(object title, object start, object seekSeconds, object bychange)
+
+        /// <summary>
+        /// 验证
+        /// </summary>
+        /// <param name="title"></param>
+        /// <param name="start"></param>
+        /// <param name="bychange"></param>
+        public void jsStockTT(object title, object start, object bychange)
+        {
+            try
+            {
+                _byTTChannel = byte.Parse(bychange.ToString());
+                _jsStockTTseekSeconds = "20";
+
+                _jsStockTTDate = start.ToString();
+                _jsStockTTNotic = title.ToString();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// 抽样
+        /// </summary>
+        /// <param name="title"></param>
+        /// <param name="start"></param>
+        /// <param name="bychange"></param>
+        public void jsStockCY(object title, object start, object bychange)
+        {
+            try
+            {
+                _byCYChannel = byte.Parse(bychange.ToString());
+                _jsStockCYseekSeconds = "20";
+
+                _jsStockCYDate = start.ToString();
+                _jsStockCYNotic = title.ToString();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// 卸货
+        /// </summary>
+        /// <param name="title"></param>
+        /// <param name="start"></param>
+        /// <param name="bychange"></param>
+        public void jsStockXH(object title, object start, object bychange)
+        {
+            try
+            {
+                _byXHChannel = byte.Parse(bychange.ToString());
+                _jsStockXHseekSeconds = "20";
+
+                _jsStockXHDate = start.ToString();
+                _jsStockXHNotic = title.ToString();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// 称重
+        /// </summary>
+        /// <param name="title"></param>
+        /// <param name="start"></param>
+        /// <param name="bychange"></param>
+        public void jsStockCZ(object title, object start, object bychange)
+        {
+            try
+            {
+                _byCZChannel = byte.Parse(bychange.ToString());
+                _jsStockCZseekSeconds = "20";
+
+                _jsStockCZDate = start.ToString();
+                _jsStockCZNotic = title.ToString();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// 入库
+        /// </summary>
+        /// <param name="title"></param>
+        /// <param name="start"></param>
+        /// <param name="bychange"></param>
+        public void jsStockIn(object title, object start, object bychange)
         {
             try
             {
                 _byInChannel = byte.Parse(bychange.ToString());
-                _jsStockInseekSeconds = seekSeconds.ToString();
+                _jsStockInseekSeconds = "20";
 
                 _jsStockInDate = start.ToString();
                 _jsStockInNotic = title.ToString();
@@ -580,12 +716,18 @@ namespace AnXinWH.ShiPinNewVideoOCX
                 MessageBox.Show(ex.Message);
             }
         }
-        public void jsStockOut(object title, object start, object seekSeconds, object bychange)
+        /// <summary>
+        /// 出库
+        /// </summary>
+        /// <param name="title"></param>
+        /// <param name="start"></param>
+        /// <param name="bychange"></param>
+        public void jsStockOut(object title, object start, object bychange)
         {
             try
             {
                 _byOutChannel = byte.Parse(bychange.ToString());
-                _jsStockOutseekSeconds = seekSeconds.ToString();
+                _jsStockOutseekSeconds = "20";
 
                 _jsStockOutDate = start.ToString();
                 _jsStockOutNotic = title.ToString();
@@ -595,12 +737,19 @@ namespace AnXinWH.ShiPinNewVideoOCX
                 MessageBox.Show(ex.Message);
             }
         }
-        public void jsStockShelf(object title, object start, object seekSeconds, object bychange)
+
+        /// <summary>
+        /// 上架
+        /// </summary>
+        /// <param name="title"></param>
+        /// <param name="start"></param>
+        /// <param name="bychange"></param>
+        public void jsStockShelf(object title, object start, object bychange)
         {
             try
             {
                 _byShelfChannel = byte.Parse(bychange.ToString());
-                _jsStockShelfseekSeconds = seekSeconds.ToString();
+                _jsStockShelfseekSeconds = "20";
 
                 _jsStockShelfDate = start.ToString();
                 _jsStockShelfNotic = title.ToString();
@@ -610,6 +759,10 @@ namespace AnXinWH.ShiPinNewVideoOCX
                 MessageBox.Show(ex.Message);
             }
         }
+       
+        
+        
+        
         public void jsStartVideo(object o)
         {
             if (o != null)
@@ -620,11 +773,11 @@ namespace AnXinWH.ShiPinNewVideoOCX
                 //initVideo();
             }
         }
-        string jsSetTimeStockIn(object title, object start, object seekSeconds, object bychange)
+        string jsSetTimeStockIn(object title, object start, object bychange)
         {
             var tmpoff = 10;
             byte tmpbyChangel = 0;
-
+            object seekSeconds = 20;
             try
             {
                 if (!hLoginp)
@@ -634,6 +787,7 @@ namespace AnXinWH.ShiPinNewVideoOCX
                 }
 
                 SetMsg(groupBox1, _receiveNo);
+
 
                 if (start != null)
                 {
@@ -648,6 +802,8 @@ namespace AnXinWH.ShiPinNewVideoOCX
                     }
                     else
                     {
+                        closeAll();
+                        SetMsg(lbl0Msg, title.ToString() + " 开始时间有误：" + start.ToString());
                         return title.ToString() + " 开始时间有误：" + start.ToString();
                     }
 
@@ -675,12 +831,14 @@ namespace AnXinWH.ShiPinNewVideoOCX
 
                     return "ok";
                 }
-                return "Error.提供的数据有误。";
+                lbl0Msg.Text = title.ToString() + ": Error.提供的数据有误.";
+                return title.ToString() + ": Error.提供的数据有误.";
 
             }
             catch (Exception ex)
             {
-                return "jsError:" + ex.Message;
+                lbl0Msg.Text = title.ToString() + ":jsError " + ex.Message;
+                return title.ToString() + ":jsError " + ex.Message;
             }
 
         }
@@ -1085,7 +1243,7 @@ namespace AnXinWH.ShiPinNewVideoOCX
         private void button2_Click(object sender, EventArgs e)
         {
             //playOnMini(120 * 1000);
-            jsSetTimeStockIn("回放测试", dateTimePicker1.Value, 20, 0);
+            jsSetTimeStockIn("回放测试", dateTimePicker1.Value, 0);
         }
 
         private void trackBar1_Scroll(object sender, EventArgs e)
@@ -1099,17 +1257,17 @@ namespace AnXinWH.ShiPinNewVideoOCX
 
         private void btn0StockIn_Click(object sender, EventArgs e)
         {
-            jsSetTimeStockIn(_jsStockInNotic, _jsStockInDate, _jsStockInseekSeconds, _byInChannel);
+            jsSetTimeStockIn(_jsStockInNotic, _jsStockInDate, _byInChannel);
         }
 
         private void btn1Shelf_Click(object sender, EventArgs e)
         {
-            jsSetTimeStockIn(_jsStockShelfNotic, _jsStockShelfDate, _jsStockShelfseekSeconds, _byShelfChannel);
+            jsSetTimeStockIn(_jsStockShelfNotic, _jsStockShelfDate, _byShelfChannel);
         }
 
         private void btn2StockOut_Click(object sender, EventArgs e)
         {
-            jsSetTimeStockIn(_jsStockOutNotic, _jsStockOutDate, _jsStockOutseekSeconds, _byOutChannel);
+            jsSetTimeStockIn(_jsStockOutNotic, _jsStockOutDate, _byOutChannel);
         }
 
         public void btn0Now_Click(object sender, EventArgs e)
@@ -1230,25 +1388,32 @@ namespace AnXinWH.ShiPinNewVideoOCX
         }
 
 
-        public int _oldLeft { get; set; }
+        private void btn0XH_Click(object sender, EventArgs e)
+        {
+            jsSetTimeStockIn(_jsStockXHNotic, _jsStockXHDate, _byXHChannel);
+        }
 
-        public int _oldTop { get; set; }
+        private void btn2CZ_Click(object sender, EventArgs e)
+        {
+            jsSetTimeStockIn(_jsStockCZNotic, _jsStockCZDate, _byCZChannel);
+        }
 
-        public int _oldheight { get; set; }
+        private void btn2CY_Click(object sender, EventArgs e)
+        {
+            jsSetTimeStockIn(_jsStockCYNotic, _jsStockCYDate, _byCYChannel);
+        }
 
-        public int _oldwidth { get; set; }
+        private void btn7TT_Click(object sender, EventArgs e)
+        {
+            jsSetTimeStockIn(_jsStockTTNotic, _jsStockTTDate, _byTTChannel);
+        }
 
-        public Boolean m_IsFullScreen = false;//标记是否全屏
 
-        public static FullPlay _fullplay;
+        public string _jsStockCZseekSeconds { get; set; }
 
-        public bool _playNow { get; set; }
+        public string _jsStockCYseekSeconds { get; set; }
 
-        public bool _isDoublePlay { get; set; }
-
-        public DateTime _endTime { get; set; }
-
-        public DateTime _startTime { get; set; }
+        public string _jsStockTTseekSeconds { get; set; }
     }
 
 }

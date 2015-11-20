@@ -46,14 +46,19 @@
             this.btn1Shelf = new System.Windows.Forms.Button();
             this.btn2StockOut = new System.Windows.Forms.Button();
             this.listBox1 = new System.Windows.Forms.ListBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.btn2CY = new System.Windows.Forms.Button();
+            this.btn7TT = new System.Windows.Forms.Button();
+            this.btn2CZ = new System.Windows.Forms.Button();
+            this.btn0XH = new System.Windows.Forms.Button();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.btn0Now = new System.Windows.Forms.Button();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox2
@@ -166,10 +171,10 @@
             // btn0StockIn
             // 
             this.btn0StockIn.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btn0StockIn.Location = new System.Drawing.Point(32, 17);
+            this.btn0StockIn.Location = new System.Drawing.Point(32, 66);
             this.btn0StockIn.Name = "btn0StockIn";
             this.btn0StockIn.Size = new System.Drawing.Size(121, 40);
-            this.btn0StockIn.TabIndex = 1;
+            this.btn0StockIn.TabIndex = 3;
             this.btn0StockIn.Text = "入库";
             this.btn0StockIn.UseVisualStyleBackColor = true;
             this.btn0StockIn.Click += new System.EventHandler(this.btn0StockIn_Click);
@@ -177,10 +182,10 @@
             // btn1Shelf
             // 
             this.btn1Shelf.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btn1Shelf.Location = new System.Drawing.Point(32, 63);
+            this.btn1Shelf.Location = new System.Drawing.Point(32, 158);
             this.btn1Shelf.Name = "btn1Shelf";
             this.btn1Shelf.Size = new System.Drawing.Size(121, 40);
-            this.btn1Shelf.TabIndex = 2;
+            this.btn1Shelf.TabIndex = 5;
             this.btn1Shelf.Text = "上架";
             this.btn1Shelf.UseVisualStyleBackColor = true;
             this.btn1Shelf.Click += new System.EventHandler(this.btn1Shelf_Click);
@@ -188,10 +193,10 @@
             // btn2StockOut
             // 
             this.btn2StockOut.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btn2StockOut.Location = new System.Drawing.Point(32, 109);
+            this.btn2StockOut.Location = new System.Drawing.Point(32, 250);
             this.btn2StockOut.Name = "btn2StockOut";
             this.btn2StockOut.Size = new System.Drawing.Size(121, 40);
-            this.btn2StockOut.TabIndex = 3;
+            this.btn2StockOut.TabIndex = 7;
             this.btn2StockOut.Text = "出库";
             this.btn2StockOut.UseVisualStyleBackColor = true;
             this.btn2StockOut.Click += new System.EventHandler(this.btn2StockOut_Click);
@@ -201,35 +206,81 @@
             this.listBox1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.listBox1.FormattingEnabled = true;
             this.listBox1.ItemHeight = 12;
-            this.listBox1.Location = new System.Drawing.Point(3, 321);
+            this.listBox1.Location = new System.Drawing.Point(2, 20);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(173, 160);
-            this.listBox1.TabIndex = 21;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("宋体", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.ForeColor = System.Drawing.Color.Red;
-            this.label1.Location = new System.Drawing.Point(0, 297);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(54, 21);
-            this.label1.TabIndex = 22;
-            this.label1.Text = "报警";
+            this.listBox1.Size = new System.Drawing.Size(174, 100);
+            this.listBox1.TabIndex = 10;
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.btn2CY);
+            this.groupBox3.Controls.Add(this.btn7TT);
+            this.groupBox3.Controls.Add(this.btn2CZ);
+            this.groupBox3.Controls.Add(this.btn0XH);
+            this.groupBox3.Controls.Add(this.groupBox4);
             this.groupBox3.Controls.Add(this.btn0StockIn);
             this.groupBox3.Controls.Add(this.btn1Shelf);
-            this.groupBox3.Controls.Add(this.label1);
             this.groupBox3.Controls.Add(this.btn2StockOut);
-            this.groupBox3.Controls.Add(this.listBox1);
             this.groupBox3.Location = new System.Drawing.Point(0, 114);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(176, 483);
-            this.groupBox3.TabIndex = 23;
+            this.groupBox3.TabIndex = 1;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "历史视频";
+            // 
+            // btn2CY
+            // 
+            this.btn2CY.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btn2CY.Location = new System.Drawing.Point(32, 204);
+            this.btn2CY.Name = "btn2CY";
+            this.btn2CY.Size = new System.Drawing.Size(121, 40);
+            this.btn2CY.TabIndex = 6;
+            this.btn2CY.Text = "抽样";
+            this.btn2CY.UseVisualStyleBackColor = true;
+            this.btn2CY.Click += new System.EventHandler(this.btn2CY_Click);
+            // 
+            // btn7TT
+            // 
+            this.btn7TT.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btn7TT.Location = new System.Drawing.Point(32, 296);
+            this.btn7TT.Name = "btn7TT";
+            this.btn7TT.Size = new System.Drawing.Size(121, 40);
+            this.btn7TT.TabIndex = 8;
+            this.btn7TT.Text = "验证";
+            this.btn7TT.UseVisualStyleBackColor = true;
+            this.btn7TT.Click += new System.EventHandler(this.btn7TT_Click);
+            // 
+            // btn2CZ
+            // 
+            this.btn2CZ.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btn2CZ.Location = new System.Drawing.Point(32, 112);
+            this.btn2CZ.Name = "btn2CZ";
+            this.btn2CZ.Size = new System.Drawing.Size(121, 40);
+            this.btn2CZ.TabIndex = 4;
+            this.btn2CZ.Text = "称重";
+            this.btn2CZ.UseVisualStyleBackColor = true;
+            this.btn2CZ.Click += new System.EventHandler(this.btn2CZ_Click);
+            // 
+            // btn0XH
+            // 
+            this.btn0XH.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btn0XH.Location = new System.Drawing.Point(32, 20);
+            this.btn0XH.Name = "btn0XH";
+            this.btn0XH.Size = new System.Drawing.Size(121, 40);
+            this.btn0XH.TabIndex = 2;
+            this.btn0XH.Text = "卸货";
+            this.btn0XH.UseVisualStyleBackColor = true;
+            this.btn0XH.Click += new System.EventHandler(this.btn0XH_Click);
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.listBox1);
+            this.groupBox4.Location = new System.Drawing.Point(-2, 355);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(182, 125);
+            this.groupBox4.TabIndex = 9;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "报警";
             // 
             // btn0Now
             // 
@@ -257,7 +308,7 @@
             this.contextMenuStrip1.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -279,9 +330,13 @@
         private System.Windows.Forms.Button btn1Shelf;
         private System.Windows.Forms.Button btn2StockOut;
         private System.Windows.Forms.ListBox listBox1;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Button btn0Now;
         protected internal System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.Button btn2CY;
+        private System.Windows.Forms.Button btn7TT;
+        private System.Windows.Forms.Button btn2CZ;
+        private System.Windows.Forms.Button btn0XH;
     }
 }

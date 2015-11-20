@@ -257,7 +257,7 @@
             {
             "AssemblyRegister" = "3:2"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:AnXinWH.ShiPinNewVideoOCX, Version=1.0.1.2, Culture=neutral, PublicKeyToken=c8486a0d113f11e1, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:AnXinWH.ShiPinNewVideoOCX, Version=1.0.1.3, Culture=neutral, PublicKeyToken=c8486a0d113f11e1, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_BF6FD85E95794296BBAAE72BDA1D9999"
@@ -411,15 +411,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:ISECNewVideo"
-        "ProductCode" = "8:{E088EEB1-2505-4F66-B700-7CB056BF189B}"
-        "PackageCode" = "8:{97249B5B-168C-4CA1-B446-4BD86707C893}"
+        "ProductCode" = "8:{DFFD0B86-6B15-478B-B69A-D1482D492739}"
+        "PackageCode" = "8:{45770727-50BB-4264-9EFC-2D7B54EE55FC}"
         "UpgradeCode" = "8:{EB0299AF-E441-436C-8DBE-8862E4E0D490}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:1.1.2"
+        "ProductVersion" = "8:1.1.3"
         "Manufacturer" = "8:ISEC"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
@@ -535,7 +535,7 @@
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_BC1BB662A1334C5597CDB4EAED743F16"
             {
             "Name" = "8:UnInstall ISECNewVideo"
-            "Arguments" = "8:/x {E088EEB1-2505-4F66-B700-7CB056BF189B}"
+            "Arguments" = "8:/x {DFFD0B86-6B15-478B-B69A-D1482D492739}"
             "Description" = "8:"
             "ShowCmd" = "3:1"
             "IconIndex" = "3:0"

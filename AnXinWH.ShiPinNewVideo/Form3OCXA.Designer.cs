@@ -34,10 +34,12 @@
             // isecNewVideoA1
             // 
             this.isecNewVideoA1._isScroll = false;
+            this.isecNewVideoA1._playNow = false;
             this.isecNewVideoA1.Location = new System.Drawing.Point(12, 8);
             this.isecNewVideoA1.Name = "isecNewVideoA1";
             this.isecNewVideoA1.Size = new System.Drawing.Size(914, 620);
             this.isecNewVideoA1.TabIndex = 0;
+            this.isecNewVideoA1.Load += new System.EventHandler(this.isecNewVideoA1_Load);
             // 
             // Form3OCXA
             // 
