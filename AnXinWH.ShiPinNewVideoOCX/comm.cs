@@ -83,7 +83,7 @@ namespace AnXinWH.ShiPinNewVideoOCX
 
 
     }
-     public class videoCfg
+    public class videoCfg
     {
         public string filename { get; set; }
         public TMCC.tmFindFileCfg_t fileCfg { get; set; }
@@ -92,5 +92,12 @@ namespace AnXinWH.ShiPinNewVideoOCX
     {
         public string nameVideo { get; set; }
         public videoCfg videoCfg { get; set; }
+    }
+    public class video
+    {
+        public string title { get; set; }
+        public DateTime start { get; set; }
+        public Int32 seekSeconds { get; set; }
+        public byte bychange { get; set; }
     }
 }

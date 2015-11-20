@@ -27,6 +27,7 @@ namespace AnXinWH.ShiPinNewVideoOCX
         static configHost _getConfigHost = comm.getConfigHostN();
 
         static List<lisVideo> _lisIn { get; set; }
+        static Dictionary<string, video> _dicAlarm { get; set; }
 
         public string ReceiveNo { get; private set; }
 
@@ -105,6 +106,28 @@ namespace AnXinWH.ShiPinNewVideoOCX
                 MessageBox.Show(ex.Message);
             }
         }
+        #region for litbox
+        private void play_DoubleClick(ListBox lis, string notice)
+        {
+            if (lis.SelectedItem != null)
+            {
+                var tmpname = lis.SelectedItem.ToString();
+                lbl0Msg.Text = notice + ", 播放视频:" + tmpname;
+                if (_dicAlarm.ContainsKey(tmpname))
+                {
+                    var tmpvideo = _dicAlarm[tmpname];
+                    _lisIn = new List<lisVideo>();
+                    _lisIn = getListMoveFromStartAnd(tmpvideo.start.AddSeconds(-tmpvideo.seekSeconds), tmpvideo.start.AddSeconds(tmpvideo.seekSeconds), tmpvideo.title, tmpvideo.bychange);
+                    if (_lisIn.Count > 0)
+                    {
+                        playOldFileListName(_lisIn[0], tmpvideo.title, tmpvideo.start.AddSeconds(-tmpvideo.seekSeconds), tmpvideo.start.AddSeconds(tmpvideo.seekSeconds), tmpvideo.bychange);
+                        //return;
+                    }
+                }
+                lbl0Msg.Text = notice + ":" + tmpname + ",没有找到对应视频记录.";
+            }
+        }
+        #endregion
         #region function
         private void initForm()
         {
@@ -127,6 +150,14 @@ namespace AnXinWH.ShiPinNewVideoOCX
             _jsStockOutNotic = null;
             _jsStockShelfDate = null;
             _jsStockShelfNotic = null;
+
+            //list doublie
+            listBox1.DoubleClick += listBox1_DoubleClick;
+        }
+
+        void listBox1_DoubleClick(object sender, EventArgs e)
+        {
+            play_DoubleClick(listBox1,"报警");
         }
 
         private void initVideo()
@@ -421,6 +452,53 @@ namespace AnXinWH.ShiPinNewVideoOCX
                 return null;
             }
 
+        }
+        /// <summary>
+        /// 报警标题,时间点,左右偏移秒,通道号|N|....|N|
+        /// </summary>
+        /// <param name="videosAlarm"></param>
+        public void jsStockAlarm(object videosAlarm)
+        {
+            try
+            {
+                _dicAlarm = new Dictionary<string, video>();
+
+                var tmpSplit = videosAlarm.ToString().Split('|');
+                foreach (var item in tmpSplit)
+                {
+                    var tmpSplit2 = item.Split(',');
+
+                    if (tmpSplit2.Length < 4)
+                    {
+                        continue;
+                    }
+                    var tmpkey = tmpSplit2[0] + "." + tmpSplit2[1];
+                    if (!_dicAlarm.ContainsKey(tmpkey))
+                    {
+                        var tmpvideo = new video();
+                        tmpvideo.bychange = byte.Parse(tmpSplit2[3]);
+                        tmpvideo.seekSeconds = Int32.Parse(tmpSplit2[2]);
+                        tmpvideo.start = DateTime.Parse(tmpSplit2[1]);
+                        tmpvideo.title = tmpSplit2[0];
+                        _dicAlarm.Add(tmpkey, tmpvideo);
+                    }
+                    else
+                    {
+                        continue;
+                    }
+
+                }
+                listBox1.Items.Clear();
+                // update list
+                foreach (var item in _dicAlarm)
+                {
+                    listBox1.Items.Add(item.Key);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
         public void jsStockIn(object title, object start, object seekSeconds, object bychange)
         {

@@ -14,7 +14,7 @@ namespace AnXinWH.ShiPinNewVideo
         {
             InitializeComponent();
             this.FormClosing += Form3OCXA_FormClosing;
-            
+
             this.StartPosition = FormStartPosition.CenterScreen;
             this.MaximizeBox = false;
         }
@@ -31,6 +31,13 @@ namespace AnXinWH.ShiPinNewVideo
             isecNewVideoA1.jsStockIn("入库", DateTime.Now.AddDays(-1), 20, 0);
             isecNewVideoA1.jsStockShelf("上架", DateTime.Now.AddHours(-2), 20, 0);
             isecNewVideoA1.jsStockOut("出库", DateTime.Now.AddHours(-1), 20, 0);
+
+            var tmpAlarm = "";
+            for (int i = 0; i < 100; i++)
+            {
+                tmpAlarm += i + "报警" + "," + DateTime.Now.AddHours(-i).ToString("yyyy-MM-dd HH:mm:ss") + ",20,0|";
+            }
+            isecNewVideoA1.jsStockAlarm(tmpAlarm);
         }
     }
 }
